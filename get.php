@@ -11,8 +11,7 @@ $Message_entities = $Object['message']['entities'] ?? false;
 if($Message_entities != false){
     if($Object['message']['text'] == '/start'){
         $Keyboard = [ ['عضویت در گروه یادآور'] , ['درباره'] ];
-        startWellcome($Message_id , "با سلام به ربات یادآور خوش آمدید.
-        لطفا یکی از گزینه های زیر را انتخاب نمایید:" , $Keyboard , $Message_message_id);
+        startWellcome($Message_id , "با سلام به ربات یادآور خوش آمدید.\nلطفا یکی از گزینه های زیر را انتخاب نمایید:" , $Keyboard , $Message_message_id);
 
 }}
 
