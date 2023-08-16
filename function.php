@@ -10,7 +10,8 @@ function sendMessage($Message_id , $text){
 
 function startWellcome($Message_id , $text , $keyboard){
     $Method = 'sendMessage';
-    $reply_markup = json_encode($keyboard);
+    $arr_keyboard = array('keyboard'=>$keyboard);
+    $reply_markup = json_encode($arr_keyboard);
     $Request_to_server = API_REQUEST.$Method."?"."chat_id=".$Message_id."&"."text=".$text."&"."reply_markup=".$reply_markup;
     file_get_contents($Request_to_server);
 }
