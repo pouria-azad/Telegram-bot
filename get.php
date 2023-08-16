@@ -8,7 +8,7 @@ $Message_entities = $Object['message']['entities'] ?? false;
 if($Message_entities != false){
     if($Object['message']['text'] == '/start'){
         $keyboard = [ ['عضویت در گروه یادآور'] , ['درباره'] ];
-        startWellcome($Message_id , $text , $keyboard);
+        startWellcome($Message_id , "test" , $keyboard);
 }}
 
 //sendMessage($Message_id, $Content);
