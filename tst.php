@@ -17,11 +17,11 @@ foreach($array as $users){
     if(!$users['username']){
         $status = getChatMember("@site132ddd" , $users['chat_id']);
         if ( $status['ok'] ){
-            $sql = "UPDATE `users` SET `username`=? WHERE `chat_id`=?";
+            $sql = "UPDATE `users` SET `username`= ? WHERE `chat_id`= ?";
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(1, $status['result']['user']['username']);
             $stmt->bindValue(2, $users['username']);
-            $stmt->execute();
+            echo $stmt->execute();
     }}
 }
 
