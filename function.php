@@ -15,3 +15,9 @@ function startWellcome($Message_id , $text , $keyboard , $Message_message_id){
     $Request_to_server = API_REQUEST.$Method."?"."chat_id=".$Message_id."&"."text=".$text."&"."reply_markup=".$reply_markup."&"."reply_to_message_id=".$Message_message_id;
     file_get_contents($Request_to_server);
 }
+
+function getChatMember($chat_id , $user_id){
+    $Method = 'getChatMember';
+    $Request_to_server = API_REQUEST.$Method."?"."chat_id=".$chat_id."&"."user_id=".$user_id;
+    return file_get_contents($Request_to_server);
+}
