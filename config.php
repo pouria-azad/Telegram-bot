@@ -1,7 +1,7 @@
  <?php
 $servername = "localhost";
 $username = "telegr12_users";
-$password = "9i%T8g)NIMtp";
+$password = "R9@&E7AC-m.zsG8";
 
 try {
   $conn = new PDO("mysql:host=$servername;dbname=myDB", $username, $password);
