@@ -21,7 +21,7 @@ foreach ($array as $users) {
                 $sql = "UPDATE `users` SET `username`= ? WHERE `chat_id`= ?";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindValue(1, $status['result']['user']['username']);
-                $stmt->bindValue(2, $users['username']);
+                $stmt->bindValue(2, $users['chat_id']);
                 $stmt->execute();
                 echo $stmt->rowCount() . " records UPDATED successfully";
             } catch (PDOException $e) {
