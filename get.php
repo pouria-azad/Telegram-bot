@@ -28,4 +28,3 @@ $Object = json_decode($Content , true);
 
 //sendMessage($Message_id, $Content);
 
-sendMessage(1178581717, getChatMember("@site132ddd" , "1178581717"));
