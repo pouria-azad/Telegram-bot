@@ -1,6 +1,6 @@
  <?php
-$servername = "telegr12_myproject";
-$username = "telegr12_myproject";
+$servername = "telegr12_table";
+$username = "telegr12_table";
 $password = "9i%T8g)NIMtp";
 
 try {
