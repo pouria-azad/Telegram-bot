@@ -12,6 +12,6 @@ $stmt->execute();
 $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
 foreach($stmt->fetchAll() as $array) 
 {
-    var_dump($array);
+    echo  $array['chat_id'];
   }
 
