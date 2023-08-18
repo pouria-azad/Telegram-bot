@@ -1,6 +1,7 @@
 <?php
 include "./config.php";
-$sql = "INSERT INTO `users`(`chat_id`) VALUES (?)";
+$sql = "INSERT INTO `users` (`chat_id`, `username`, `entry_year`, `fullname`, `status`) VALUES (?, NULL, NULL, NULL, NULL);";
 $stml = $conn->prepare($sql);
-$stmt->bind_param(123456789);
+$chat_id = 123456789;
+$stmt->bind_param($chat_id);
 echo $stmt->execute();
