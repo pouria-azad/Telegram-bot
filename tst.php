@@ -15,20 +15,20 @@ $array = $stmt->fetchAll();
 var_dump($array);
 
 
-// foreach ($array as $users) {
-//     if (!$users['username']) {
-//         $status = getChatMember(-1001454096414, $users['chat_id']);
-//         if ($status['ok'] && $status['result']['user']['username']) {
-//             try {
-//                 $sql = "UPDATE `users` SET `username`= ? WHERE `chat_id`= ?";
-//                 $stmt = $conn->prepare($sql);
-//                 $stmt->bindValue(1, $status['result']['user']['username']);
-//                 $stmt->bindValue(2, $users['chat_id']);
-//                 $stmt->execute();
-//                 echo $stmt->rowCount() . " records UPDATED successfully";
-//             } catch (PDOException $e) {
-//                 echo $sql . "<br>" . $e->getMessage();
-//             }
-//         }
-//     }
+foreach ($array as $users) {
+    // if (!$users['username']) {
+        $status = getChatMember(-1001454096414, $users['chat_id']);
+        if ($status['ok'] && $status['result']['user']['username']) {
+            try {
+                $sql = "UPDATE `users` SET `username`= ? WHERE `chat_id`= ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(1, $status['result']['user']['username']);
+                $stmt->bindValue(2, $users['chat_id']);
+                $stmt->execute();
+                echo $stmt->rowCount() . " records UPDATED successfully";
+            } catch (PDOException $e) {
+                echo $sql . "<br>" . $e->getMessage();
+            }
+        }
+    }
 // }
