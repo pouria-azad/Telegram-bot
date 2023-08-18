@@ -15,7 +15,7 @@ $array = $stmt->fetchAll();
 
 foreach ($array as $users) {
     if (!$users['username']) {
-        $status = getChatMember("-1001454096414", $users['chat_id']);
+        $status = getChatMember(-1001454096414, $users['chat_id']);
         if ($status['ok'] && $status['result']['user']['username']) {
             try {
                 $sql = "UPDATE `users` SET `username`= ? WHERE `chat_id`= ?";
