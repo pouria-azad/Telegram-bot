@@ -1,5 +1,5 @@
  <?php
-$servername = "telegr12_users";
+$servername = "localhost";
 $username = "telegr12_users";
 $password = "9i%T8g)NIMtp";
 
