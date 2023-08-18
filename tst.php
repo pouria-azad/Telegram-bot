@@ -12,13 +12,12 @@ $stmt = $conn->prepare($sql);
 $stmt->execute();
 $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
 $array = $stmt->fetchAll();
-var_dump($array);
-echo "\n\n";
+
 foreach($array as $users){
     if(!$users['username']){
         $status = getChatMember("@site132ddd" , $users['chat_id']);
         if ( $status['ok'] ){
-            var_dump($status['result']['user']['username']);
+            echo $status['result']['user']['username'];
             echo "\n";
     }}
 }
