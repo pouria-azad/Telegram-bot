@@ -6,12 +6,10 @@ include "./config.php";
 // $stmt->bind_param($chat_id);
 // echo $stmt->execute();
 
-$sql = "SELECT `chat_id` FROM  `users`";
+$sql = "SELECT `chat_id`, `username` FROM  `users`";
 $stmt = $conn->prepare($sql); 
 $stmt->execute();
 $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
-foreach($stmt->fetchAll() as $array) 
-{
-    echo  $array['chat_id'];
-  }
+$array = $stmt->fetchAll();
+var_dump($array);
 
