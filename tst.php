@@ -10,8 +10,8 @@ $sql = "SELECT `chat_id` FROM  `users`";
 $stmt = $conn->prepare($sql); 
 $stmt->execute();
 $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
-foreach($stmt->fetchAll() as $k=>$v) 
+foreach($stmt->fetchAll() as $array) 
 {
-    echo $v;
+    var_dump($array);
   }
 
