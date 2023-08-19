@@ -5,7 +5,7 @@ include "./config.php";
 $Content = file_get_contents('php://input');
 $Object = json_decode($Content, true);
 $Message_id = $Object['message']['from']['id'];
-//$Message_message_id = $Object['message']['message_id'];
+$Message_message_id = $Object['message']['message_id'];
 $Message_entities = $Object['message']['entities'] ?? false;
 // $Date = $Object['date'];
 
@@ -14,16 +14,19 @@ sendMessage("1178581717", "666");
 
 if ($Message_entities) {
     if ($Object['message']['text'] == '/start') {
+
+        echo "kd";
+
         try {
             $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)";
-            $stml = $conn->prepare($sql);
+            $stmp = $conn->prepare($sql);
             $stmt->bindValue(1, $Message_id);
             $stmt->bindValue(2, "0");
-            // use exec() because no results are returned
-            $conn->exec($sql);
-            sendMessage("1178581717", "sec");
+            $result->execute();
+
+            sendMessage("1178581717", "New record created successfully");
         } catch (PDOException $e) {
-            sendMessage("1178581717", "failse<br>" . $e->getMessage());
+            sendMessage("1178581717", $sql . "<br>" . $e->getMessage());
         }
         $conn = null;
         $Keyboard = [['مدیریت لیست اعضا'], ['درباره']];
