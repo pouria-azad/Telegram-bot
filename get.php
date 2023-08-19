@@ -13,7 +13,7 @@ sendMessage(1178581717, $Message_entities && $Object['message']['text'] == '/sta
 sendMessage(1178581717, $Object['message']['text']);
 
 
-if ($Message_entities && $Object['message']['text'] == '/start') {
+if ($Message_entities !=false && $Object['message']['text'] == '/start') {
 
     $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)";
     $stml = $conn->prepare($sql);
