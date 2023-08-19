@@ -20,9 +20,9 @@ if ($Message_entities != false && $Object['message']['text'] == '/start') {
         $stmt->bindValue(2, "0");
         // use exec() because no results are returned
         $conn->exec($sql);
-        echo "New record created successfully";
+        sendMessage("1178581717", "sec");
     } catch (PDOException $e) {
-        echo $sql . "<br>" . $e->getMessage();
+        sendMessage("1178581717", "failse<br>" . $e->getMessage() );
     }
     $conn = null;
     $Keyboard = [['مدیریت لیست اعضا'], ['درباره']];
