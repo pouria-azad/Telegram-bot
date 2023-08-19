@@ -2,9 +2,8 @@
 //include "./function.php";
 include "./config.php";
 
-$Content = file_get_contents('php://input');
-$Object = json_decode($Content, true);
-$Message_id = $Object['message']['from']['id'];
+
+$Message_id = "111";
 
 try {
     $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)";
@@ -13,9 +12,9 @@ try {
     $stmt->bindValue(2, "0");
     // use exec() because no results are returned
     $conn->exec($sql);
-    //sendMessage("1178581717", "sec");
+    echo "New record created successfully";
 } catch (PDOException $e) {
-    //sendMessage("1178581717", "failse<br>" . $e->getMessage());
+    echo $sql . "<br>" . $e->getMessage();
 }
 $conn = null;
 
