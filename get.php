@@ -62,7 +62,7 @@ if ($Message_entities && $Object['message']['text'] == '/start') {
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
 }
 
-if ($array[0][['status']] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا'){
+if ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا'){
     $Keyboard = [['مدیریت dfdff اعضا'], ['درباره']];
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
 
