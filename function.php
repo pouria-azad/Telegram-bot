@@ -30,3 +30,9 @@ function getChatMember($chat_id , $user_id){
     $Request_to_server = API_REQUEST.$Method."?"."chat_id=".$chat_id."&"."user_id=".$user_id;
     return json_decode(file_get_contents($Request_to_server) , true);
 }
+
+function answerCallbackQuery($Callback_id , $text){
+    $Method = 'answerCallbackQuery';
+    $Request_to_server = API_REQUEST.$Method."?"."callback_query_id=".$Callback_id."&"."text=".$text;
+    file_get_contents($Request_to_server);
+}

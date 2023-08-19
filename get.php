@@ -8,6 +8,10 @@ $Message_id = $Object['message']['from']['id'];
 $Message_message_id = $Object['message']['message_id'];
 $Message_entities = $Object['message']['entities'] ?? false;
 $Date = $Object['message']['date'];
+//callback
+$Callback_chat_id = $Object['callback_query']['from']['id'];
+$Callback_data = $Object['callback_query']['data'];
+$Callback_id = $Object['callback_query']['id'];
 
 
 $pdo = $conn->prepare("INSERT INTO `kj`( `log`) VALUES ( ? )");
@@ -69,10 +73,27 @@ if ($Message_entities && $Object['message']['text'] == '/start') {
 
 if ($array[0]['status'] == "0" && $Object['message']['text'] == 'درباره') {
     $Inline_keyboard = [
-        [['text' => 'سلام بزن یس', 'callback_data' => "YES"], ['text' => 'بای بزن نو', 'callback_data' => "NO"]]
+        [['text' => 'سلام بزن یس', 'callback_data' => "yeah"], ['text' => 'بای بزن نو', 'callback_data' => "no"]]
     ];
 
     startWellcomeinline($Message_id, "test999", $Inline_keyboard, $Message_message_id);
+}
+// data 
+if($Callback_chat_id && $Callback_data){
+    switch($Callback_data){
+        case "yeah":
+            // $stmt = $conn->prepare("UPDATE `status` SET `date`= ? ,`status`= ? WHERE `chat_id`= ?");
+            // $stmt->bindValue(1, $Date);
+            // $stmt->bindValue(2, "1");
+            // $stmt->bindValue(3, $Callback_chat_id);
+            // $stmt->execute();
+            answerCallbackQuery($Callback_id , "okey");
+
+            break;
+        case "no":
+
+            break;
+    }
 }
 // $switch = false;
 // if($Object['message']['text'] == 'عضویت در گروه یادآور' && $switch == false){
