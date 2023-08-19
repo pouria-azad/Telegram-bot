@@ -1,5 +1,5 @@
 <?php
-include './function.php';
+include "./function.php";
 include "./config.php";
 
 $Content = file_get_contents('php://input');
@@ -12,21 +12,23 @@ $Message_entities = $Object['message']['entities'] ?? false;
 sendMessage("1178581717", "666");
 
 
-if ($Message_entities != false && $Object['message']['text'] == '/start') {
-    try {
-        $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)";
-        $stml = $conn->prepare($sql);
-        $stmt->bindValue(1, $Message_id);
-        $stmt->bindValue(2, "0");
-        // use exec() because no results are returned
-        $conn->exec($sql);
-        sendMessage("1178581717", "sec");
-    } catch (PDOException $e) {
-        sendMessage("1178581717", "failse<br>" . $e->getMessage() );
+if ($Message_entities) {
+    if ($Object['message']['text'] == '/start') {
+        try {
+            $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)";
+            $stml = $conn->prepare($sql);
+            $stmt->bindValue(1, $Message_id);
+            $stmt->bindValue(2, "0");
+            // use exec() because no results are returned
+            $conn->exec($sql);
+            sendMessage("1178581717", "sec");
+        } catch (PDOException $e) {
+            sendMessage("1178581717", "failse<br>" . $e->getMessage());
+        }
+        $conn = null;
+        $Keyboard = [['مدیریت لیست اعضا'], ['درباره']];
+        startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.\nلطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
     }
-    $conn = null;
-    $Keyboard = [['مدیریت لیست اعضا'], ['درباره']];
-    startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.\nلطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
 }
 // $switch = false;
 // if($Object['message']['text'] == 'عضویت در گروه یادآور' && $switch == false){
