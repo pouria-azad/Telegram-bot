@@ -1,5 +1,5 @@
 <?php
-//include './function.php';
+include "./function.php";
 include "./config.php";
 
 
