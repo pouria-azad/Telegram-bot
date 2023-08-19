@@ -81,6 +81,19 @@ if ($array[0]['status'] == "0" && $Object['message']['text'] == 'درباره') 
 }
 // data 
 if ($Callback_chat_id && $Callback_data) {
+    $array = [];
+
+    try {
+        $sql = "SELECT * FROM `users`";
+        $pdo = $conn->prepare($sql);
+        $pdo->execute();
+        $result = $pdo->setFetchMode(PDO::FETCH_ASSOC);
+        $array = $pdo->fetchAll();
+    } catch (PDOException $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+
+
     switch ($Callback_data) {
         case "update":
             $stmt = $conn->prepare("UPDATE `status` SET `date`= ? ,`status`= ? WHERE `chat_id`= ?");
@@ -90,14 +103,7 @@ if ($Callback_chat_id && $Callback_data) {
             $stmt->execute();
 
             //start update
-            $sql = "SELECT `chat_id`, `username` FROM  `users`";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute();
-            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $array = $stmt->fetchAll();
-
             foreach ($array as $users) {
-
                 $status = getChatMember(-1001454096414, $users['chat_id']);
                 if ($status['ok'] && $status['result']['user']['username']) {
                     try {
@@ -106,17 +112,17 @@ if ($Callback_chat_id && $Callback_data) {
                         $stmt->bindValue(1, $status['result']['user']['username']);
                         $stmt->bindValue(2, $users['chat_id']);
                         $stmt->execute();
-                        answerCallbackQuery($Callback_id, "اطلاعات ".$stmt->rowCount() . " نفر با موفقیت آپدیت شد!");
                     } catch (PDOException $e) {
                         sendMessage("1178581717", $sql . "<br>" . $e->getMessage());
                     }
                 }
-                sendMessage("1178581717", "1");
             }
+            answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت آپدیت شد!");
             //end update
             break;
         case "recive":
-
+            
+            
             answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت آپدیت شد!");
             break;
     }
