@@ -10,11 +10,15 @@ $Message_entities = $Object['message']['entities'] ?? false;
 $Date = $Object['date'];
 
 if ($Message_entities && $Object['message']['text'] == '/start') {
-    $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)";
-    $stml = $conn->prepare($sql);
-    $stmt->bindValue(1, $Message_id);
-    $stmt->bindValue(2, 0);
-    $stmt->execute();
+    try {
+        $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)";
+        $stml = $conn->prepare($sql);
+        $stmt->bindValue(1, $Message_id);
+        $stmt->bindValue(2, 0);
+        $stmt->execute();
+    } catch (PDOException $e) {
+        sendMessage($Message_id, $sql . "<br>" . $e->getMessage());
+    }
     $Keyboard = [['مدیریت لیست اعضا'], ['درباره']];
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.\nلطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
 }
