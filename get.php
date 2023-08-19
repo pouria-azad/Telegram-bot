@@ -122,7 +122,7 @@ if ($Callback_chat_id && $Callback_data) {
             break;
         case "recive":
             foreach($array as $users){
-                if($users['entry_year']== "1397"){
+                if($users['entry_year']== "1399"){
                     $text = "نام: ".$users['fullname_fa']."آیدی: ".$users['username'];
                     sendMessage("1178581717", $text);
                 }
