@@ -9,7 +9,7 @@ try {
     $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)";
     $stml = $conn->prepare($sql);
     $stmt->bindParam(1, $Message_id);
-    $stmt->bindParam(2, "0");
+    $stmt->bindValue(2, "0");
     // use exec() because no results are returned
     $conn->exec($sql);
     echo "New record created successfully";
