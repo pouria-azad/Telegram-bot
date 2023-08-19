@@ -7,18 +7,16 @@ $Object = json_decode($Content, true);
 $Message_id = $Object['message']['from']['id'];
 $Message_message_id = $Object['message']['message_id'];
 $Message_entities = $Object['message']['entities'] ?? false;
-$Date = $Object['date'];
+// $Date = $Object['date'];
 
-sendMessage(1178581717, $Message_entities && $Object['message']['text'] == '/start');
-sendMessage(1178581717, $Object['message']['text']);
 
 
 if ($Message_entities !=false && $Object['message']['text'] == '/start') {
 
     $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)";
     $stml = $conn->prepare($sql);
-    $stmt->bindValue(1, $Message_id);
-    $stmt->bindValue(2, 0);
+    $stmt->bindValue(1, $Message_message_id);
+    $stmt->bindValue(2, "0");
     $stmt->execute();
     $publisher_id = $conn->lastInsertId();
     sendMessage(1178581717, 'The publisher id ' . $publisher_id . ' was inserted');
