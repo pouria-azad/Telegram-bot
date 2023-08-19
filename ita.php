@@ -1,5 +1,5 @@
 <?php
-include "./function.php";
+//include "./function.php";
 include "./config.php";
 
 $Content = file_get_contents('php://input');
@@ -13,9 +13,9 @@ try {
     $stmt->bindValue(2, "0");
     // use exec() because no results are returned
     $conn->exec($sql);
-    sendMessage("1178581717", "sec");
+    //sendMessage("1178581717", "sec");
 } catch (PDOException $e) {
-    sendMessage("1178581717", "failse<br>" . $e->getMessage());
+    //sendMessage("1178581717", "failse<br>" . $e->getMessage());
 }
 $conn = null;
 
