@@ -9,13 +9,13 @@ $Message_message_id = $Object['message']['message_id'];
 $Message_entities = $Object['message']['entities'] ?? false;
 // $Date = $Object['date'];
 
-sendMessage("1178581717", "666");
+sendMessage("1178581717", "1");
 
 
 if ($Message_entities) {
     if ($Object['message']['text'] == '/start') {
 
-        echo "kd";
+        sendMessage("1178581717", "2");
 
         try {
             $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)";
@@ -23,11 +23,13 @@ if ($Message_entities) {
             $pdo->bindValue(1, $Message_id);
             $pdo->bindValue(2, "0");
             $pdo->execute();
-
             sendMessage("1178581717", "New record created successfully");
+            // echo "New record created successfully";
         } catch (PDOException $e) {
+            //   echo $sql . "<br>" . $e->getMessage();
             sendMessage("1178581717", $sql . "<br>" . $e->getMessage());
         }
+
         $conn = null;
         $Keyboard = [['مدیریت لیست اعضا'], ['درباره']];
         startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.\nلطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
