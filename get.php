@@ -10,7 +10,7 @@ $Message_entities = $Object['message']['entities'] ?? false;
 $Date = $Object['date'];
 
 sendMessage(1178581717, $Message_entities && $Object['message']['text'] == '/start');
-sendMessage(1178581717, $Message_entities );
+sendMessage(1178581717, implode($Message_entities) );
 sendMessage(1178581717, $Object['message']['text'] );
 
 
