@@ -121,7 +121,12 @@ if ($Callback_chat_id && $Callback_data) {
             //end update
             break;
         case "recive":
-            
+            foreach($array as $users){
+                if($users['entry_year']== "1397"){
+                    $text = "نام: ".$users['fullname_fa']."آیدی: ".$users['username'];
+                    sendMessage("1178581717", $text);
+                }
+            }
             
             answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت آپدیت شد!");
             break;
