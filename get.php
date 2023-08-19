@@ -19,10 +19,10 @@ if ($Message_entities) {
 
         try {
             $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)";
-            $stmp = $conn->prepare($sql);
-            $stmt->bindValue(1, $Message_id);
-            $stmt->bindValue(2, "0");
-            $result->execute();
+            $pdo = $conn->prepare($sql);
+            $pdo->bindValue(1, $Message_id);
+            $pdo->bindValue(2, "0");
+            $pdo->execute();
 
             sendMessage("1178581717", "New record created successfully");
         } catch (PDOException $e) {
