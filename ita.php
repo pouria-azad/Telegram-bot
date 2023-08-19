@@ -6,7 +6,7 @@ include "./config.php";
 $Message_id = "111";
 
 try {
-    $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES ("1" , "0")";
+    $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES ('1' , '0')";
     $stml = $conn->prepare($sql);
     //$stmt->bindValue(1, $Message_id);
     //$stmt->bindValue(2, "0");
