@@ -12,6 +12,7 @@ $Date = $Object['message']['date'];
 $Callback_chat_id = $Object['callback_query']['from']['id'];
 $Callback_data = $Object['callback_query']['data'];
 $Callback_id = $Object['callback_query']['id'];
+$Callback_date = $Object['callback_query']['message']['date'];
 
 
 $pdo = $conn->prepare("INSERT INTO `kj`( `log`) VALUES ( ? )");
@@ -73,25 +74,49 @@ if ($Message_entities && $Object['message']['text'] == '/start') {
 
 if ($array[0]['status'] == "0" && $Object['message']['text'] == 'درباره') {
     $Inline_keyboard = [
-        [['text' => 'سلام بزن یس', 'callback_data' => "yeah"], ['text' => 'بای بزن نو', 'callback_data' => "no"]]
+        [['text' => 'بروزرسانی لیست اعضا', 'callback_data' => "update"], ['text' => 'دریافت لیست اعضا', 'callback_data' => "recive"]]
     ];
 
     startWellcomeinline($Message_id, "test999", $Inline_keyboard, $Message_message_id);
 }
 // data 
-if($Callback_chat_id && $Callback_data){
-    switch($Callback_data){
-        case "yeah":
-            // $stmt = $conn->prepare("UPDATE `status` SET `date`= ? ,`status`= ? WHERE `chat_id`= ?");
-            // $stmt->bindValue(1, $Date);
-            // $stmt->bindValue(2, "1");
-            // $stmt->bindValue(3, $Callback_chat_id);
-            // $stmt->execute();
-            answerCallbackQuery($Callback_id , "okey");
+if ($Callback_chat_id && $Callback_data) {
+    switch ($Callback_data) {
+        case "update":
+            $stmt = $conn->prepare("UPDATE `status` SET `date`= ? ,`status`= ? WHERE `chat_id`= ?");
+            $stmt->bindValue(1, $Callback_date);
+            $stmt->bindValue(2, "01");
+            $stmt->bindValue(3, $Callback_chat_id);
+            $stmt->execute();
 
+            //start update
+            $sql = "SELECT `chat_id`, `username` FROM  `users`";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $array = $stmt->fetchAll();
+
+            foreach ($array as $users) {
+
+                $status = getChatMember(-1001454096414, $users['chat_id']);
+                if ($status['ok'] && $status['result']['user']['username']) {
+                    try {
+                        $sql = "UPDATE `users` SET `username`= ? WHERE `chat_id`= ?";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->bindValue(1, $status['result']['user']['username']);
+                        $stmt->bindValue(2, $users['chat_id']);
+                        $stmt->execute();
+                        answerCallbackQuery($Callback_id, "اطلاعات ".$stmt->rowCount() . " نفر با موفقیت آپدیت شد!");
+                    } catch (PDOException $e) {
+                        sendMessage("1178581717", $sql . "<br>" . $e->getMessage());
+                    }
+                }
+            }
+            //end update
             break;
-        case "no":
+        case "recive":
 
+            answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت آپدیت شد!");
             break;
     }
 }
