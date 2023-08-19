@@ -13,15 +13,18 @@ sendMessage("1178581717", "666");
 
 
 if ($Message_entities != false && $Object['message']['text'] == '/start') {
-
-    $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)";
-    sendMessage("1178581717", "132112123");
-    $stml = $conn->prepare($sql);
-    $stmt->bindValue(1, $Message_id);
-    $stmt->bindValue(2, "0");
-    $stmt->execute();
-    $publisher_id = $conn->lastInsertId();
-    sendMessage("1178581717", 'The publisher id ' . $publisher_id . ' was inserted');
+    try {
+        $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)";
+        $stml = $conn->prepare($sql);
+        $stmt->bindValue(1, $Message_id);
+        $stmt->bindValue(2, "0");
+        // use exec() because no results are returned
+        $conn->exec($sql);
+        echo "New record created successfully";
+    } catch (PDOException $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+    $conn = null;
     $Keyboard = [['مدیریت لیست اعضا'], ['درباره']];
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.\nلطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
 }
