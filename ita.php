@@ -11,8 +11,5 @@ sendMessage("1178581717", "666");
     sendMessage("1178581717", "1");
     $stml = $conn->prepare($sql);
     $stmt->execute();
-    $publisher_id = $conn->lastInsertId();
-    sendMessage("1178581717", 'The publisher id ' . $publisher_id . ' was inserted');
     $Keyboard = [ ['dfgdدرباره']];
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.\nلطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
-}
