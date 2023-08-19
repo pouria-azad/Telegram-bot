@@ -1,6 +1,6 @@
 <?php
-//define('API_TOKEN', '6546866682:AAGJD4uISP2U4RsOU8JC0fWNZ8VirfjGZnE');
-define('API_TOKEN', '6550970307:AAFBcBSWJmEYgXpse7cs-ckQ7cPRmZEX-6k');
+define('API_TOKEN', '6546866682:AAGJD4uISP2U4RsOU8JC0fWNZ8VirfjGZnE');
+//define('API_TOKEN', '6550970307:AAFBcBSWJmEYgXpse7cs-ckQ7cPRmZEX-6k');
 define('API_REQUEST', 'https://api.telegram.org/bot'.API_TOKEN.'/');
 
 function sendMessage($Message_id , $text){
