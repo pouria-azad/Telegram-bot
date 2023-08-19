@@ -10,20 +10,18 @@ $Message_entities = $Object['message']['entities'] ?? false;
 $Date = $Object['date'];
 
 sendMessage(1178581717, $Message_entities && $Object['message']['text'] == '/start');
-sendMessage(1178581717, implode($Message_entities) );
-sendMessage(1178581717, $Object['message']['text'] );
+sendMessage(1178581717, $Object['message']['text']);
 
 
 if ($Message_entities && $Object['message']['text'] == '/start') {
-    try {
-        $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)";
-        $stml = $conn->prepare($sql);
-        $stmt->bindValue(1, $Message_id);
-        $stmt->bindValue(2, 0);
-        $stmt->execute();
-    } catch (PDOException $e) {
-        sendMessage($Message_id, $sql . "<br>" . $e->getMessage());
-    }
+
+    $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)";
+    $stml = $conn->prepare($sql);
+    $stmt->bindValue(1, $Message_id);
+    $stmt->bindValue(2, 0);
+    $stmt->execute();
+    $publisher_id = $conn->lastInsertId();
+    sendMessage(1178581717, 'The publisher id ' . $publisher_id . ' was inserted');
     $Keyboard = [['مدیریت لیست اعضا'], ['درباره']];
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.\nلطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
 }
