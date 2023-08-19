@@ -111,6 +111,7 @@ if ($Callback_chat_id && $Callback_data) {
                         sendMessage("1178581717", $sql . "<br>" . $e->getMessage());
                     }
                 }
+                sendMessage("1178581717", "1");
             }
             //end update
             break;
