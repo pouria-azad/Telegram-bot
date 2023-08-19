@@ -9,6 +9,11 @@ $Message_message_id = $Object['message']['message_id'];
 $Message_entities = $Object['message']['entities'] ?? false;
 $Date = $Object['date'];
 
+sendMessage(1178581717, $Message_entities && $Object['message']['text'] == '/start');
+sendMessage(1178581717, var_dump($Message_entities) );
+sendMessage(1178581717, var_dump($Object['message']['text']) );
+
+
 if ($Message_entities && $Object['message']['text'] == '/start') {
     try {
         $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)";
