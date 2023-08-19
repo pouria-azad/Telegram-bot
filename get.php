@@ -9,7 +9,7 @@ $Message_message_id = $Object['message']['message_id'];
 $Message_entities = $Object['message']['entities'] ?? false;
 $Date = $Object['message']['date'];
 
-sendMessage("1178581717", "1");
+sendMessage("1178581717", $Object);
 
 try {
     $sql = "SELECT `chat_id`,`status` FROM `status` WHERE `chat_id`= ? LIMIT 1";
