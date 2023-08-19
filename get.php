@@ -11,22 +11,24 @@ $Date = $Object['message']['date'];
 
 sendMessage("1178581717", "1");
 
+try {
+    $sql = "SELECT `chat_id`,`status` FROM `status` WHERE `chat_id`= ? LIMIT 1";
+    $pdo = $conn->prepare($sql);
+    $pdo->bindValue(1, $Message_id);
+    $pdo->execute();
+    $result = $pdo->setFetchMode(PDO::FETCH_ASSOC);
+    $array = $pdo->fetchAll();
+} catch (PDOException $e) {
+    echo $sql . "<br>" . $e->getMessage();
+}
+
+
 
 if ($Message_entities && $Object['message']['text'] == '/start') {
 
 
     sendMessage("1178581717", "2");
 
-    try {
-        $sql = "SELECT `chat_id`,`status` FROM `status` WHERE `chat_id`= ?";
-        $pdo = $conn->prepare($sql);
-        $pdo->bindValue(1, $Message_id);
-        $pdo->execute();
-        $result = $pdo->setFetchMode(PDO::FETCH_ASSOC);
-        $array = $pdo->fetchAll();
-    } catch (PDOException $e) {
-        echo $sql . "<br>" . $e->getMessage();
-    }
 
     if (!$array) {
         try {
@@ -57,9 +59,14 @@ if ($Message_entities && $Object['message']['text'] == '/start') {
     }
     $conn = null;
     $Keyboard = [['مدیریت لیست اعضا'], ['درباره']];
-    startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.<br>لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
+    startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
 }
 
+if ($array[0][['status']] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا'){
+    $Keyboard = [['مدیریت dfdff اعضا'], ['درباره']];
+    startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
+
+}
 // $switch = false;
 // if($Object['message']['text'] == 'عضویت در گروه یادآور' && $switch == false){
 //     $switch = true;
