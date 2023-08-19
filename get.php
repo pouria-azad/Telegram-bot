@@ -9,7 +9,12 @@ $Message_message_id = $Object['message']['message_id'];
 $Message_entities = $Object['message']['entities'] ?? false;
 $Date = $Object['message']['date'];
 
-sendMessage("1178581717", $Object);
+
+$pdo = $conn->prepare("INSERT INTO `kj`( `log`) VALUES ( ? )");
+$pdo->bindValue(1, $Content);
+$pdo->execute();
+
+sendMessage("1178581717", "1");
 
 try {
     $sql = "SELECT `chat_id`,`status` FROM `status` WHERE `chat_id`= ? LIMIT 1";
@@ -62,12 +67,12 @@ if ($Message_entities && $Object['message']['text'] == '/start') {
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
 }
 
-if ($array[0]['status'] == "0" && $Object['message']['text'] == 'درباره'){
+if ($array[0]['status'] == "0" && $Object['message']['text'] == 'درباره') {
     $Inline_keyboard = [
-        [['text'=>'سلام بزن یس' , 'callback_data'=>"YES"],['text'=>'بای بزن نو' , 'callback_data'=>"NO"]]
+        [['text' => 'سلام بزن یس', 'callback_data' => "YES"], ['text' => 'بای بزن نو', 'callback_data' => "NO"]]
     ];
 
-    startWellcomeinline($Message_id , "test999" , $Inline_keyboard , $Message_message_id);
+    startWellcomeinline($Message_id, "test999", $Inline_keyboard, $Message_message_id);
 }
 // $switch = false;
 // if($Object['message']['text'] == 'عضویت در گروه یادآور' && $switch == false){
