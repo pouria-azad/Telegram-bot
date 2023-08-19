@@ -6,10 +6,10 @@ include "./config.php";
 $Message_id = "111";
 
 try {
-    $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)";
+    $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES (:chat_id , :status )";
     $stml = $conn->prepare($sql);
-    $stmt->bindParam(1, $Message_id);
-    $stmt->bindValue(2, "0");
+    $stmt->bindValue(":chat_id", $Message_id);
+    $stmt->bindValue(":status", "0");
     // use exec() because no results are returned
     $conn->exec($sql);
     echo "New record created successfully";
