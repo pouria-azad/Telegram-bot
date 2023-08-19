@@ -1,19 +1,23 @@
 <?php
 include './function.php';
+include "./config.php";
+
 $Content = file_get_contents('php://input');
-$Object = json_decode($Content , true);
-// $Message_id = $Object['message']['from']['id'];
-// $Message_message_id = $Object['message']['message_id'];
+$Object = json_decode($Content, true);
+$Message_id = $Object['message']['from']['id'];
+$Message_message_id = $Object['message']['message_id'];
+$Message_entities = $Object['message']['entities'] ?? false;
+$Date = $Object['date'];
 
-
-// $Message_entities = $Object['message']['entities'] ?? false;
-
-// if($Message_entities != false){
-//     if($Object['message']['text'] == '/start'){
-//         $Keyboard = [ ['عضویت در گروه یادآور'] , ['درباره'] ];
-//         startWellcome($Message_id , "با سلام به ربات یادآور خوش آمدید.\nلطفا یکی از گزینه های زیر را انتخاب نمایید:" , $Keyboard , $Message_message_id);
-
-// }}
+if ($Message_entities && $Object['message']['text'] == '/start') {
+    $sql = "INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)";
+    $stml = $conn->prepare($sql);
+    $stmt->bindValue(1, $Message_id);
+    $stmt->bindValue(2, 0);
+    $stmt->execute();
+    $Keyboard = [['مدیریت لیست اعضا'], ['درباره']];
+    startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.\nلطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
+}
 // $switch = false;
 // if($Object['message']['text'] == 'عضویت در گروه یادآور' && $switch == false){
 //     $switch = true;
@@ -27,4 +31,3 @@ $Object = json_decode($Content , true);
 // }
 
 //sendMessage($Message_id, $Content);
-
