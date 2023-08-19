@@ -9,8 +9,7 @@ $Message_message_id = $Object['message']['message_id'];
 $Message_entities = $Object['message']['entities'] ?? false;
 // $Date = $Object['date'];
 
-if ($Object['message']['text'] == 'مدیریت لیست اعضا')
-    sendMessage("1178581717", "tste");
+sendMessage("1178581717", "tste");
 
 
 if ($Message_entities != false && $Object['message']['text'] == '/start') {
