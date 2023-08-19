@@ -4,7 +4,7 @@ include "./config.php";
 
 
 $Message_id = "111";
-
+echo "kd";
 try {
     $sql = "INSERT INTO `kj` (`id`) VALUES (:chat_id);";
     $stml = $conn->prepare($sql);
@@ -17,7 +17,7 @@ try {
     echo $sql . "<br>" . $e->getMessage();
 }
 $conn = null;
-
+echo "dd";
 
 
 // try {
