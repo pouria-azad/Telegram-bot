@@ -144,10 +144,11 @@ if ($Callback_chat_id && $Callback_data) {
                 }
             }
             
-            $text = "\ud83d\udd34\u2b55\ufe0f\ud83d\udd34\u2b55\ufe0f \u00a0 \u0648\u0631\u0648\u062f\u06cc 1398 \ud83d\udd34\u2b55\ufe0f\ud83d\udd34\u2b55\ufe0f"
+            $base = "\ud83d\udd34\u2b55\ufe0f\ud83d\udd34\u2b55\ufe0f \u00a0 \u0648\u0631\u0648\u062f\u06cc 1398 \ud83d\udd34\u2b55\ufe0f\ud83d\udd34\u2b55\ufe0f"
             ."\n\n";
+            $text = "";
             foreach($y99 as $number=>$user)
-            $text.($number+1)." ".$user[0]." ".$user[1]."\n\n";
+            $text = $text.$base.($number+1)." ".$user[0]." ".$user[1]."\n\n";
 
             sendMessage("1178581717", $text);
 
