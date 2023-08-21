@@ -136,16 +136,11 @@ if ($Callback_chat_id && $Callback_data) {
                     $y00[] = [$users['fullname_fa'], $users['username']];
                 }
             }
+            year("1397" , $y97);
+            year("1398" , $y98);
             year("1399" , $y99);
-            // $base = "\xE2\xAD\x95 \xF0\x9F\x94\xB4 \xE2\xAD\x95 " . "<b><u>ورودی های سال: 1399</u></b>" . " \xE2\xAD\x95 \xF0\x9F\x94\xB4 \xE2\xAD\x95" . "%0A%0A";
-            // $text = "";
-            // $text = $text . $base . "1" . " " . $y99[0][0] . " @" . $y99[0][1];
-            // $y99 = array_slice($y99, 1);
-            // foreach ($y99 as $number => $user)
-            //     $text = $text . "%0A" . ($number + 2) . ". " . $user[0] . " @" . $user[1];
-            // sendMessage("1178581717", $text);
-
-
+            year("1400" , $y00);
+            
             answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت ارسال شد!");
             break;
     }
