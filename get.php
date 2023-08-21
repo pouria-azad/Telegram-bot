@@ -137,16 +137,14 @@ if ($Callback_chat_id && $Callback_data) {
                 }
             }
 
-            $base = "\u{d83d}\u{dd34}\u{2b55}\u{fe0f}\u{d83d}\u{dd34}\u{2b55}\u{fe0f} \u{00a0} \u{0648}\u{0631}\u{0648}\u{062f}\u{06cc} 1398 \u{d83d}\u{dd34}\u{2b55}\u{fe0f}\u{d83d}\u{dd34}\u{2b55}\u{fe0f}\n\n";
+            $base = "\xE2\xAD\x95 \xF0\x9F\x94\xB4 \xE2\xAD\x95 " . "<b><u>ورودی های سال: 1398</u></b>" . " \xE2\xAD\x95 \xF0\x9F\x94\xB4 \xE2\xAD\x95" . "%0A%0A";
             $text = "";
-
-            $text = $text . $base . "1" . " " . $y99[0][0] . " " . $y99[0][1] . "\n\n";
-            sendMessage("1178581717", "fdsfdsfds");
-            $y99 = array_slice($y99, 1);
+            $text = $text . $base . "1" . " " . $y99[0][0] . " @" . $y99[0][1] . "%0A";
+    
             foreach ($y99 as $number => $user)
-                $text = $text . "\n\n" . ($number + 2) . " " . $user[0] . " @" . $user[1] . "\n\n";
-
+                $text = $text . "%0A" . ($number + 2) . ". " . $user[0] . " @" . $user[1];
             sendMessage("1178581717", $text);
+
 
             answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت ارسال شد!");
             break;
