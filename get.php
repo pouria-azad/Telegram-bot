@@ -93,7 +93,7 @@ if (($Message_entities && $Object['message']['text'] == '/start') || ($array[0][
     sendMessage($Message_id, "شما به این بخش دسترسی ندارید!");
 }
 // data 
-elseif ($Callback_chat_id && $Callback_data) {
+elseif ($Callback_chat_id && $Callback_data && $is_admin[0]['status']) {
     $array = [];
 
     try {
