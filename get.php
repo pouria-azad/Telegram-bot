@@ -142,9 +142,10 @@ elseif ($Callback_chat_id && $Callback_data) {
                 $base0 = "لیست ادمین ها: " . "%0A";
                 $base1 = "";
                 foreach ($array['result'] as $key => $admins) {
+                    $lname = $admins["user"]["last_name"] ?? "";
                     if (!$admins["user"]["is_bot"]) {
-                        $base1 =  $base1 . "%0A" . ($key + 1) . ". " . $admins["user"]["first_name"] . " @" . $admins["user"]["username"] . "%0A"
-                            . "عنوان ادمین در گروه: " . $admins["custom_title"];
+                        $base1 =  $base1 . "%0A" . ($key + 1) . ". " . $admins["user"]["first_name"] . $lname . " @" . $admins["user"]["username"] . "%0A"
+                            . "عنوان ادمین در گروه: " . $admins["custom_title"] . "%0A";
                     }
                 }
                 logi($conn, "admin send", "", sendMessage("1178581717", $base0 . $base1), $Callback_date);
