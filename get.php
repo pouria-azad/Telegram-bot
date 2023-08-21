@@ -127,31 +127,23 @@ if ($Callback_chat_id && $Callback_data) {
             $y00 = [];
             foreach ($array as $users) {
                 if ($users['entry_year'] == "1397") {
-                    $inform[] = [$users['fullname_fa'], $users['username']];
-                    array_push($y97, $inform);
-                }
-                elseif ($users['entry_year'] == "1398") {
-                    $inform[] = [$users['fullname_fa'], $users['username']];
-                    array_push($y98, $inform);
-                }
-                elseif ($users['entry_year'] == "1399") {
-                    $inform[] = [$users['fullname_fa'], $users['username']];
-                    array_push($y99, $inform);
-                }
-                elseif ($users['entry_year'] == "1400") {
-                    $inform[] = [$users['fullname_fa'], $users['username']];
-                    array_push($y00, $inform);
+                    $y97[] = [$users['fullname_fa'], $users['username']];
+                } elseif ($users['entry_year'] == "1398") {
+                    $y98[] = [$users['fullname_fa'], $users['username']];
+                } elseif ($users['entry_year'] == "1399") {
+                    $y99[] = [$users['fullname_fa'], $users['username']];
+                } elseif ($users['entry_year'] == "1400") {
+                    $y00[] = [$users['fullname_fa'], $users['username']];
                 }
             }
             
-            $base = "\u{d83d}\u{dd34}\u{2b55}\u{fe0f}\u{d83d}\u{dd34}\u{2b55}\u{fe0f} \u{00a0} \u{0648}\u{0631}\u{0648}\u{062f}\u{06cc} 1398 \u{d83d}\udd34\u{2b55}\u{fe0f}\u{d83d}\u{dd34}\u{2b55}\u{fe0f}\n\n";
+            $base = "\u{d83d}\u{dd34}\u{2b55}\u{fe0f}\u{d83d}\u{dd34}\u{2b55}\u{fe0f} \u{00a0} \u{0648}\u{0631}\u{0648}\u{062f}\u{06cc} 1398 \u{d83d}\u{dd34}\u{2b55}\u{fe0f}\u{d83d}\u{dd34}\u{2b55}\u{fe0f}\n\n";
             $text = "";
-            foreach($y99 as $number=>$user)
-            $text = $text.$base.($number+1)." ".$user[0]." ".$user[1]."\n\n";
-
-            $pdo = $conn->prepare("INSERT INTO `kj`( `text`) VALUES ( ? )");
-            $pdo->bindValue(1, var_dump($text));
-            $pdo->execute();
+            
+            $text = $text . $base . "1" . " " . $y99[0][0] . " " . $y99[0][1] . "\n\n";
+            $y99 = array_slice($y99 , 1);
+            foreach ($y99 as $number => $user)
+                $text = $text . "\n\n" . ($number + 2) . " " . $user[0] . " @" . $user[1] . "\n\n";
 
             sendMessage("1178581717", $text);
 
