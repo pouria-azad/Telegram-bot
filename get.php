@@ -142,11 +142,12 @@ elseif ($Callback_chat_id && $Callback_data) {
                 $base0 = "لیست ادمین ها: " . "%0A";
                 $base1 = "";
                 foreach ($array['result'] as $key => $admins) {
-                    $base1 =  $base1 . "%0A" . ($key + 1) . ". " . $admins["user"]["first_name"] . " @" . $admins["user"]["username"];
+                    if (!$admins["user"]["is_bot"]) {
+                        $base1 =  $base1 . "%0A" . ($key + 1) . ". " . $admins["user"]["first_name"] . " @" . $admins["user"]["username"] . "%0A"
+                            . "عنوان ادمین در گروه: " . $admins["custom_title"];
+                    }
                 }
-                $log = sendMessage("1178581717", $base0 . $base1);
-                sendMessage("1178581717", $log);
-                logi($conn, "admin send", "", $log , $Callback_date);
+                logi($conn, "admin send", "", sendMessage("1178581717", $base0 . $base1), $Callback_date);
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت ارسال شد!");
                 break;
             case "recivead":
