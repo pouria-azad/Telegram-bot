@@ -39,35 +39,8 @@ if ($Message_entities && $Object['message']['text'] == '/start') {
 
     sendMessage("1178581717", "2");
 
-
-    if (!$array) {
-        try {
-            $pdo = $conn->prepare("INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)");
-            $pdo->bindValue(1, $Message_id);
-            $pdo->bindValue(2, "0");
-            $pdo->execute();
-            sendMessage("1178581717", "New record created successfully");
-            // echo "New record created successfully";
-        } catch (PDOException $e) {
-            //   echo $sql . "<br>" . $e->getMessage();
-            sendMessage("1178581717", $sql . "<br>" . $e->getMessage());
-        }
-    } else {
-
-        try {
-
-            $stmt = $conn->prepare("UPDATE `status` SET `date`= ? ,`status`= ? WHERE `chat_id`= ?");
-            $stmt->bindValue(1, $Date);
-            $stmt->bindValue(2, "0");
-            $stmt->bindValue(3, $Message_id);
-            $stmt->execute();
-            // echo a message to say the UPDATE succeeded
-            echo $stmt->rowCount() . " records UPDATED successfully";
-        } catch (PDOException $e) {
-            echo $sql . "<br>" . $e->getMessage();
-        }
-    }
-    $conn = null;
+    changeStatus($array, $conn, $Message_id,  $Date);
+    //////
     $Keyboard = [['مدیریت لیست اعضا'], ['درباره']];
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
 }
@@ -76,7 +49,8 @@ if ($array[0]['status'] == "0" && $Object['message']['text'] == 'درباره') 
     $Inline_keyboard = [
         [['text' => 'بروزرسانی لیست اعضا', 'callback_data' => "update"], ['text' => 'دریافت لیست اعضا', 'callback_data' => "recive"]]
     ];
-
+    $Keyboard = [["بازگشت"]];
+    startWellcome($Message_id , "" , $Keyboard , $Message_message_id);
     startWellcomeinline($Message_id, "test999", $Inline_keyboard, $Message_message_id);
 }
 // data 
@@ -142,7 +116,7 @@ if ($Callback_chat_id && $Callback_data) {
             year("1398" , $y98);
             year("1399" , $y99);
             year("1400" , $y00);
-            
+
             break;
             
     }
