@@ -4,15 +4,33 @@ include "./config.php";
 
 $Content = file_get_contents('php://input');
 $Object = json_decode($Content, true);
-$Message_id = $Object['message']['from']['id'];
-$Message_message_id = $Object['message']['message_id'];
+//message
+$Message_id = $Object['message']['from']['id'] ?? false;
+$Message_message_id = $Object['message']['message_id'] ?? false;
 $Message_entities = $Object['message']['entities'] ?? false;
-$Date = $Object['message']['date'];
+$Date = $Object['message']['date'] ?? false;
+//new_chat_member
+if (isset($Object['message']['new_chat_members']) && $Object['message']['new_chat_members']['is_bot'] == false) {
+    $newMembers = $Object['message']['new_chat_members'];
+
+    foreach ($newMembers as $newMember) {
+        $userId = $newMember['id'];
+        $username = isset($newMember['username']) ? $newMember['username'] : '';
+        $firstName = $newMember['first_name'];
+        $lastName = isset($newMember['last_name']) ? $newMember['last_name'] : '';
+
+        $pdo = $conn->prepare("INSERT INTO `users`(`chat_id`, `username`, `fullname`) VALUES (? , ? , ?");
+        $pdo->bindValue(1, $userId);
+        $pdo->bindValue(2, $username);
+        $pdo->bindValue(3, $firstName.' '.$lastName);
+        $pdo->execute();
+    
+}}
 //callback
-$Callback_chat_id = $Object['callback_query']['from']['id'];
-$Callback_data = $Object['callback_query']['data'];
-$Callback_id = $Object['callback_query']['id'];
-$Callback_date = $Object['callback_query']['message']['date'];
+$Callback_chat_id = $Object['callback_query']['from']['id'] ?? false;
+$Callback_data = $Object['callback_query']['data'] ?? false;
+$Callback_id = $Object['callback_query']['id'] ?? false;
+$Callback_date = $Object['callback_query']['message']['date'] ?? false;
 
 
 $pdo = $conn->prepare("INSERT INTO `kj`( `log`) VALUES ( ? )");
@@ -39,7 +57,7 @@ if (($Message_entities && $Object['message']['text'] == '/start') || ($array[0][
     //////
     $Keyboard = [['مدیریت لیست اعضا'], ['درباره']];
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
-} elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'درباره') {
+} elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا') {
 
     changeStatus($array, $conn, $Message_id,  $Date, "1");
     //////
