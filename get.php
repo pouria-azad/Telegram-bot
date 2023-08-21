@@ -6,11 +6,11 @@ include "./jdf.php";
 $Content = file_get_contents('php://input');
 $Object = json_decode($Content, true);
 //message
-$Message_id = $Object['message']['from']['id'] ?? false;
-$Message_fname = $Object['message']['from']['first_name'] ?? false;
-$Message_message_id = $Object['message']['message_id'] ?? false;
-$Message_entities = $Object['message']['entities'] ?? false;
-$Date = $Object['message']['date'] ?? false;
+$Message_id = $Object['message']['from']['id'] ?? null;
+$Message_fname = $Object['message']['from']['first_name'] ?? null;
+$Message_message_id = $Object['message']['message_id'] ?? null;
+$Message_entities = $Object['message']['entities'] ?? null;
+$Date = $Object['message']['date'] ?? null;
 $Date = jdate('Y-m-d H:i:s', $Date, "", "", "en");
 //new_chat_member
 if (isset($Object['message']['new_chat_members']) && $Object['message']['new_chat_members']['is_bot'] == false) {
@@ -35,10 +35,10 @@ if (isset($Object['message']['new_chat_members']) && $Object['message']['new_cha
     }
 }
 //callback
-$Callback_chat_id = $Object['callback_query']['from']['id'] ?? false;
-$Callback_data = $Object['callback_query']['data'] ?? false;
-$Callback_id = $Object['callback_query']['id'] ?? false;
-$Callback_date = $Object['callback_query']['message']['date'] ?? false;
+$Callback_chat_id = $Object['callback_query']['from']['id'] ?? null;
+$Callback_data = $Object['callback_query']['data'] ?? null;
+$Callback_id = $Object['callback_query']['id'] ?? null;
+$Callback_date = $Object['callback_query']['message']['date'] ?? null;
 if (isset($Callback_date))
     $Callback_date = jdate('Y-m-d H:i:s', $Datestamp, "", "", "en");
 
@@ -57,7 +57,10 @@ try {
 
 try {
     $pdo = $conn->prepare("SELECT `status` FROM `users` WHERE `chat_id`= ? LIMIT 1");
-    $pdo->bindValue(1, $Message_id);
+    if (isset($Message_id))
+        $pdo->bindValue(1, $Message_id);
+    else
+        $pdo->bindValue(1, $Callback_chat_id);
     $pdo->execute();
     $is_admin = $pdo->fetchAll();
 } catch (PDOException $e) {
