@@ -121,14 +121,37 @@ if ($Callback_chat_id && $Callback_data) {
             //end update
             break;
         case "recive":
-            foreach($array as $users){
-                if($users['entry_year']== "1399"){
-                    $text = "نام: ".$users['fullname_fa']."آیدی: ".$users['username'];
-                    sendMessage("1178581717", $text);
+            $y97 = [];
+            $y98 = [];
+            $y99 = [];
+            $y00 = [];
+            foreach ($array as $users) {
+                if ($users['entry_year'] == "1397") {
+                    $text = "نام: " . $users['fullname_fa'] . "آیدی: " . $users['username'];
+                    array_push($y97, $text);
+                }
+                elseif ($users['entry_year'] == "1398") {
+                    $text = "نام: " . $users['fullname_fa'] . "آیدی: " . $users['username'];
+                    array_push($y98, $text);
+                }
+                elseif ($users['entry_year'] == "1399") {
+                    $text[] = [$users['fullname_fa'], $users['username']];
+                    array_push($y99, $text);
+                }
+                elseif ($users['entry_year'] == "1400") {
+                    $text = "نام: " . $users['fullname_fa'] . "آیدی: " . $users['username'];
+                    array_push($y00, $text);
                 }
             }
             
-            answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت آپدیت شد!");
+            $text = "\ud83d\udd34\u2b55\ufe0f\ud83d\udd34\u2b55\ufe0f \u00a0 \u0648\u0631\u0648\u062f\u06cc 1398 \ud83d\udd34\u2b55\ufe0f\ud83d\udd34\u2b55\ufe0f"
+            ."\n\n";
+            foreach($y98 as $number=>$users)
+            $text.($number+1)." ".$username."\n\n";
+
+            sendMessage("1178581717", $text);
+
+            answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت ارسال شد!");
             break;
     }
 }
