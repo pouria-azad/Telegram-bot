@@ -63,7 +63,7 @@ try {
 } catch (PDOException $e) {
     echo $sql . "<br>" . $e->getMessage();
 }
-logi($conn,"is admin test",$is_admin,"",$Date);
+logi($conn,"is admin test",var_dump($is_admin),"",$Date);
 //کلید استارت یا بازگشت
 if (($Message_entities && $Object['message']['text'] == '/start') || ($array[0]['status'] == "1" && $Object['message']['text'] == "بازگشت")) {
     $array = getStatus($conn, $Message_id);
