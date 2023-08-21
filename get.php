@@ -9,8 +9,8 @@ $Object = json_decode($Content, true);
 $Message_id = $Object['message']['from']['id'] ?? false;
 $Message_message_id = $Object['message']['message_id'] ?? false;
 $Message_entities = $Object['message']['entities'] ?? false;
-$Datestamp = $Object['message']['date'] ?? false;
-$Date = jdate('Y-m-d H:i:s', $Datestamp , "","","en");
+$Date = $Object['message']['date'] ?? false;
+$Date = jdate('Y-m-d H:i:s', $Date, "", "", "en");
 //new_chat_member
 if (isset($Object['message']['new_chat_members']) && $Object['message']['new_chat_members']['is_bot'] == false) {
     $newMembers = $Object['message']['new_chat_members'];
@@ -30,10 +30,12 @@ if (isset($Object['message']['new_chat_members']) && $Object['message']['new_cha
         } catch (PDOException $e) {
             $rrr = $e->getMessage();
         }
-        $pdo = $conn->prepare("INSERT INTO `kj`(`name` , `text` , `date`) VALUES ('join user' , ? , ?)");
-        $pdo->bindValue(1, $rrr);
-        $pdo->bindValue(2, $Date);
-        $pdo->execute();
+        // $pdo = $conn->prepare("INSERT INTO `kj`(`name` , `text` , `log` , `date`) VALUES ('join user' , ? , ? , ?)");
+        // $pdo->bindValue(1, $rrr);
+        // $pdo->bindValue(2, $Content);
+        // $pdo->bindValue(3, $Date);
+        // $pdo->execute();
+        logi($conn , "join user" , $rrr , $Content , $Date);
     }
 }
 //callback
@@ -41,11 +43,8 @@ $Callback_chat_id = $Object['callback_query']['from']['id'] ?? false;
 $Callback_data = $Object['callback_query']['data'] ?? false;
 $Callback_id = $Object['callback_query']['id'] ?? false;
 $Callback_date = $Object['callback_query']['message']['date'] ?? false;
-
-
-$pdo = $conn->prepare("INSERT INTO `kj`( `log`) VALUES ( ? )");
-$pdo->bindValue(1, $Content);
-$pdo->execute();
+if (isset($Callback_date))
+    $Callback_date = jdate('Y-m-d H:i:s', $Datestamp, "", "", "en");
 
 sendMessage("1178581717", "1");
 
@@ -95,11 +94,8 @@ elseif ($Callback_chat_id && $Callback_data) {
 
     switch ($Callback_data) {
         case "update":
-            $stmt = $conn->prepare("UPDATE `status` SET `date`= ? ,`status`= ? WHERE `chat_id`= ?");
-            $stmt->bindValue(1, $Callback_date);
-            $stmt->bindValue(2, "01");
-            $stmt->bindValue(3, $Callback_chat_id);
-            $stmt->execute();
+            
+            updateStatus($conn ,$Callback_date ,"01" , $Callback_chat_id);
 
             //start update
             foreach ($array as $users) {

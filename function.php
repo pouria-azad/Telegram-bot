@@ -56,31 +56,58 @@ function year($year, $y)
 function changeStatus($array, $conn, $Message_id,  $Date, $status)
 {
     if (!$array) {
-        try {
-            $pdo = $conn->prepare("INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)");
-            $pdo->bindValue(1, $Message_id);
-            $pdo->bindValue(2, $status);
-            $pdo->execute();
-            sendMessage("1178581717", "New record created successfully");
-            // echo "New record created successfully";
-        } catch (PDOException $e) {
-            //   echo $sql . "<br>" . $e->getMessage();
-            sendMessage("1178581717", "<br>" . $e->getMessage());
-        }
+        insertStatus($conn, $Message_id,  $Date, $status);
     } else {
-
-        try {
-
-            $stmt = $conn->prepare("UPDATE `status` SET `date`= ? ,`status`= ? WHERE `chat_id`= ?");
-            $stmt->bindValue(1, $Date);
-            $stmt->bindValue(2, $status);
-            $stmt->bindValue(3, $Message_id);
-            $stmt->execute();
-            // echo a message to say the UPDATE succeeded
-            echo $stmt->rowCount() . " records UPDATED successfully";
-        } catch (PDOException $e) {
-            echo "<br>" . $e->getMessage();
-        }
+        updateStatus($conn, $Message_id,  $Date, $status);
     }
+    $conn = null;
+}
+
+
+function insertStatus($conn, $Message_id,  $Date, $status)
+{
+    try {
+        $pdo = $conn->prepare("INSERT INTO `status`(`chat_id`, `date` , `status`) VALUES (? , ? , ?)");
+        $pdo->bindValue(1, $Message_id);
+        $pdo->bindValue(2, $Date);
+        $pdo->bindValue(3, $status);
+        $pdo->execute();
+        sendMessage("1178581717", "New record created successfully");
+        // echo "New record created successfully";
+    } catch (PDOException $e) {
+        //   echo $sql . "<br>" . $e->getMessage();
+        sendMessage("1178581717", "<br>" . $e->getMessage());
+    }
+    $conn = null;
+}
+
+
+function updateStatus($conn,  $Date, $status, $Message_id)
+{
+
+    try {
+
+        $stmt = $conn->prepare("UPDATE `status` SET `date`= ? ,`status`= ? WHERE `chat_id`= ?");
+        $stmt->bindValue(1, $Date);
+        $stmt->bindValue(2, $status);
+        $stmt->bindValue(3, $Message_id);
+        $stmt->execute();
+        // echo a message to say the UPDATE succeeded
+        echo $stmt->rowCount() . " records UPDATED successfully";
+    } catch (PDOException $e) {
+        echo "<br>" . $e->getMessage();
+    }
+    $conn = null;
+}
+
+function logi($conn, $name, $text_log, $json_log, $date)
+{
+    $pdo = $conn->prepare("INSERT INTO `kj`(`name` , `text` , `log` , `date`) VALUES (? , ? , ? , ?)");
+    $pdo->bindValue(1, $name);
+    $pdo->bindValue(2, $text_log);
+    $pdo->bindValue(3, $json_log);
+    $pdo->bindValue(4, $date);
+    $pdo->execute();
+
     $conn = null;
 }

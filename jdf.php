@@ -11,7 +11,7 @@
 /*	F	*/
 function jdate($format, $timestamp = '', $none = '', $time_zone = 'Asia/Tehran', $tr_num = 'fa') {
 
-  $T_sec = -90000;/* <= رفع خطاي زمان سرور ، با اعداد '+' و '-' بر حسب ثانيه */
+  $T_sec = -3600;/* <= رفع خطاي زمان سرور ، با اعداد '+' و '-' بر حسب ثانيه */
 
   if ($time_zone != 'local') date_default_timezone_set(($time_zone === '') ? 'Asia/Tehran' : $time_zone);
   $ts = $T_sec + (($timestamp === '') ? time() : tr_num($timestamp));
