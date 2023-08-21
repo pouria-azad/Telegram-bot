@@ -53,7 +53,7 @@ function year($year, $y)
     sendMessage("1178581717", $text);
 }
 
-function changeStatus($array, $conn, $Message_id,  $Date, $status)
+function changeStatus($array, $conn,  $Date, $status, $Message_id)
 {
     if (!$array) {
         insertStatus($conn, $Date, $status, $Message_id);
@@ -110,4 +110,16 @@ function logi($conn, $name, $text_log, $json_log, $date)
     $pdo->execute();
 
     $conn = null;
+}
+
+function getStatus($conn, $Message_id)
+{
+    try {
+        $pdo = $conn->prepare("SELECT `chat_id`,`status` FROM `status` WHERE `chat_id`= ? LIMIT 1");
+        $pdo->bindValue(1, $Message_id);
+        $pdo->execute();
+        return $pdo->fetchAll();
+    } catch (PDOException $e) {
+        echo  "<br>" . $e->getMessage();
+    }
 }

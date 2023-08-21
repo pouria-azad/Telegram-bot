@@ -56,14 +56,16 @@ try {
 
 
 
+//کلید استارت یا بازگشت
 if (($Message_entities && $Object['message']['text'] == '/start') || ($array[0]['status'] == "1" && $Object['message']['text'] == "بازگشت")) {
-    changeStatus($array, $conn, $Message_id,  $Date, "0");
+    $array = getStatus($conn, $Message_id);
+    changeStatus($array, $conn,  $Date, "0" , $Message_id);
     //////
     $Keyboard = [['مدیریت لیست اعضا'], ['درباره']];
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
 } elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا') {
-
-    changeStatus($array, $conn, $Message_id,  $Date, "1");
+    $array = getStatus($conn, $Message_id);
+    changeStatus($array, $conn,  $Date, "1" ,$Message_id);
     //////
     $Inline_keyboard = [
         [['text' => 'بروزرسانی لیست اعضا', 'callback_data' => "update"], ['text' => 'دریافت لیست اعضا', 'callback_data' => "recive"]]
@@ -80,30 +82,25 @@ elseif ($Callback_chat_id && $Callback_data) {
         $sql = "SELECT * FROM `users`";
         $pdo = $conn->prepare($sql);
         $pdo->execute();
-        $result = $pdo->setFetchMode(PDO::FETCH_ASSOC);
+        //$result = $pdo->setFetchMode(PDO::FETCH_ASSOC);
         $array = $pdo->fetchAll();
     } catch (PDOException $e) {
         echo $sql . "<br>" . $e->getMessage();
     }
 
-
     switch ($Callback_data) {
         case "update":
-            
-            updateStatus($conn ,$Callback_date ,"01" , $Callback_chat_id);
-
             //start update
             foreach ($array as $users) {
                 $status = getChatMember(-1001454096414, $users['chat_id']);
                 if ($status['ok'] && $status['result']['user']['username']) {
                     try {
-                        $sql = "UPDATE `users` SET `username`= ? WHERE `chat_id`= ?";
-                        $stmt = $conn->prepare($sql);
+                        $stmt = $conn->prepare("UPDATE `users` SET `username`= ? WHERE `chat_id`= ?");
                         $stmt->bindValue(1, $status['result']['user']['username']);
                         $stmt->bindValue(2, $users['chat_id']);
                         $stmt->execute();
                     } catch (PDOException $e) {
-                        sendMessage("1178581717", $sql . "<br>" . $e->getMessage());
+                        sendMessage("1178581717",  "<br>" . $e->getMessage());
                     }
                 }
             }
