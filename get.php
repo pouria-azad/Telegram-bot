@@ -21,7 +21,7 @@ if (isset($Object['message']['new_chat_members']) && $Object['message']['new_cha
         sendMessage("1178581717", "foreach");
         $rrr = "";
         try {
-            $pdo = $conn->prepare("INSERT INTO `users`(`chat_id`, `username`, `fullname`) VALUES (? , ? , ?");
+            $pdo = $conn->prepare("INSERT INTO `users`(`chat_id`, `username`, `fullname`) VALUES (? , ? , ?)");
             $pdo->bindValue(1, $userId);
             $pdo->bindValue(2, $username);
             $pdo->bindValue(3, $firstName . ' ' . $lastName);
