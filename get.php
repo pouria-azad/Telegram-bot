@@ -1,6 +1,7 @@
 <?php
 include "./function.php";
 include "./config.php";
+include "./jdf.php";
 
 $Content = file_get_contents('php://input');
 $Object = json_decode($Content, true);
@@ -8,17 +9,16 @@ $Object = json_decode($Content, true);
 $Message_id = $Object['message']['from']['id'] ?? false;
 $Message_message_id = $Object['message']['message_id'] ?? false;
 $Message_entities = $Object['message']['entities'] ?? false;
-$Date = $Object['message']['date'] ?? false;
+$Datestamp = $Object['message']['date'] ?? false;
+$Date = jdate('Y-m-d H:i:s', $Datestamp , "","","en");
 //new_chat_member
 if (isset($Object['message']['new_chat_members']) && $Object['message']['new_chat_members']['is_bot'] == false) {
     $newMembers = $Object['message']['new_chat_members'];
-    sendMessage("1178581717", "halghe");
     foreach ($newMembers as $newMember) {
         $userId = $newMember['id'];
         $username = isset($newMember['username']) ? $newMember['username'] : '';
         $firstName = $newMember['first_name'];
         $lastName = isset($newMember['last_name']) ? $newMember['last_name'] : '';
-        sendMessage("1178581717", "foreach");
         $rrr = "";
         try {
             $pdo = $conn->prepare("INSERT INTO `users`(`chat_id`, `username`, `fullname`) VALUES (? , ? , ?)");
@@ -27,13 +27,12 @@ if (isset($Object['message']['new_chat_members']) && $Object['message']['new_cha
             $pdo->bindValue(3, $firstName . ' ' . $lastName);
             $pdo->execute();
             $rrr = "New record created successfully";
-            sendMessage("1178581717", "try");
         } catch (PDOException $e) {
             $rrr = $e->getMessage();
         }
-        sendMessage("1178581717", "end");
-        $pdo = $conn->prepare("INSERT INTO `kj`(`text`) VALUES (?)");
+        $pdo = $conn->prepare("INSERT INTO `kj`(`name` , `text` , `date`) VALUES (`join user` , ? , ?)");
         $pdo->bindValue(1, $rrr);
+        $pdo->bindValue(2, $Date);
         $pdo->execute();
     }
 }
