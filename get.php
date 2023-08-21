@@ -7,6 +7,7 @@ $Content = file_get_contents('php://input');
 $Object = json_decode($Content, true);
 //message
 $Message_id = $Object['message']['from']['id'] ?? false;
+$Message_fname = $Object['message']['from']['first_name'] ?? false;
 $Message_message_id = $Object['message']['message_id'] ?? false;
 $Message_entities = $Object['message']['entities'] ?? false;
 $Date = $Object['message']['date'] ?? false;
@@ -71,13 +72,16 @@ if (($Message_entities && $Object['message']['text'] == '/start') || ($array[0][
         [
             ['text' => 'بروزرسانی لیست اعضا', 'callback_data' => "update-0"],
             ['text' => 'دریافت لیست اعضا', 'callback_data' => "recive-0"],
+        ],
+        [
             ['text' => 'بروزرسانی لیست مدیران', 'callback_data' => "updatead-0"],
             ['text' => 'دریافت لیست مدیران', 'callback_data' => "recivead-0"],
         ]
     ];
     $Keyboard = [["بازگشت"]];
     startWellcome($Message_id, "/", $Keyboard, $Message_message_id);
-    startWellcomeinline($Message_id, "test999", $Inline_keyboard, $Message_message_id);
+    $text = $Message_fname. " عزیز در این بخش شما میتوانید اعضای گروه رو مدیریت نمایید";
+    startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
 }
 // data 
 elseif ($Callback_chat_id && $Callback_data) {
