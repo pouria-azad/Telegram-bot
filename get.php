@@ -127,11 +127,11 @@ if ($Callback_chat_id && $Callback_data) {
             $y00 = [];
             foreach ($array as $users) {
                 if ($users['entry_year'] == "1397") {
-                    $text = "نام: " . $users['fullname_fa'] . "آیدی: " . $users['username'];
+                    $text[] = [$users['fullname_fa'], $users['username']];
                     array_push($y97, $text);
                 }
                 elseif ($users['entry_year'] == "1398") {
-                    $text = "نام: " . $users['fullname_fa'] . "آیدی: " . $users['username'];
+                    $text[] = [$users['fullname_fa'], $users['username']];
                     array_push($y98, $text);
                 }
                 elseif ($users['entry_year'] == "1399") {
@@ -139,15 +139,15 @@ if ($Callback_chat_id && $Callback_data) {
                     array_push($y99, $text);
                 }
                 elseif ($users['entry_year'] == "1400") {
-                    $text = "نام: " . $users['fullname_fa'] . "آیدی: " . $users['username'];
+                    $text[] = [$users['fullname_fa'], $users['username']];
                     array_push($y00, $text);
                 }
             }
             
             $text = "\ud83d\udd34\u2b55\ufe0f\ud83d\udd34\u2b55\ufe0f \u00a0 \u0648\u0631\u0648\u062f\u06cc 1398 \ud83d\udd34\u2b55\ufe0f\ud83d\udd34\u2b55\ufe0f"
             ."\n\n";
-            foreach($y98 as $number=>$users)
-            $text.($number+1)." ".$username."\n\n";
+            foreach($y99 as $number=>$user)
+            $text.($number+1)." ".$user[0]." ".$user[1]."\n\n";
 
             sendMessage("1178581717", $text);
 
