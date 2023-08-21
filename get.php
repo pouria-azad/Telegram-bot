@@ -39,18 +39,21 @@ if ($Message_entities && $Object['message']['text'] == '/start') {
 
     sendMessage("1178581717", "2");
 
-    changeStatus($array, $conn, $Message_id,  $Date);
+    changeStatus($array, $conn, $Message_id,  $Date , "0");
     //////
     $Keyboard = [['مدیریت لیست اعضا'], ['درباره']];
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
 }
 
 if ($array[0]['status'] == "0" && $Object['message']['text'] == 'درباره') {
+    
+    changeStatus($array, $conn, $Message_id,  $Date , "1");
+    //////
     $Inline_keyboard = [
         [['text' => 'بروزرسانی لیست اعضا', 'callback_data' => "update"], ['text' => 'دریافت لیست اعضا', 'callback_data' => "recive"]]
     ];
     $Keyboard = [["بازگشت"]];
-    startWellcome($Message_id , "" , $Keyboard , $Message_message_id);
+    startWellcome($Message_id , "/" , $Keyboard , $Message_message_id);
     startWellcomeinline($Message_id, "test999", $Inline_keyboard, $Message_message_id);
 }
 // data 

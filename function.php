@@ -53,13 +53,13 @@ function year($year, $y)
     sendMessage("1178581717", $text);
 }
 
-function changeStatus($array, $conn, $Message_id,  $Date)
+function changeStatus($array, $conn, $Message_id,  $Date, $status)
 {
     if (!$array) {
         try {
             $pdo = $conn->prepare("INSERT INTO `status`(`chat_id`, `status`) VALUES (? , ?)");
             $pdo->bindValue(1, $Message_id);
-            $pdo->bindValue(2, "0");
+            $pdo->bindValue(2, $status);
             $pdo->execute();
             sendMessage("1178581717", "New record created successfully");
             // echo "New record created successfully";
@@ -73,7 +73,7 @@ function changeStatus($array, $conn, $Message_id,  $Date)
 
             $stmt = $conn->prepare("UPDATE `status` SET `date`= ? ,`status`= ? WHERE `chat_id`= ?");
             $stmt->bindValue(1, $Date);
-            $stmt->bindValue(2, "0");
+            $stmt->bindValue(2, $status);
             $stmt->bindValue(3, $Message_id);
             $stmt->execute();
             // echo a message to say the UPDATE succeeded
