@@ -80,7 +80,7 @@ if (($Message_entities && $Object['message']['text'] == '/start') || ($array[0][
     ];
     $Keyboard = [["بازگشت"]];
     startWellcome($Message_id, "/", $Keyboard, $Message_message_id);
-    $text = $Message_fname. " عزیز در این بخش شما میتوانید اعضای گروه رو مدیریت نمایید";
+    $text = " عزیز در این بخش شما میتوانید اعضای گروه رو مدیریت نمایید". $Message_fname;
     startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
 }
 // data 
