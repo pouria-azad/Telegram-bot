@@ -30,11 +30,6 @@ if (isset($Object['message']['new_chat_members']) && $Object['message']['new_cha
         } catch (PDOException $e) {
             $rrr = $e->getMessage();
         }
-        // $pdo = $conn->prepare("INSERT INTO `kj`(`name` , `text` , `log` , `date`) VALUES ('join user' , ? , ? , ?)");
-        // $pdo->bindValue(1, $rrr);
-        // $pdo->bindValue(2, $Content);
-        // $pdo->bindValue(3, $Date);
-        // $pdo->execute();
         logi($conn , "join user" , $rrr , $Content , $Date);
     }
 }

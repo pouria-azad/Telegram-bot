@@ -56,15 +56,15 @@ function year($year, $y)
 function changeStatus($array, $conn, $Message_id,  $Date, $status)
 {
     if (!$array) {
-        insertStatus($conn, $Message_id,  $Date, $status);
+        insertStatus($conn, $Date, $status, $Message_id);
     } else {
-        updateStatus($conn, $Message_id,  $Date, $status);
+        updateStatus($conn,  $Date, $status, $Message_id);
     }
     $conn = null;
 }
 
 
-function insertStatus($conn, $Message_id,  $Date, $status)
+function insertStatus($conn, $Date, $status, $Message_id)
 {
     try {
         $pdo = $conn->prepare("INSERT INTO `status`(`chat_id`, `date` , `status`) VALUES (? , ? , ?)");
