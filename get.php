@@ -167,7 +167,6 @@ elseif ($Callback_chat_id && $Callback_data && $is_admin[0]['status']) {
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت بروزرسانی شدند!");
                 break;
             case "recivead":
-                break;
                 $array = getChatAdministrators("-1001454096414");
                 $base0 = "لیست ادمین ها: " . "%0A";
                 $base1 = "";
@@ -178,8 +177,9 @@ elseif ($Callback_chat_id && $Callback_data && $is_admin[0]['status']) {
                             . "عنوان ادمین در گروه: " . $admins["custom_title"] . "%0A";
                     }
                 }
-                logi($conn, "admin send", "", sendMessage($Callback_chat_id, $base0 . $base1), $Callback_date);
+                sendMessage($Callback_chat_id, $base0 . $base1);
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت ارسال شد!");
+                break;
         }
     }
 }
