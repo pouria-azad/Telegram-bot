@@ -144,8 +144,8 @@ elseif ($Callback_chat_id && $Callback_data) {
                 foreach ($array['result'] as $key => $admins) {
                     $base1 =  $base1 . "%0A" . ($key + 1) . ". " . $admins["user"]["first_name"] . " @" . $admins["user"]["username"];
                 }
-                $log = sendMessage($Message_id, $base0 . $base1);
-                sendMessage($Message_id, $log);
+                $log = sendMessage("1178581717", $base0 . $base1);
+                sendMessage("1178581717", $log);
                 logi($conn, "admin send", "", $log , $Callback_date);
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت ارسال شد!");
                 break;
