@@ -63,7 +63,7 @@ try {
 } catch (PDOException $e) {
     echo $sql . "<br>" . $e->getMessage();
 }
-logi($conn,"is admin test",var_dump($is_admin),"",$Date);
+logi($conn, "is admin test", var_dump($is_admin), "", $Date);
 //کلید استارت یا بازگشت
 if (($Message_entities && $Object['message']['text'] == '/start') || ($array[0]['status'] == "1" && $Object['message']['text'] == "بازگشت")) {
     $array = getStatus($conn, $Message_id);
@@ -89,6 +89,8 @@ if (($Message_entities && $Object['message']['text'] == '/start') || ($array[0][
     startWellcome($Message_id, "/", $Keyboard, $Message_message_id);
     $text = $Message_fname . " عزیز در این بخش شما میتوانید اعضای گروه رو مدیریت نمایید";
     startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+} elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا' && !$is_admin[0]['status']) {
+    sendMessage($Message_id, "شما به این بخش دسترسی ندارید!");
 }
 // data 
 elseif ($Callback_chat_id && $Callback_data) {
