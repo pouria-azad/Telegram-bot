@@ -30,7 +30,7 @@ if (isset($Object['message']['new_chat_members']) && $Object['message']['new_cha
         } catch (PDOException $e) {
             $rrr = $e->getMessage();
         }
-        logi($conn , "join user" , $rrr , $Content , $Date);
+        logi($conn, "join user", $rrr, $Content, $Date);
     }
 }
 //callback
@@ -59,16 +59,21 @@ try {
 //کلید استارت یا بازگشت
 if (($Message_entities && $Object['message']['text'] == '/start') || ($array[0]['status'] == "1" && $Object['message']['text'] == "بازگشت")) {
     $array = getStatus($conn, $Message_id);
-    changeStatus($array, $conn,  $Date, "0" , $Message_id);
+    changeStatus($array, $conn,  $Date, "0", $Message_id);
     //////
     $Keyboard = [['مدیریت لیست اعضا'], ['درباره']];
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
 } elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا') {
     $array = getStatus($conn, $Message_id);
-    changeStatus($array, $conn,  $Date, "1" ,$Message_id);
+    changeStatus($array, $conn,  $Date, "1", $Message_id);
     //////
     $Inline_keyboard = [
-        [['text' => 'بروزرسانی لیست اعضا', 'callback_data' => "update"], ['text' => 'دریافت لیست اعضا', 'callback_data' => "recive"]]
+        [
+            ['text' => 'بروزرسانی لیست اعضا', 'callback_data' => "update-0"],
+            ['text' => 'دریافت لیست اعضا', 'callback_data' => "recive-0"],
+            ['text' => 'بروزرسانی لیست مدیران', 'callback_data' => "updatead-0"],
+            ['text' => 'دریافت لیست مدیران', 'callback_data' => "recivead-0"],
+        ]
     ];
     $Keyboard = [["بازگشت"]];
     startWellcome($Message_id, "/", $Keyboard, $Message_message_id);
@@ -79,7 +84,7 @@ elseif ($Callback_chat_id && $Callback_data) {
     $array = [];
 
     try {
-        $sql = "SELECT * FROM `users`";
+        $sql = "SELECT * FROM `users` ORDER BY `users`.`fullname_fa` ASC";
         $pdo = $conn->prepare($sql);
         $pdo->execute();
         //$result = $pdo->setFetchMode(PDO::FETCH_ASSOC);
@@ -87,50 +92,64 @@ elseif ($Callback_chat_id && $Callback_data) {
     } catch (PDOException $e) {
         echo $sql . "<br>" . $e->getMessage();
     }
-
-    switch ($Callback_data) {
-        case "update":
-            //start update
-            foreach ($array as $users) {
-                $status = getChatMember(-1001454096414, $users['chat_id']);
-                if ($status['ok'] && $status['result']['user']['username']) {
-                    try {
-                        $stmt = $conn->prepare("UPDATE `users` SET `username`= ? WHERE `chat_id`= ?");
-                        $stmt->bindValue(1, $status['result']['user']['username']);
-                        $stmt->bindValue(2, $users['chat_id']);
-                        $stmt->execute();
-                    } catch (PDOException $e) {
-                        sendMessage("1178581717",  "<br>" . $e->getMessage());
+    $Callback_data = explode('-', $Callback_data);
+    if ($Callback_data[1] == "0") {
+        switch ($Callback_data[0]) {
+            case "update":
+                //start update
+                foreach ($array as $users) {
+                    $status = getChatMember(-1001454096414, $users['chat_id']);
+                    if ($status['ok'] && $status['result']['user']['username']) {
+                        try {
+                            $stmt = $conn->prepare("UPDATE `users` SET `username`= ? WHERE `chat_id`= ?");
+                            $stmt->bindValue(1, $status['result']['user']['username']);
+                            $stmt->bindValue(2, $users['chat_id']);
+                            $stmt->execute();
+                        } catch (PDOException $e) {
+                            sendMessage("1178581717",  "<br>" . $e->getMessage());
+                        }
                     }
                 }
-            }
-            answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت آپدیت شد!");
-            //end update
-            break;
-        case "recive":
-            $y97 = [];
-            $y98 = [];
-            $y99 = [];
-            $y00 = [];
-            foreach ($array as $users) {
-                if ($users['entry_year'] == "1397") {
-                    $y97[] = [$users['fullname_fa'], $users['username']];
-                } elseif ($users['entry_year'] == "1398") {
-                    $y98[] = [$users['fullname_fa'], $users['username']];
-                } elseif ($users['entry_year'] == "1399") {
-                    $y99[] = [$users['fullname_fa'], $users['username']];
-                } elseif ($users['entry_year'] == "1400") {
-                    $y00[] = [$users['fullname_fa'], $users['username']];
+                answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت آپدیت شد!");
+                //end update
+                break;
+            case "recive":
+                $y97 = [];
+                $y98 = [];
+                $y99 = [];
+                $y00 = [];
+                foreach ($array as $users) {
+                    if ($users['entry_year'] == "1397") {
+                        $y97[] = [$users['fullname_fa'], $users['username']];
+                    } elseif ($users['entry_year'] == "1398") {
+                        $y98[] = [$users['fullname_fa'], $users['username']];
+                    } elseif ($users['entry_year'] == "1399") {
+                        $y99[] = [$users['fullname_fa'], $users['username']];
+                    } elseif ($users['entry_year'] == "1400") {
+                        $y00[] = [$users['fullname_fa'], $users['username']];
+                    }
                 }
-            }
 
-            answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت ارسال شد!");
-            year("1397", $y97);
-            year("1398", $y98);
-            year("1399", $y99);
-            year("1400", $y00);
+                answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت ارسال شد!");
+                year("1397", $y97);
+                year("1398", $y98);
+                year("1399", $y99);
+                year("1400", $y00);
 
-            break;
+                break;
+            case "updatead":
+                $array = getChatAdministrators("-1001454096414");
+                $base0 = "لیست ادمین ها: " . "%0A";
+                $base1 = "";
+                foreach ($array['result'] as $key => $admins) {
+                    $base1 =  $base1 . "%0A" . ($key + 1) . ". " . $admins["user"]["first_name"] . " @" . $admins["user"]["username"];
+                }
+                sendMessage($Message_id, $base0 . $base1);
+                answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت ارسال شد!");
+                break;
+            case "recivead":
+                break;
+        }
     }
 }
 // $switch = false;

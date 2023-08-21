@@ -123,3 +123,10 @@ function getStatus($conn, $Message_id)
         echo  "<br>" . $e->getMessage();
     }
 }
+
+function getChatAdministrators($chat_id)
+{
+    $Method = 'getChatAdministrators';
+    $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . "$chat_id";
+    return json_decode(file_get_contents($Request_to_server), true);
+}
