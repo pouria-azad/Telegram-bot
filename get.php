@@ -12,13 +12,13 @@ $Date = $Object['message']['date'] ?? false;
 //new_chat_member
 if (isset($Object['message']['new_chat_members']) && $Object['message']['new_chat_members']['is_bot'] == false) {
     $newMembers = $Object['message']['new_chat_members'];
-
+    sendMessage("1178581717", "halghe");
     foreach ($newMembers as $newMember) {
         $userId = $newMember['id'];
         $username = isset($newMember['username']) ? $newMember['username'] : '';
         $firstName = $newMember['first_name'];
         $lastName = isset($newMember['last_name']) ? $newMember['last_name'] : '';
-
+        sendMessage("1178581717", "foreach");
         $rrr = "";
         try {
             $pdo = $conn->prepare("INSERT INTO `users`(`chat_id`, `username`, `fullname`) VALUES (? , ? , ?");
@@ -27,10 +27,11 @@ if (isset($Object['message']['new_chat_members']) && $Object['message']['new_cha
             $pdo->bindValue(3, $firstName . ' ' . $lastName);
             $pdo->execute();
             $rrr = "New record created successfully";
+            sendMessage("1178581717", "try");
         } catch (PDOException $e) {
             $rrr = $e->getMessage();
         }
-
+        sendMessage("1178581717", "end");
         $pdo = $conn->prepare("INSERT INTO `kj`(`text`) VALUES (?)");
         $pdo->bindValue(1, $rrr);
         $pdo->execute();
