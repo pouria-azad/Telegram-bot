@@ -127,28 +127,31 @@ if ($Callback_chat_id && $Callback_data) {
             $y00 = [];
             foreach ($array as $users) {
                 if ($users['entry_year'] == "1397") {
-                    $text[] = [$users['fullname_fa'], $users['username']];
-                    array_push($y97, $text);
+                    $inform[] = [$users['fullname_fa'], $users['username']];
+                    array_push($y97, $inform);
                 }
                 elseif ($users['entry_year'] == "1398") {
-                    $text[] = [$users['fullname_fa'], $users['username']];
-                    array_push($y98, $text);
+                    $inform[] = [$users['fullname_fa'], $users['username']];
+                    array_push($y98, $inform);
                 }
                 elseif ($users['entry_year'] == "1399") {
-                    $text[] = [$users['fullname_fa'], $users['username']];
-                    array_push($y99, $text);
+                    $inform[] = [$users['fullname_fa'], $users['username']];
+                    array_push($y99, $inform);
                 }
                 elseif ($users['entry_year'] == "1400") {
-                    $text[] = [$users['fullname_fa'], $users['username']];
-                    array_push($y00, $text);
+                    $inform[] = [$users['fullname_fa'], $users['username']];
+                    array_push($y00, $inform);
                 }
             }
             
-            $base = "\ud83d\udd34\u2b55\ufe0f\ud83d\udd34\u2b55\ufe0f \u00a0 \u0648\u0631\u0648\u062f\u06cc 1398 \ud83d\udd34\u2b55\ufe0f\ud83d\udd34\u2b55\ufe0f"
-            ."\n\n";
+            $base = "\u{d83d}\u{dd34}\u{2b55}\u{fe0f}\u{d83d}\u{dd34}\u{2b55}\u{fe0f} \u{00a0} \u{0648}\u{0631}\u{0648}\u{062f}\u{06cc} 1398 \u{d83d}\udd34\u{2b55}\u{fe0f}\u{d83d}\u{dd34}\u{2b55}\u{fe0f}\n\n";
             $text = "";
             foreach($y99 as $number=>$user)
             $text = $text.$base.($number+1)." ".$user[0]." ".$user[1]."\n\n";
+
+            $pdo = $conn->prepare("INSERT INTO `kj`( `text`) VALUES ( ? )");
+            $pdo->bindValue(1, var_dump($text));
+            $pdo->execute();
 
             sendMessage("1178581717", $text);
 
