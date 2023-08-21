@@ -136,13 +136,15 @@ if ($Callback_chat_id && $Callback_data) {
                     $y00[] = [$users['fullname_fa'], $users['username']];
                 }
             }
+
+            answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت ارسال شد!");
             year("1397" , $y97);
             year("1398" , $y98);
             year("1399" , $y99);
             year("1400" , $y00);
             
-            answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت ارسال شد!");
             break;
+            
     }
 }
 // $switch = false;
