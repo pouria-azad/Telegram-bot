@@ -179,7 +179,7 @@ elseif ($Callback_chat_id && $Callback_data && $is_admin[0]['status']) {
                 }
                 $text = $base0 . $base1;
                 sendMessage($Callback_chat_id, $text);
-                logi($conn,"call back chat id",$Callback_chat_id , "", $Date);
+                logi($conn,"call back chat id",$text , "", $Date);
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت ارسال شد!");
                 break;
         }
