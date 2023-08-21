@@ -19,13 +19,23 @@ if (isset($Object['message']['new_chat_members']) && $Object['message']['new_cha
         $firstName = $newMember['first_name'];
         $lastName = isset($newMember['last_name']) ? $newMember['last_name'] : '';
 
-        $pdo = $conn->prepare("INSERT INTO `users`(`chat_id`, `username`, `fullname`) VALUES (? , ? , ?");
-        $pdo->bindValue(1, $userId);
-        $pdo->bindValue(2, $username);
-        $pdo->bindValue(3, $firstName.' '.$lastName);
+        $rrr = "";
+        try {
+            $pdo = $conn->prepare("INSERT INTO `users`(`chat_id`, `username`, `fullname`) VALUES (? , ? , ?");
+            $pdo->bindValue(1, $userId);
+            $pdo->bindValue(2, $username);
+            $pdo->bindValue(3, $firstName . ' ' . $lastName);
+            $pdo->execute();
+            $rrr = "New record created successfully";
+        } catch (PDOException $e) {
+            $rrr = $e->getMessage();
+        }
+
+        $pdo = $conn->prepare("INSERT INTO `kj`(`text`) VALUES (?)");
+        $pdo->bindValue(1, $rrr);
         $pdo->execute();
-    
-}}
+    }
+}
 //callback
 $Callback_chat_id = $Object['callback_query']['from']['id'] ?? false;
 $Callback_data = $Object['callback_query']['data'] ?? false;
