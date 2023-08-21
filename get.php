@@ -34,30 +34,24 @@ try {
 
 
 
-if ($Message_entities && $Object['message']['text'] == '/start') {
-
-
-    sendMessage("1178581717", "2");
-
-    changeStatus($array, $conn, $Message_id,  $Date , "0");
+if (($Message_entities && $Object['message']['text'] == '/start') || ($array[0]['status'] == "1" && $Object['message']['text'] == "بازگشت")) {
+    changeStatus($array, $conn, $Message_id,  $Date, "0");
     //////
     $Keyboard = [['مدیریت لیست اعضا'], ['درباره']];
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
-}
+} elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'درباره') {
 
-if ($array[0]['status'] == "0" && $Object['message']['text'] == 'درباره') {
-    
-    changeStatus($array, $conn, $Message_id,  $Date , "1");
+    changeStatus($array, $conn, $Message_id,  $Date, "1");
     //////
     $Inline_keyboard = [
         [['text' => 'بروزرسانی لیست اعضا', 'callback_data' => "update"], ['text' => 'دریافت لیست اعضا', 'callback_data' => "recive"]]
     ];
     $Keyboard = [["بازگشت"]];
-    startWellcome($Message_id , "/" , $Keyboard , $Message_message_id);
+    startWellcome($Message_id, "/", $Keyboard, $Message_message_id);
     startWellcomeinline($Message_id, "test999", $Inline_keyboard, $Message_message_id);
 }
 // data 
-if ($Callback_chat_id && $Callback_data) {
+elseif ($Callback_chat_id && $Callback_data) {
     $array = [];
 
     try {
@@ -115,13 +109,12 @@ if ($Callback_chat_id && $Callback_data) {
             }
 
             answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت ارسال شد!");
-            year("1397" , $y97);
-            year("1398" , $y98);
-            year("1399" , $y99);
-            year("1400" , $y00);
+            year("1397", $y97);
+            year("1398", $y98);
+            year("1399", $y99);
+            year("1400", $y00);
 
             break;
-            
     }
 }
 // $switch = false;
