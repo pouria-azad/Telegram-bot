@@ -154,16 +154,16 @@ elseif ($Callback_chat_id && $Callback_data && $is_admin[0]['status']) {
 
                 break;
             case "updatead":
-                $array = getChatAdministrators("-1001454096414");
-                foreach ($array['result'] as $key => $admins) {
-                    try {
-                        $stmt = $conn->prepare("UPDATE `users` SET `status`= '1' WHERE `chat_id`= ?");
-                        $stmt->bindValue(1, $admins["user"]["id"]);
-                        $stmt->execute();
-                    } catch (PDOException $e) {
-                        logi($conn, "admin update error", $e->getMessage(), "", $Callback_date);
-                    }
-                }
+                // $array = getChatAdministrators("-1001454096414");
+                // foreach ($array['result'] as $key => $admins) {
+                //     try {
+                //         $stmt = $conn->prepare("UPDATE `users` SET `status`= '1' WHERE `chat_id`= ?");
+                //         $stmt->bindValue(1, $admins["user"]["id"]);
+                //         $stmt->execute();
+                //     } catch (PDOException $e) {
+                //         logi($conn, "admin update error", $e->getMessage(), "", $Callback_date);
+                //     }
+                // }
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت بروزرسانی شدند!");
                 break;
             case "recivead":
