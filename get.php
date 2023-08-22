@@ -178,13 +178,7 @@ elseif ($Callback_chat_id && $Callback_data && $is_admin[0]['status']) {
                     }
                 }
                 $text = $base0 . $base1;
-                define('API_TOKEN', '6546866682:AAGJD4uISP2U4RsOU8JC0fWNZ8VirfjGZnE');
-                define('API_REQUEST', 'https://api.telegram.org/bot' . API_TOKEN . '/');
-                $Method = 'sendMessage';
-                $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . "1178581717" . "&" . "text=" . $text . "&" . "parse_mode=HTML";
-                file_get_contents($Request_to_server);
-                sendMessage("1178581717", $Request_to_server);
-                logi($conn, "text", $Request_to_server, "", "");
+                sendadmins($Callback_chat_id,$text);
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت ارسال شد!");
                 break;
         }

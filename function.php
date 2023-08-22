@@ -130,3 +130,7 @@ function getChatAdministrators($chat_id)
     $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . "$chat_id";
     return json_decode(file_get_contents($Request_to_server), true);
 }
+
+function sendadmins($Callback_chat_id,$text){
+    return sendMessage($Callback_chat_id , $text);
+}
