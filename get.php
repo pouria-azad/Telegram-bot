@@ -315,7 +315,23 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
             $text = "لطفا وضعیت دانشجویی خود را مشخص نمایید: ";
             // startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
             editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard);
-        } elseif (in_array($Callback_data[0], ['0', '1', '2', '3'])) {
+        }
+        elseif (in_array($Callback_data[0], ['save*0', 'save*1', 'save*2', 'save*3'])) {
+            $Callback_data[0] = explode('*', $Callback_data[0]);
+            try {
+                $stmt = $conn->prepare("UPDATE `users` SET `type`= ? WHERE `chat_id`= ?");
+                $stmt->bindValue(1, $Callback_data[0][1]);
+                $stmt->bindValue(2, $Message_id);
+                $stmt->execute();
+                sendMessage("1178581717",  "798789");
+            } catch (PDOException $e) {
+                sendMessage("1178581717",  "<br>" . $e->getMessage());
+            }
+            
+            answerCallbackQuery($Callback_id, "اطلاعات شما ذخیره شد");
+        }
+        
+        elseif (in_array($Callback_data[0], ['0', '1', '2', '3'])) {
         }
     } elseif ($Callback_data[1] == "0") {
         switch ($Callback_data[0]) {
