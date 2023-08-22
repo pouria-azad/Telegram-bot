@@ -161,7 +161,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                 ];
                 $text = "لطفا سال ورود خود را به رشته کامپیوتر وارد کنید";
                 // startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
-                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard);
+                sendMessage($Callback_chat_id, $editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard));
                 break;
             case "1396":
                 $Inline_keyboard = [
