@@ -160,7 +160,8 @@ elseif ($Callback_chat_id && $Callback_data) {
 
                 $base0 = "لیست ادمین ها: " . "%0A";
                 $base1 = "";
-                foreach ($array['result'] as $key => $admins) {
+                $key = 0;
+                foreach ($array['result'] as $admins) {
                     $username = $admins["user"]["username"] ?? "";
                     $cutsom_title = $admins["custom_title"] ?? "";
                     if (!$admins["user"]["is_bot"]) {
