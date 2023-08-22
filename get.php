@@ -175,7 +175,9 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                     ]
                 ];
                 $text = "سال ورود شما " . "1396" . " است؟";
-                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                // startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard);
+                answerCallbackQuery($Callback_id, "سال شما تایید شد");
                 break;
             case "1397":
                 $Inline_keyboard = [
