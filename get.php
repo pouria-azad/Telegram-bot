@@ -44,16 +44,16 @@ if (isset($Callback_date))
 
 sendMessage("1178581717", "1");
 //user-status
-// try {
-//     $sql = "SELECT `chat_id`,`status` FROM `status` WHERE `chat_id`= ? LIMIT 1";
-//     $pdo = $conn->prepare($sql);
-//     $pdo->bindValue(1, $Message_id);
-//     $pdo->execute();
-//     $result = $pdo->setFetchMode(PDO::FETCH_ASSOC);
-//     $array = $pdo->fetchAll();
-// } catch (PDOException $e) {
-//     echo $sql . "<br>" . $e->getMessage();
-// }
+try {
+    $sql = "SELECT `chat_id`,`status` FROM `status` WHERE `chat_id`= ? LIMIT 1";
+    $pdo = $conn->prepare($sql);
+    $pdo->bindValue(1, $Message_id);
+    $pdo->execute();
+    $result = $pdo->setFetchMode(PDO::FETCH_ASSOC);
+    $array = $pdo->fetchAll();
+} catch (PDOException $e) {
+    echo $sql . "<br>" . $e->getMessage();
+}
 //is_admin
 try {
     $pdo = $conn->prepare("SELECT `status` FROM `users` WHERE `chat_id`= ? LIMIT 1");
@@ -69,14 +69,14 @@ try {
 // logi($conn, "is admin test", $is_admin, "", $Date);
 //کلید استارت یا بازگشت
 if (($Message_entities && $Object['message']['text'] == '/start') || ($array[0]['status'] == "-1" && $Object['message']['text'] == "بازگشت به منوی اصلی")) {
-    $array = getStatus($conn, $Message_id);
+    //$array = getStatus($conn, $Message_id);
     changeStatus($array, $conn,  $Date, "0", $Message_id);
     //////
     $Keyboard = [['عضویت در گروه یادآور']['مدیریت لیست اعضا'], ['درباره']];
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
 } //
 elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا' && $is_admin[0]['status']) {
-    $array = getStatus($conn, $Message_id);
+    //$array = getStatus($conn, $Message_id);
     changeStatus($array, $conn,  $Date, "-1", $Message_id);
     //////
     $Inline_keyboard = [
