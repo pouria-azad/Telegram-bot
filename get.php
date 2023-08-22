@@ -146,7 +146,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
     if ($Callback_data[1] == "1") {
         switch ($Callback_data[0]) {
             case "okname":
-                answerCallbackQuery($Callback_id, "نام شما تایید شد");
+                //answerCallbackQuery($Callback_id, "نام شما تایید شد");
                 // changeStatus($array, $conn,  $Date, "2", $Message_id);
                 $Inline_keyboard = [
                     [
