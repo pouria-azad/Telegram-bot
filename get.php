@@ -72,7 +72,7 @@ if (($Message_entities && $Object['message']['text'] == '/start') || ($array[0][
     //$array = getStatus($conn, $Message_id);
     changeStatus($array, $conn,  $Date, "0", $Message_id);
     //////
-    $Keyboard = [['عضویت در گروه یادآور']['مدیریت لیست اعضا'], ['درباره']];
+    $Keyboard = [['عضویت در گروه یادآور'],['مدیریت لیست اعضا'], ['درباره']];
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
 } //
 elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا' && $is_admin[0]['status']) {
