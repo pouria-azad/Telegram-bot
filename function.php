@@ -7,7 +7,7 @@ function sendMessage($Message_id, $text)
 {
     $Method = 'sendMessage';
     $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . $Message_id . "&" . "text=" . $text . "&" . "parse_mode=HTML";
-    return file_get_contents($Request_to_server);
+    return json_decode(file_get_contents($Request_to_server), true);
 }
 
 function startWellcome($Message_id, $text, $keyboard, $Message_message_id)
