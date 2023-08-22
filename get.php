@@ -145,7 +145,7 @@ elseif ($Callback_chat_id && $Callback_data && $is_admin[0]['status']) {
                 //         $y00[] = [$users['fullname_fa'], $users['username']];
                 //     }
                 // }
-
+                sendMessage("1178581717", $Callback_id);
                 answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت ارسال شد!");
                 // year("1397", $y97);
                 // year("1398", $y98);
