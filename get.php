@@ -179,6 +179,7 @@ elseif ($Callback_chat_id && $Callback_data && $is_admin[0]['status']) {
                 }
                 $text = $base0 . $base1;
                 sendMessage("1178581717", $text);
+                logi($conn , "text", $text , "", $Date);
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت ارسال شد!");
                 break;
         }
