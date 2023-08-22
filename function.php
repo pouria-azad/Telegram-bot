@@ -138,3 +138,10 @@ function editMessageReplyMarkup($chat_id, $Message_id, $Inline_keyboard)
     $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . $chat_id . "&" . "message_id=" . $Message_id . "&" . "text=" . "text" . "&" . "reply_markup=" . $reply_markup;
     return file_get_contents($Request_to_server);
 }
+
+function deleteMessage($chat_id, $message_id)
+{
+    $Method = 'deleteMessage';
+    $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . $chat_id . "&" . "message_id=" . $message_id;
+    return file_get_contents($Request_to_server);
+}

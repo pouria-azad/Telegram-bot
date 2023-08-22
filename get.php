@@ -327,7 +327,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
             } catch (PDOException $e) {
                 sendMessage("1178581717",  "<br>" . $e->getMessage());
             }
-            
+            deleteMessage($Callback_chat_id, $Callback_message_message_id);
             answerCallbackQuery($Callback_id, "اطلاعات شما ذخیره شد");
         }
         
