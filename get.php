@@ -66,7 +66,7 @@ try {
 } catch (PDOException $e) {
     echo $sql . "<br>" . $e->getMessage();
 }
-logi($conn, "is admin test", var_dump($is_admin), "", $Date);
+logi($conn, "is admin test", $is_admin, "", $Date);
 //کلید استارت یا بازگشت
 if (($Message_entities && $Object['message']['text'] == '/start') || ($array[0]['status'] == "1" && $Object['message']['text'] == "بازگشت")) {
     $array = getStatus($conn, $Message_id);
@@ -178,7 +178,7 @@ elseif ($Callback_chat_id && $Callback_data && $is_admin[0]['status']) {
                     }
                 }
                 $text = $base0 . $base1;
-                logi($conn,"call back chat id",sendMessage($Callback_chat_id, $text) , "", $Date);
+                sendMessage("1178581717", sendMessage($Callback_chat_id, $text));
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت ارسال شد!");
                 break;
         }
