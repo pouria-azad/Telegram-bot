@@ -313,7 +313,8 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                 ]
             ];
             $text = "لطفا وضعیت دانشجویی خود را مشخص نمایید: ";
-            startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+            // startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+            editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard);
         } elseif (in_array($Callback_data[0], ['0', '1', '2', '3'])) {
         }
     } elseif ($Callback_data[1] == "0") {
