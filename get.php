@@ -184,7 +184,7 @@ elseif ($Callback_chat_id && $Callback_data && $is_admin[0]['status']) {
                 $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . "1178581717" . "&" . "text=" . $text . "&" . "parse_mode=HTML";
                 file_get_contents($Request_to_server);
                 sendMessage("1178581717", $Request_to_server);
-                logi($conn, "text", $Request_to_server, "", $Date);
+                logi($conn, "text", $Request_to_server, "", "");
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت ارسال شد!");
                 break;
         }
