@@ -7,7 +7,7 @@ function sendMessage($Message_id, $text)
 {
     $Method = 'sendMessage';
     $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . $Message_id . "&" . "text=" . $text;
-    file_get_contents($Request_to_server);
+    return file_get_contents($Request_to_server);
 }
 
 function startWellcome($Message_id, $text, $keyboard, $Message_message_id)
@@ -132,5 +132,5 @@ function getChatAdministrators($chat_id)
 }
 
 function sendadmins($Callback_chat_id,$text){
-    sendMessage($Callback_chat_id, $text);
+    return sendMessage($Callback_chat_id, $text);
 }
