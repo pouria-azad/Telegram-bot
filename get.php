@@ -170,7 +170,7 @@ elseif ($Callback_chat_id && $Callback_data) {
                 break;
             case "recivead":
                 $array = getChatAdministrators("-1001454096414");
-                $text = "";
+            
                 $base0 = "لیست ادمین ها: " . "%0A";
                 $base1 = "";
                 foreach ($array['result'] as $key => $admins) {
@@ -180,8 +180,8 @@ elseif ($Callback_chat_id && $Callback_data) {
                             . "عنوان ادمین در گروه: " . $admins["custom_title"] . "%0A";
                     }
                 }
-                $text = $text . $base0 . $base1;
-                sendadmins($Callback_chat_id, $text);
+                //  $base1;
+                sendadmins($Callback_chat_id, $base0);
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت ارسال شد!");
                 break;
         }
