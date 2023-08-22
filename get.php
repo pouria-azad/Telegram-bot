@@ -38,6 +38,8 @@ if (isset($Object['message']['new_chat_members']) && $Object['message']['new_cha
 $Callback_chat_id = $Object['callback_query']['from']['id'] ?? null;
 $Callback_data = $Object['callback_query']['data'] ?? null;
 $Callback_id = $Object['callback_query']['id'] ?? null;
+$Callback_message_message_id = $Object['callback_query']['message']['message_id'] ?? null;
+$Callback_chat_id = $Object['callback_query']['chat']['id'] ?? null;
 $Callback_date = $Object['callback_query']['message']['date'] ?? null;
 if (isset($Callback_date))
     $Callback_date = jdate('Y-m-d H:i:s', $Datestamp, "", "", "en");
@@ -159,7 +161,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                 ];
                 $text = "لطفا سال ورود خود را به رشته کامپیوتر وارد کنید";
                 // startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
-                editMessageReplyMarkup($Message_id, $Message_message_id, $Inline_keyboard);
+                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard);
                 break;
             case "1396":
                 $Inline_keyboard = [
