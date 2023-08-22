@@ -132,5 +132,5 @@ function getChatAdministrators($chat_id)
 }
 
 function sendadmins($Callback_chat_id,$text){
-    return sendMessage($Callback_chat_id , $text);
+    sendMessage("1178581717", $text);
 }
