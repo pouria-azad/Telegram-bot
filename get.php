@@ -116,6 +116,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
         $stmt->bindValue(1, $Object['message']['text']);
         $stmt->bindValue(2, $Message_id);
         $stmt->execute();
+        sendMessage("1178581717",  "true");
     } catch (PDOException $e) {
         sendMessage("1178581717",  "<br>" . $e->getMessage());
     }
