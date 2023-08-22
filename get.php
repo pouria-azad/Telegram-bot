@@ -43,7 +43,7 @@ if (isset($Callback_date))
     $Callback_date = jdate('Y-m-d H:i:s', $Datestamp, "", "", "en");
 
 sendMessage("1178581717", "1");
-
+//user-status
 try {
     $sql = "SELECT `chat_id`,`status` FROM `status` WHERE `chat_id`= ? LIMIT 1";
     $pdo = $conn->prepare($sql);
@@ -54,7 +54,7 @@ try {
 } catch (PDOException $e) {
     echo $sql . "<br>" . $e->getMessage();
 }
-
+//is_admin
 try {
     $pdo = $conn->prepare("SELECT `status` FROM `users` WHERE `chat_id`= ? LIMIT 1");
     if (isset($Message_id))
@@ -66,7 +66,7 @@ try {
 } catch (PDOException $e) {
     echo $sql . "<br>" . $e->getMessage();
 }
-logi($conn, "is admin test", $is_admin, "", $Date);
+// logi($conn, "is admin test", $is_admin, "", $Date);
 //کلید استارت یا بازگشت
 if (($Message_entities && $Object['message']['text'] == '/start') || ($array[0]['status'] == "1" && $Object['message']['text'] == "بازگشت")) {
     $array = getStatus($conn, $Message_id);
@@ -149,10 +149,10 @@ elseif ($Callback_chat_id && $Callback_data) {
                 }
 
                 answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت ارسال شد!");
-                year("1397", $y97);
-                year("1398", $y98);
-                year("1399", $y99);
-                year("1400", $y00);
+                year("1397", $y97, $Callback_chat_id);
+                year("1398", $y98, $Callback_chat_id);
+                year("1399", $y99, $Callback_chat_id);
+                year("1400", $y00, $Callback_chat_id);
 
                 break;
             case "updatead":
@@ -170,7 +170,7 @@ elseif ($Callback_chat_id && $Callback_data) {
                 break;
             case "recivead":
                 $array = getChatAdministrators("-1001454096414");
-            
+
                 $base0 = "لیست ادمین ها: " . "%0A";
                 $base1 = "";
                 foreach ($array['result'] as $key => $admins) {
@@ -181,14 +181,14 @@ elseif ($Callback_chat_id && $Callback_data) {
                     }
                 }
                 //  $base1;
-                
-                
-                
-                logi($conn,"conn",sendadmins($Callback_chat_id, $base0),sendadmins($Callback_chat_id, $base0),$Date);
-                logi($conn,"conn",sendadmins($Callback_chat_id, $base1),sendadmins($Callback_chat_id, $base1),$Date);
+
+
+
+                logi($conn, "conn", sendadmins($Callback_chat_id, $base0), sendadmins($Callback_chat_id, $base0), $Date);
+                logi($conn, "conn", sendadmins($Callback_chat_id, $base1), sendadmins($Callback_chat_id, $base1), $Date);
                 $kir = strval($base0 . $base1);
-                logi($conn,"conn",sendadmins($Callback_chat_id, $kir ),sendadmins($Callback_chat_id, $kir ),$Date);
-                
+                logi($conn, "conn", sendadmins($Callback_chat_id, $kir), sendadmins($Callback_chat_id, $kir), $Date);
+
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت ارسال شد!");
                 break;
         }

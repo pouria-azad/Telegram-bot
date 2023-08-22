@@ -1,6 +1,6 @@
 <?php
-define('API_TOKEN', '6546866682:AAGJD4uISP2U4RsOU8JC0fWNZ8VirfjGZnE');
-//define('API_TOKEN', '6550970307:AAFBcBSWJmEYgXpse7cs-ckQ7cPRmZEX-6k');
+// define('API_TOKEN', '6546866682:AAGJD4uISP2U4RsOU8JC0fWNZ8VirfjGZnE');
+define('API_TOKEN', '6550970307:AAFBcBSWJmEYgXpse7cs-ckQ7cPRmZEX-6k');
 define('API_REQUEST', 'https://api.telegram.org/bot' . API_TOKEN . '/');
 
 function sendMessage($Message_id, $text)
@@ -42,7 +42,7 @@ function answerCallbackQuery($Callback_id, $text)
     file_get_contents($Request_to_server);
 }
 
-function year($year, $y)
+function year($year, $y, $id)
 {
     $base = "\xE2\xAD\x95 \xF0\x9F\x94\xB4 \xE2\xAD\x95 " . "<b><u>ورودی های سال: " . $year . "</u></b>" . " \xE2\xAD\x95 \xF0\x9F\x94\xB4 \xE2\xAD\x95" . "%0A%0A";
     $text = "";
@@ -50,7 +50,7 @@ function year($year, $y)
     $y99 = array_slice($y, 1);
     foreach ($y99 as $number => $user)
         $text = $text . "%0A" . ($number + 2) . ". " . $user[0] . " @" . $user[1];
-    sendMessage("1178581717", $text);
+    sendMessage($id, $text);
 }
 
 function changeStatus($array, $conn,  $Date, $status, $Message_id)
@@ -131,6 +131,7 @@ function getChatAdministrators($chat_id)
     return json_decode(file_get_contents($Request_to_server), true);
 }
 
-function sendadmins($Callback_chat_id,$text){
+function sendadmins($Callback_chat_id, $text)
+{
     return sendMessage($Callback_chat_id, $text);
 }
