@@ -75,7 +75,7 @@ if (($Message_entities && $Object['message']['text'] == '/start') || ($array[0][
     $Keyboard = [['مدیریت لیست اعضا'], ['درباره']];
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
 } //&& $is_admin[0]['status']
-elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا' ) {
+elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا') {
     $array = getStatus($conn, $Message_id);
     changeStatus($array, $conn,  $Date, "1", $Message_id);
     //////
@@ -94,11 +94,11 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیری�
     $text = $Message_fname . " عزیز در این بخش شما میتوانید اعضای گروه رو مدیریت نمایید";
     startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
     //&& !$is_admin[0]['status']
-} elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا' ) {
+} elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا') {
     sendMessage($Message_id, "شما به این بخش دسترسی ندارید!");
 }
 // data && $is_admin[0]['status']
-elseif ($Callback_chat_id && $Callback_data ) {
+elseif ($Callback_chat_id && $Callback_data) {
     $array = [];
 
     try {
@@ -147,7 +147,7 @@ elseif ($Callback_chat_id && $Callback_data ) {
                         $y00[] = [$users['fullname_fa'], $users['username']];
                     }
                 }
-                
+
                 answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت ارسال شد!");
                 year("1397", $y97);
                 year("1398", $y98);
@@ -180,7 +180,7 @@ elseif ($Callback_chat_id && $Callback_data ) {
                     }
                 }
                 $text = $base0 . $base1;
-                sendadmins($Callback_chat_id,$text);
+                sendadmins($Callback_chat_id, "kir");
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت ارسال شد!");
                 break;
         }
