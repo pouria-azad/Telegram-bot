@@ -247,7 +247,8 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                     ]
                 ];
                 $text = "وضعیت شما " . "دانکشده مهندسی" . " است؟";
-                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                // startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard);
                 break;
             case "1":
                 $Inline_keyboard = [
