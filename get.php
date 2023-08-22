@@ -146,7 +146,6 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
     if ($Callback_data[1] == "1") {
         switch ($Callback_data[0]) {
             case "okname":
-                //answerCallbackQuery($Callback_id, "نام شما تایید شد");
                 // changeStatus($array, $conn,  $Date, "2", $Message_id);
                 $Inline_keyboard = [
                     [
@@ -157,12 +156,13 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                         ['text' => "1400", 'callback_data' => "1400-1"],
                         ['text' => "1401", 'callback_data' => "1401-1"],
                         ['text' => "1402", 'callback_data' => "1402-1"],
-                    ]
-                ];
-                $text = "لطفا سال ورود خود را به رشته کامپیوتر وارد کنید";
-                // startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
-                $re = editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard);
-                logi($conn , "inline update",$re,$re , $Date);
+                        ]
+                    ];
+                    $text = "لطفا سال ورود خود را به رشته کامپیوتر وارد کنید";
+                    // startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                    $re = editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard);
+                    logi($conn , "inline update",$re,$re , $Date);
+                    answerCallbackQuery($Callback_id, "نام شما تایید شد");
                 break;
             case "1396":
                 $Inline_keyboard = [
