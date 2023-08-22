@@ -155,28 +155,28 @@ elseif ($Callback_chat_id && $Callback_data) {
                 year("1400", $y00, $Callback_chat_id);
 
                 break;
-            case "updatead":
+            case "recivead":
                 $array = getChatAdministrators("-1001454096414");
 
                 $base0 = "لیست ادمین ها: " . "%0A";
-                $byek = "";
-                foreach ($array['result'] as $key => $admins) {
-                    $lname = $admins["user"]["last_name"] ?? "";
-                    $username = $admins["user"]["username"] ?? "";
-                    $cutsom_title = $admins["custom_title"] ?? "";
-                    if (!$admins["user"]["is_bot"]) {
-                        $byek =  $byek . "%0A" . ($key + 1) . ". " . $admins["user"]["first_name"] . " " . $lname . " @" . $username . "%0A"
-                            . "عنوان ادمین در گروه: " . $cutsom_title . "%0A";
-                    }
-                }
-                //  $byek;
+                $byek = "%0A2. MDVR%20 @mdvr_9980%0Aعنوان ادمین در گروه: ادمین۹۹%0A%0A3. ._.%20 @yeganeh_sft%0Aعنوان ادمین در گروه: ادمین ۱۴۰۱%0A%0A4. 🍁Y.N%20 @YGN_NF%0Aعنوان ادمین در گروه: %0A%0A5. Ｔｒｉｎｉｔｙ%20 @Tri_nit_y%0Aعنوان ادمین در گروه: ادمین۱۴۰۰%0A%0A6. ⚜ Maleki_Z ⚜%20 @Z_Maleki_1021%0Aعنوان ادمین در گروه: ادمین ۹۹%0A%0A7. 「𝑷𝒐𝒖𝒓𝒊𝒂 𝑨𝒛𝒂𝒅」 @Pouria_Azad%0Aعنوان ادمین در گروه: ادمین ۹۹%0A%0A8. Somayeh Jamali vahid @Somayeh_6603%0Aعنوان ادمین در گروه: ادمین ۱۴۰۰%0A%0A9. Mohadeseh%20 @Mohiiii_na%0Aعنوان ادمین در گروه: ادمین ۹۹%0A%0A10. Rahmat%20 @wolf2022%0Aعنوان ادمین در گروه: ادمین ۹۹%0A%0A11. Arman Hosseyni @arman_hosseyni%0Aعنوان ادمین در گروه: ادمین ۹۹%0A";
+                // foreach ($array['result'] as $key => $admins) {
+                //     $lname = $admins["user"]["last_name"] ?? "";
+                //     $username = $admins["user"]["username"] ?? "";
+                //     $cutsom_title = $admins["custom_title"] ?? "";
+                //     if (!$admins["user"]["is_bot"]) {
+                //         $byek =  $byek . "%0A" . ($key + 1) . ". " . $admins["user"]["first_name"] . " " . $lname . " @" . $username . "%0A"
+                //             . "عنوان ادمین در گروه: " . $cutsom_title . "%0A";
+                //     }
+                // }
 
-                logi($conn, "conn", sendadmins($Callback_chat_id, $byek), sendadmins($Callback_chat_id, $byek), $Date);
 
+                logi($conn, "conn", sendMessage($Callback_chat_id, $byek), sendMessage($Callback_chat_id, $byek), $Date);
+                answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت ارسال شد!");
                 
-                answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت بروزرسانی شدند!");
+                
                 break;
-            case "recivead":
+            case "updatead":
                 $array = getChatAdministrators("-1001454096414");
                 foreach ($array['result'] as $key => $admins) {
                     try {
@@ -191,8 +191,8 @@ elseif ($Callback_chat_id && $Callback_data) {
                 // logi($conn, "conn", sendadmins($Callback_chat_id, $base0), sendadmins($Callback_chat_id, $base0), $Date);
                 // $kir = strval($base0 . $byek);
                 // logi($conn, "conn", sendadmins($Callback_chat_id, $kir), sendadmins($Callback_chat_id, $kir), $Date);
-
-                answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت ارسال شد!");
+                answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت بروزرسانی شدند!");
+                
                 break;
         }
     }

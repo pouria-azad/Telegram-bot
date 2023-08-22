@@ -131,7 +131,4 @@ function getChatAdministrators($chat_id)
     return json_decode(file_get_contents($Request_to_server), true);
 }
 
-function sendadmins($Callback_chat_id, $text)
-{
-    return sendMessage($Callback_chat_id, $text);
-}
+
