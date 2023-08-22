@@ -142,10 +142,13 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
     } catch (PDOException $e) {
         echo $sql . "<br>" . $e->getMessage();
     }
+
     $Callback_data = explode('-', $Callback_data);
+
     if ($Callback_data[1] == "1") {
         switch ($Callback_data[0]) {
             case "okname":
+                 sendMessage($Callback_from_id , "ddd");
                  changeStatus($array, $conn,  $Date, "2", $Message_id);
                 // $Inline_keyboard = [
                 //     [
