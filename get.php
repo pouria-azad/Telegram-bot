@@ -130,27 +130,27 @@ elseif ($Callback_chat_id && $Callback_data && $is_admin[0]['status']) {
                 //end update
                 break;
             case "recive":
-                $y97 = [];
-                $y98 = [];
-                $y99 = [];
-                $y00 = [];
-                foreach ($array as $users) {
-                    if ($users['entry_year'] == "1397") {
-                        $y97[] = [$users['fullname_fa'], $users['username']];
-                    } elseif ($users['entry_year'] == "1398") {
-                        $y98[] = [$users['fullname_fa'], $users['username']];
-                    } elseif ($users['entry_year'] == "1399") {
-                        $y99[] = [$users['fullname_fa'], $users['username']];
-                    } elseif ($users['entry_year'] == "1400") {
-                        $y00[] = [$users['fullname_fa'], $users['username']];
-                    }
-                }
+                // $y97 = [];
+                // $y98 = [];
+                // $y99 = [];
+                // $y00 = [];
+                // foreach ($array as $users) {
+                //     if ($users['entry_year'] == "1397") {
+                //         $y97[] = [$users['fullname_fa'], $users['username']];
+                //     } elseif ($users['entry_year'] == "1398") {
+                //         $y98[] = [$users['fullname_fa'], $users['username']];
+                //     } elseif ($users['entry_year'] == "1399") {
+                //         $y99[] = [$users['fullname_fa'], $users['username']];
+                //     } elseif ($users['entry_year'] == "1400") {
+                //         $y00[] = [$users['fullname_fa'], $users['username']];
+                //     }
+                // }
 
                 answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت ارسال شد!");
-                year("1397", $y97);
-                year("1398", $y98);
-                year("1399", $y99);
-                year("1400", $y00);
+                // year("1397", $y97);
+                // year("1398", $y98);
+                // year("1399", $y99);
+                // year("1400", $y00);
 
                 break;
             case "updatead":
