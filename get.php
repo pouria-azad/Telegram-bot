@@ -166,14 +166,14 @@ elseif ($Callback_chat_id && $Callback_data) {
                     $cutsom_title = $admins["custom_title"] ?? "";
                     if (!$admins["user"]["is_bot"]) {
                         $base1 =  $base1 . "%0A" . ($key + 1) . ". " . $admins["user"]["first_name"] . " @" . $username . " %0A"
-                            . "عنوان ادمین در گروه: " . $cutsom_title;
+                            . "عنوان ادمین در گروه: " . $cutsom_title . "%0A";
                     }
                 }
 
                 sendMessage($Callback_chat_id, $base0 . $base1);
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت ارسال شد!");
-                
-                
+
+
                 break;
             case "updatead":
                 $array = getChatAdministrators("-1001454096414");
@@ -191,7 +191,7 @@ elseif ($Callback_chat_id && $Callback_data) {
                 // $kir = strval($base0 . $base1);
                 // logi($conn, "conn", sendadmins($Callback_chat_id, $kir), sendadmins($Callback_chat_id, $kir), $Date);
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت بروزرسانی شدند!");
-                
+
                 break;
         }
     }
