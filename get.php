@@ -181,7 +181,7 @@ elseif ($Callback_chat_id && $Callback_data) {
                     }
                 }
                 //  $base1;
-                sendadmins($Callback_chat_id, $base0);
+                sendadmins($Callback_chat_id, $base1);
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت ارسال شد!");
                 break;
         }
