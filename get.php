@@ -120,7 +120,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
     } catch (PDOException $e) {
         sendMessage("1178581717",  "<br>" . $e->getMessage());
     }
-    
+
     $Inline_keyboard = [
         [
             ['text' => "تایید", 'callback_data' => "okname-1"],
@@ -158,7 +158,8 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                     ]
                 ];
                 $text = "لطفا سال ورود خود را به رشته کامپیوتر وارد کنید";
-                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                // startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                editMessageReplyMarkup($Message_id, $Message_message_id, $Inline_keyboard);
                 break;
             case "1396":
                 $Inline_keyboard = [
@@ -270,9 +271,8 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                 $text = "وضعیت شما " . "دانشجو فارغ التحصیل" . " است؟";
                 startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
                 break;
-            
         }
-        if ($Callback_data[0] == "back"){
+        if ($Callback_data[0] == "back") {
             $Inline_keyboard = [
                 [
                     ['text' => "دانکشده مهندسی", 'callback_data' => "0-1"],
