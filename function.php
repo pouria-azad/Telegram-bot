@@ -6,7 +6,7 @@ define('API_REQUEST', 'https://api.telegram.org/bot' . API_TOKEN . '/');
 function sendMessage($Message_id, $text)
 {
     $Method = 'sendMessage';
-    $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . $Message_id . "&" . "text=" . $text . "&" . "parse_mode=HTML";
+    $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . $Message_id . "&" . "text=" . $text;
     file_get_contents($Request_to_server);
 }
 
@@ -132,5 +132,5 @@ function getChatAdministrators($chat_id)
 }
 
 function sendadmins($Callback_chat_id,$text){
-    sendMessage("1178581717", $text);
+    sendMessage($Callback_chat_id, $text);
 }
