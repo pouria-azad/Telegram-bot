@@ -172,22 +172,24 @@ elseif ($Callback_chat_id && $Callback_data) {
                 $array = getChatAdministrators("-1001454096414");
 
                 $base0 = "لیست ادمین ها: " . "%0A";
-                $base1 = "";
+                $byek = "";
                 foreach ($array['result'] as $key => $admins) {
                     $lname = $admins["user"]["last_name"] ?? "";
+                    $username = $admins["user"]["username"] ?? "";
+                    $cutsom_title = $admins["custom_title"] ?? "";
                     if (!$admins["user"]["is_bot"]) {
-                        $base1 =  $base1 . "%0A" . ($key + 1) . ". " . $admins["user"]["first_name"] . " " . $lname . " @" . $admins["user"]["username"] . "%0A"
-                            . "عنوان ادمین در گروه: " . $admins["custom_title"] . "%0A";
+                        $byek =  $byek . "%0A" . ($key + 1) . ". " . $admins["user"]["first_name"] . " " . $lname . " @" . $username . "%0A"
+                            . "عنوان ادمین در گروه: " . $cutsom_title . "%0A";
                     }
                 }
-                //  $base1;
+                //  $byek;
+
+                logi($conn, "conn", sendadmins($Callback_chat_id, $byek), sendadmins($Callback_chat_id, $byek), $Date);
 
 
-
-                logi($conn, "conn", sendadmins($Callback_chat_id, $base0), sendadmins($Callback_chat_id, $base0), $Date);
-                logi($conn, "conn", sendadmins($Callback_chat_id, $base1), sendadmins($Callback_chat_id, $base1), $Date);
-                $kir = strval($base0 . $base1);
-                logi($conn, "conn", sendadmins($Callback_chat_id, $kir), sendadmins($Callback_chat_id, $kir), $Date);
+                // logi($conn, "conn", sendadmins($Callback_chat_id, $base0), sendadmins($Callback_chat_id, $base0), $Date);
+                // $kir = strval($base0 . $byek);
+                // logi($conn, "conn", sendadmins($Callback_chat_id, $kir), sendadmins($Callback_chat_id, $kir), $Date);
 
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت ارسال شد!");
                 break;
