@@ -177,7 +177,7 @@ elseif ($Callback_chat_id && $Callback_data && $is_admin[0]['status']) {
                             . "عنوان ادمین در گروه: " . $admins["custom_title"] . "%0A";
                     }
                 }
-                //$text = $base0 . $base1;
+                $text = $base0 . $base1;
                 logi($conn,"call back chat id",sendMessage($Callback_chat_id, $text) , "", $Date);
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت ارسال شد!");
                 break;
