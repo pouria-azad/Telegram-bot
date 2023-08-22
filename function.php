@@ -1,12 +1,11 @@
 <?php
 define('API_TOKEN', '6546866682:AAGJD4uISP2U4RsOU8JC0fWNZ8VirfjGZnE');
-//define('API_TOKEN', '6550970307:AAFBcBSWJmEYgXpse7cs-ckQ7cPRmZEX-6k');
 define('API_REQUEST', 'https://api.telegram.org/bot' . API_TOKEN . '/');
 
 function sendMessage($Message_id, $text)
 {
     $Method = 'sendMessage';
-    $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . $Message_id . "&" . "text=" . $text;
+    $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . $Message_id . "&" . "text=" . $text . "&" . "parse_mode=HTML";
     return file_get_contents($Request_to_server);
 }
 
@@ -130,5 +129,3 @@ function getChatAdministrators($chat_id)
     $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . "$chat_id";
     return json_decode(file_get_contents($Request_to_server), true);
 }
-
-
