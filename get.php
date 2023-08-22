@@ -161,11 +161,10 @@ elseif ($Callback_chat_id && $Callback_data) {
                 $base0 = "لیست ادمین ها: " . "%0A";
                 $byek = "";
                 foreach ($array['result'] as $key => $admins) {
-                    $lname = $admins["user"]["last_name"] ?? "";
                     $username = $admins["user"]["username"] ?? "";
                     $cutsom_title = $admins["custom_title"] ?? "";
                     if (!$admins["user"]["is_bot"]) {
-                        $byek =  $byek . "%0A" . ($key + 1) . ". " . $admins["user"]["first_name"] . " " . $lname . " @" . $username . " %0A"
+                        $byek =  $byek . "%0A" . ($key + 1) . ". " . $admins["user"]["first_name"] . " @" . $username . " %0A"
                             . "عنوان ادمین در گروه: " . $cutsom_title;
                     }
                 }
