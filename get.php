@@ -73,7 +73,7 @@ if (($Message_entities && $Object['message']['text'] == '/start') || ($array[0][
     changeStatus($array, $conn,  $Date, "0", $Message_id);
     //////
     $Keyboard = [
-        ['عضویت در گروه یادآور'],['مدیریت لیست اعضا'], ['درباره']
+        ['عضویت در گروه یادآور'], ['مدیریت لیست اعضا'], ['درباره']
     ];
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
 } //
@@ -103,13 +103,13 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیری�
 
 
 elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت در گروه یادآور') {
-    $array = getStatus($conn, $Message_id);
+    //$array = getStatus($conn, $Message_id);
     changeStatus($array, $conn,  $Date, "1", $Message_id);
 
     $Keyboard = [['بازگشت']];
     startWellcome($Message_id, "لطفا نام کامل خود را وارد نمایید: ", $Keyboard, $Message_message_id);
 } elseif ($array[0]['status'] == "1") {
-    
+
     //if exist update name in database
     try {
         $stmt = $conn->prepare("UPDATE `users` SET `fullname_fa`= ? WHERE `chat_id`= ?");
@@ -141,7 +141,161 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
         echo $sql . "<br>" . $e->getMessage();
     }
     $Callback_data = explode('-', $Callback_data);
-    if ($Callback_data[1] == "0") {
+    if ($Callback_data[1] == "1") {
+        switch ($Callback_data[0]) {
+            case "okname":
+                changeStatus($array, $conn,  $Date, "2", $Message_id);
+                $Inline_keyboard = [
+                    [
+                        ['text' => "1396", 'callback_data' => "1396-1"],
+                        ['text' => "1397", 'callback_data' => "1397-1"],
+                        ['text' => "1398", 'callback_data' => "1398-1"],
+                        ['text' => "1399", 'callback_data' => "1399-1"],
+                        ['text' => "1400", 'callback_data' => "1400-1"],
+                        ['text' => "1401", 'callback_data' => "1401-1"],
+                        ['text' => "1402", 'callback_data' => "1402-1"],
+                    ]
+                ];
+                $text = "لطفا سال ورود خود را به رشته کامپیوتر وارد کنید";
+                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                break;
+            case "1396":
+                $Inline_keyboard = [
+                    [
+                        ['text' => "تایید", 'callback_data' => "ok*1396-1"],
+                        ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
+                    ]
+                ];
+                $text = "سال ورود شما " . "1396" . " است؟";
+                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                break;
+            case "1397":
+                $Inline_keyboard = [
+                    [
+                        ['text' => "تایید", 'callback_data' => "ok*1397-1"],
+                        ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
+                    ]
+                ];
+                $text = "سال ورود شما " . "1397" . " است؟";
+                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                break;
+            case "1398":
+                $Inline_keyboard = [
+                    [
+                        ['text' => "تایید", 'callback_data' => "ok*1398-1"],
+                        ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
+                    ]
+                ];
+                $text = "سال ورود شما " . "1398" . " است؟";
+                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                break;
+            case "1399":
+                $Inline_keyboard = [
+                    [
+                        ['text' => "تایید", 'callback_data' => "ok*1399-1"],
+                        ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
+                    ]
+                ];
+                $text = "سال ورود شما " . "1399" . " است؟";
+                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                break;
+            case "1400":
+                $Inline_keyboard = [
+                    [
+                        ['text' => "تایید", 'callback_data' => "ok*1400-1"],
+                        ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
+                    ]
+                ];
+                $text = "سال ورود شما " . "1400" . " است؟";
+                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                break;
+            case "1401":
+                $Inline_keyboard = [
+                    [
+                        ['text' => "تایید", 'callback_data' => "ok*1401-1"],
+                        ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
+                    ]
+                ];
+                $text = "سال ورود شما " . "1401" . " است؟";
+                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                break;
+            case "1402":
+                $Inline_keyboard = [
+                    [
+                        ['text' => "تایید", 'callback_data' => "ok*1402-1"],
+                        ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
+                    ]
+                ];
+                $text = "سال ورود شما " . "1402" . " است؟";
+                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                break;
+            case "0":
+                $Inline_keyboard = [
+                    [
+                        ['text' => "تایید", 'callback_data' => "save*0-1"],
+                        ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
+                    ]
+                ];
+                $text = "وضعیت شما " . "دانکشده مهندسی" . " است؟";
+                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                break;
+            case "1":
+                $Inline_keyboard = [
+                    [
+                        ['text' => "تایید", 'callback_data' => "save*1-1"],
+                        ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
+                    ]
+                ];
+                $text = "وضعیت شما " . "دانشجو پردیس" . " است؟";
+                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                break;
+            case "2":
+                $Inline_keyboard = [
+                    [
+                        ['text' => "تایید", 'callback_data' => "save*2-1"],
+                        ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
+                    ]
+                ];
+                $text = "وضعیت شما " . "دانشجو مهمان" . " است؟";
+                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                break;
+            case "3":
+                $Inline_keyboard = [
+                    [
+                        ['text' => "تایید", 'callback_data' => "save*3-1"],
+                        ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
+                    ]
+                ];
+                $text = "وضعیت شما " . "دانشجو فارغ التحصیل" . " است؟";
+                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                break;
+            
+        }
+        if (in_array($Callback_data[0], ['ok*1402', 'ok*1401', 'ok*1400', 'ok*1399', 'ok*1398', 'ok*1397', 'ok*1396'])) {
+            changeStatus($array, $conn,  $Date, "3", $Message_id);
+            $Callback_data[0] = explode('*', $Callback_data[0]);
+            try {
+                $stmt = $conn->prepare("UPDATE `users` SET `entry_year`= ? WHERE `chat_id`= ?");
+                $stmt->bindValue(1, $Callback_data[0][1]);
+                $stmt->bindValue(2, $Message_id);
+                $stmt->execute();
+                sendMessage("1178581717",  "true");
+            } catch (PDOException $e) {
+                sendMessage("1178581717",  "<br>" . $e->getMessage());
+            }
+            $Inline_keyboard = [
+                [
+                    ['text' => "دانکشده مهندسی", 'callback_data' => "0-1"],
+                    ['text' => "دانشجو پردیس", 'callback_data' => "1-1"],
+                    ['text' => "دانشجو مهمان", 'callback_data' => "2-1"],
+                    ['text' => "دانشجو فارغ التحصیل", 'callback_data' => "3-1"],
+                ]
+            ];
+            $text = "لطفا وضعیت دانشجویی خود را مشخص نمایید: ";
+            startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+        } elseif (in_array($Callback_data[0], ['0', '1', '2', '3'])) {
+        }
+    } elseif ($Callback_data[1] == "0") {
         switch ($Callback_data[0]) {
             case "update":
                 //start update
