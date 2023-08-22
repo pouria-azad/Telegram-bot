@@ -130,12 +130,12 @@ function getChatAdministrators($chat_id)
     return json_decode(file_get_contents($Request_to_server), true);
 }
 
-function editMessageReplyMarkup($chat_id, $Message_id, $Inline_keyboard)
+function editMessageReplyMarkup($chat_id, $Message_id, $Inline_keyboard, $text)
 {
     $Method = 'editMessageReplyMarkup';
     $arr_keyboard = array("inline_keyboard" => $Inline_keyboard, "resize_keyboard" => true, "one_time_keyboard" => true);
     $reply_markup = json_encode($arr_keyboard);
-    $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . $chat_id . "&" . "message_id=" . $Message_id . "&" . "text=" . "text" . "&" . "reply_markup=" . $reply_markup;
+    $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . $chat_id . "&" . "message_id=" . $Message_id . "&" . "text=" . $text . "&" . "reply_markup=" . $reply_markup;
     return file_get_contents($Request_to_server);
 }
 

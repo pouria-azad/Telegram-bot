@@ -148,8 +148,8 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
     if ($Callback_data[1] == "1") {
         switch ($Callback_data[0]) {
             case "okname":
-                 sendMessage($Callback_chat_id , "ddd");
-                 updateStatus($conn,  $Date, "2", $Callback_chat_id);
+                sendMessage($Callback_chat_id, "ddd");
+                updateStatus($conn,  $Date, "2", $Callback_chat_id);
                 $Inline_keyboard = [
                     [
                         ['text' => "1396", 'callback_data' => "1396-1"],
@@ -159,13 +159,13 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                         ['text' => "1400", 'callback_data' => "1400-1"],
                         ['text' => "1401", 'callback_data' => "1401-1"],
                         ['text' => "1402", 'callback_data' => "1402-1"],
-                        ]
-                    ];
-                    $text = "لطفا سال ورود خود را به رشته کامپیوتر وارد کنید";
-                    // startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
-                    $re = editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard);
-                    logi($conn , "inline update",$re,$re , $Date);
-                    answerCallbackQuery($Callback_id, "نام شما تایید شد");
+                    ]
+                ];
+                $text = "لطفا سال ورود خود را به رشته کامپیوتر وارد کنید";
+                // startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                $re = editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
+                logi($conn, "inline update", $re, $re, $Date);
+                answerCallbackQuery($Callback_id, "نام شما تایید شد");
                 break;
             case "1396":
                 $Inline_keyboard = [
@@ -176,7 +176,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                 ];
                 $text = "سال ورود شما " . "1396" . " است؟";
                 // startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
-                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard);
+                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
                 answerCallbackQuery($Callback_id, "سال شما تایید شد");
                 break;
             case "1397":
@@ -247,8 +247,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                     ]
                 ];
                 $text = "وضعیت شما " . "دانکشده مهندسی" . " است؟";
-                // startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
-                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard);
+                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
                 break;
             case "1":
                 $Inline_keyboard = [
@@ -314,24 +313,21 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
             ];
             $text = "لطفا وضعیت دانشجویی خود را مشخص نمایید: ";
             // startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
-            editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard);
-        }
-        elseif (in_array($Callback_data[0], ['save*0', 'save*1', 'save*2', 'save*3'])) {
+            editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
+        } elseif (in_array($Callback_data[0], ['save*0', 'save*1', 'save*2', 'save*3'])) {
+            answerCallbackQuery($Callback_id, "اطلاعات شما ذخیره شد");
             $Callback_data[0] = explode('*', $Callback_data[0]);
             try {
                 $stmt = $conn->prepare("UPDATE `users` SET `type`= ? WHERE `chat_id`= ?");
                 $stmt->bindValue(1, $Callback_data[0][1]);
                 $stmt->bindValue(2, $Message_id);
                 $stmt->execute();
-                sendMessage("1178581717",  "798789");
+                sendMessage("1178581717",  "کاربر با موفقیت افزوده شد");
             } catch (PDOException $e) {
                 sendMessage("1178581717",  "<br>" . $e->getMessage());
             }
             deleteMessage($Callback_chat_id, $Callback_message_message_id);
-            answerCallbackQuery($Callback_id, "اطلاعات شما ذخیره شد");
-        }
-        
-        elseif (in_array($Callback_data[0], ['0', '1', '2', '3'])) {
+        } elseif (in_array($Callback_data[0], ['0', '1', '2', '3'])) {
         }
     } elseif ($Callback_data[1] == "0") {
         switch ($Callback_data[0]) {
