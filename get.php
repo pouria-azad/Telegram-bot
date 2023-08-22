@@ -180,7 +180,8 @@ elseif ($Callback_chat_id && $Callback_data) {
                     }
                 }
                 $text = $base0 . $base1;
-                sendadmins($Callback_chat_id, "kir");
+                $test = "kir+2";
+                sendadmins($Callback_chat_id, $text);
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت ارسال شد!");
                 break;
         }
