@@ -159,18 +159,17 @@ elseif ($Callback_chat_id && $Callback_data) {
                 $array = getChatAdministrators("-1001454096414");
 
                 $base0 = "لیست ادمین ها: " . "%0A";
-                $byek = "";
+                $base1 = "";
                 foreach ($array['result'] as $key => $admins) {
                     $username = $admins["user"]["username"] ?? "";
                     $cutsom_title = $admins["custom_title"] ?? "";
                     if (!$admins["user"]["is_bot"]) {
-                        $byek =  $byek . "%0A" . ($key + 1) . ". " . $admins["user"]["first_name"] . " @" . $username . " %0A"
+                        $base1 =  $base1 . "%0A" . ($key + 1) . ". " . $admins["user"]["first_name"] . " @" . $username . " %0A"
                             . "عنوان ادمین در گروه: " . $cutsom_title;
                     }
                 }
 
-
-                logi($conn, "conn", sendMessage($Callback_chat_id, $byek), sendMessage($Callback_chat_id, $byek), $Date);
+                sendMessage($Callback_chat_id, $base0 . $base1);
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت ارسال شد!");
                 
                 
@@ -188,7 +187,7 @@ elseif ($Callback_chat_id && $Callback_data) {
                 }
 
                 // logi($conn, "conn", sendadmins($Callback_chat_id, $base0), sendadmins($Callback_chat_id, $base0), $Date);
-                // $kir = strval($base0 . $byek);
+                // $kir = strval($base0 . $base1);
                 // logi($conn, "conn", sendadmins($Callback_chat_id, $kir), sendadmins($Callback_chat_id, $kir), $Date);
                 answerCallbackQuery($Callback_id, "لیست ادمین ها با موفقیت بروزرسانی شدند!");
                 
