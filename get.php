@@ -164,10 +164,9 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                 deleteMessage($Callback_chat_id, $Callback_message_message_id);
                 break;
             case "okname":
-                sendMessage($Callback_chat_id, "ddd");
                 updateStatus($conn,  $Date, "2", $Callback_chat_id);
                 $m = startWellcomeremove($Callback_chat_id);
-                logi($conn , "keyboard" , $m , $m , $Date);
+                logi($conn, "keyboard", $m, $m, $Date);
                 $Inline_keyboard = [
                     [
                         ['text' => "1396", 'callback_data' => "1396-1"],

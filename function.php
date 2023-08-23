@@ -21,9 +21,9 @@ function startWellcome($Message_id, $text, $keyboard, $Message_message_id)
 function startWellcomeremove($Message_id)
 {
     $Method = 'sendMessage';
-    $arr_keyboard = array("ReplyKeyboardRemove" => true);
+    $arr_keyboard = array("remove_keyboard" => true);
     $reply_markup = json_encode($arr_keyboard);
-    $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . $Message_id . "&" . "text=" . " /" . "&" . "reply_markup=" . $reply_markup;
+    $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . $Message_id . "&" . "text=" . "\xF0\x9F\x8E\x89" . "&" . "reply_markup=" . $reply_markup;
     return ($Request_to_server);
 }
 
@@ -80,7 +80,7 @@ function insertStatus($conn, $Date, $status, $Message_id)
         $pdo->bindValue(2, $Date);
         $pdo->bindValue(3, $status);
         $pdo->execute();
-        sendMessage("1178581717", "New record created successfully");
+        
         // echo "New record created successfully";
     } catch (PDOException $e) {
         //   echo $sql . "<br>" . $e->getMessage();
@@ -168,7 +168,7 @@ function year_inline($Callback_chat_id, $Callback_message_message_id, $year, $co
         $stmt->bindValue(1, $year);
         $stmt->bindValue(2, $Callback_chat_id);
         $stmt->execute();
-        sendMessage("1178581717",  "true");
+        
     } catch (PDOException $e) {
         sendMessage("1178581717",  "<br>" . $e->getMessage());
     }
@@ -194,7 +194,7 @@ function type_inline($Callback_chat_id, $Callback_message_message_id, $type = "0
         $stmt->bindValue(1, $type);
         $stmt->bindValue(2, $Callback_chat_id);
         $stmt->execute();
-        sendMessage("1178581717",  "true");
+        
     } catch (PDOException $e) {
         sendMessage("1178581717",  "<br>" . $e->getMessage());
     }
