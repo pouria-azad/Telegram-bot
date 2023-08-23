@@ -80,7 +80,7 @@ function insertStatus($conn, $Date, $status, $Message_id)
         $pdo->bindValue(2, $Date);
         $pdo->bindValue(3, $status);
         $pdo->execute();
-        
+
         // echo "New record created successfully";
     } catch (PDOException $e) {
         //   echo $sql . "<br>" . $e->getMessage();
@@ -168,7 +168,6 @@ function year_inline($Callback_chat_id, $Callback_message_message_id, $year, $co
         $stmt->bindValue(1, $year);
         $stmt->bindValue(2, $Callback_chat_id);
         $stmt->execute();
-        
     } catch (PDOException $e) {
         sendMessage("1178581717",  "<br>" . $e->getMessage());
     }
@@ -194,7 +193,6 @@ function type_inline($Callback_chat_id, $Callback_message_message_id, $type = "0
         $stmt->bindValue(1, $type);
         $stmt->bindValue(2, $Callback_chat_id);
         $stmt->execute();
-        
     } catch (PDOException $e) {
         sendMessage("1178581717",  "<br>" . $e->getMessage());
     }

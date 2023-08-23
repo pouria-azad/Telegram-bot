@@ -117,7 +117,6 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
         $stmt->bindValue(1, $Object['message']['text']);
         $stmt->bindValue(2, $Message_id);
         $stmt->execute();
-        sendMessage("1178581717",  "true");
     } catch (PDOException $e) {
         sendMessage("1178581717",  "<br>" . $e->getMessage());
     }
@@ -165,8 +164,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                 break;
             case "okname":
                 updateStatus($conn,  $Date, "2", $Callback_chat_id);
-                $m = startWellcomeremove($Callback_chat_id);
-                logi($conn, "keyboard", $m, $m, $Date);
+                startWellcomeremove($Callback_chat_id);
                 $Inline_keyboard = [
                     [
                         ['text' => "1396", 'callback_data' => "1396-1"],
