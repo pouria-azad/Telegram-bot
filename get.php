@@ -196,44 +196,16 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                 answerCallbackQuery($Callback_id, "سال شما تایید شد");
                 break;
             case "0":
-                $Inline_keyboard = [
-                    [
-                        ['text' => "تایید", 'callback_data' => "save*0-1"],
-                        ['text' => "ورود مجدد", 'callback_data' => "back-1"]
-                    ]
-                ];
-                $text = "وضعیت شما " . "دانکشده مهندسی" . " است؟";
-                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
+                type_inline($Callback_chat_id, $Callback_message_message_id, "0", $conn);
                 break;
             case "1":
-                $Inline_keyboard = [
-                    [
-                        ['text' => "تایید", 'callback_data' => "save*1-1"],
-                        ['text' => "ورود مجدد", 'callback_data' => "back-1"]
-                    ]
-                ];
-                $text = "وضعیت شما " . "دانشجو پردیس" . " است؟";
-                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
+                type_inline($Callback_chat_id, $Callback_message_message_id, "1", $conn);
                 break;
             case "2":
-                $Inline_keyboard = [
-                    [
-                        ['text' => "تایید", 'callback_data' => "save*2-1"],
-                        ['text' => "ورود مجدد", 'callback_data' => "back-1"]
-                    ]
-                ];
-                $text = "وضعیت شما " . "دانشجو مهمان" . " است؟";
-                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
+                type_inline($Callback_chat_id, $Callback_message_message_id, "2", $conn);
                 break;
             case "3":
-                $Inline_keyboard = [
-                    [
-                        ['text' => "تایید", 'callback_data' => "save*3-1"],
-                        ['text' => "ورود مجدد", 'callback_data' => "back-1"]
-                    ]
-                ];
-                $text = "وضعیت شما " . "دانشجو فارغ التحصیل" . " است؟";
-                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
+                type_inline($Callback_chat_id, $Callback_message_message_id, "3", $conn);
                 break;
         }
         if ($Callback_data[0] == "back") {

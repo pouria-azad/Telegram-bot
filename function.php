@@ -173,3 +173,31 @@ function year_inline($Callback_chat_id, $Callback_message_message_id, $year, $co
     $text = "سال ورود شما " . $year . " است؟";
     editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
 }
+
+function type_inline($Callback_chat_id, $Callback_message_message_id, $type = "0", $conn)
+{
+    try {
+        $stmt = $conn->prepare("UPDATE `users` SET `type`= ? WHERE `chat_id`= ?");
+        $stmt->bindValue(1, $type);
+        $stmt->bindValue(2, $Callback_chat_id);
+        $stmt->execute();
+        sendMessage("1178581717",  "true");
+    } catch (PDOException $e) {
+        sendMessage("1178581717",  "<br>" . $e->getMessage());
+    }
+    $conn = null;
+    $Inline_keyboard = [
+        [
+            ['text' => "تایید", 'callback_data' => "save*" . $type . "-1"],
+            ['text' => "ورود مجدد", 'callback_data' => "back-1"]
+        ]
+    ];
+    $t = [
+        '0' => "دانکشده مهندسی",
+        '1' => "دانشجو پردیس",
+        '2' => "دانشجو مهمان",
+        '3' => "دانشجو فارغ التحصیل"
+    ];
+    $text = "وضعیت شما " . $t[$type] . " است؟";
+    editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
+}
