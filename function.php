@@ -23,7 +23,7 @@ function startWellcomeremove($Message_id)
     $Method = 'sendMessage';
     $arr_keyboard = array("ReplyKeyboardRemove" => true);
     $reply_markup = json_encode($arr_keyboard);
-    $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . $Message_id . "&" . "text=" . "" . "&" . "reply_markup=" . $reply_markup;
+    $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . $Message_id . "&" . "text=" . " /" . "&" . "reply_markup=" . $reply_markup;
     file_get_contents($Request_to_server);
 }
 
