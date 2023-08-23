@@ -96,7 +96,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیری�
     startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
     $Keyboard = [["بازگشت به منوی اصلی"]];
     $emoji = ["\xE2\x9B\xB5", "\xE2\x99\xA5", "\xE2\x98\x95", "\xF0\x9F\x8C\x83", "\xF0\x9F\x8C\x8C", "\xF0\x9F\x8D\x9F", "\xF0\x9F\x8D\xAD", "\xF0\x9F\x8D\xB9", "\xF0\x9F\x8E\x89", "\xF0\x9F\x8E\x88"];
-    startWellcome($Message_id, array_rand($emoji), $Keyboard, $Message_message_id);
+    startWellcome($Message_id, $emoji[array_rand($emoji)], $Keyboard, $Message_message_id);
     //
 } elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا' && !$is_admin[0]['status']) {
     sendMessage($Message_id, "شما به این بخش دسترسی ندارید!");
