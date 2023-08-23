@@ -150,7 +150,8 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                 $Keyboard = [
                     ['عضویت در گروه یادآور'], ['مدیریت لیست اعضا'], ['درباره']
                 ];
-                startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
+                startWellcome($Callback_chat_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Callback_message_message_id);
+                deleteMessage($Callback_chat_id, $Callback_message_message_id);
                 break;
             case "reset":
                 updateStatus($conn,  $Date, "-1", $Callback_chat_id);
