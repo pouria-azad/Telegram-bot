@@ -171,9 +171,6 @@ function year_inline($Callback_chat_id, $Callback_message_message_id, $year, $co
         ],
         [
             ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
-        ],
-        [
-            ['text' => "کنسل", 'callback_data' => "cancel-1"]
         ]
 
     ];
@@ -200,9 +197,6 @@ function type_inline($Callback_chat_id, $Callback_message_message_id, $type = "0
         ],
         [
             ['text' => "ورود مجدد", 'callback_data' => "back-1"]
-        ],
-        [
-            ['text' => "کنسل", 'callback_data' => "cancel-1"]
         ]
 
     ];

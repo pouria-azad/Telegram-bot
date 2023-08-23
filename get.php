@@ -125,6 +125,9 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
     $Inline_keyboard = [
         [
             ['text' => "تایید", 'callback_data' => "okname-1"],
+        ],
+        [
+            ['text' => "\xE2\x9D\x8C", 'callback_data' => "cancel-1"]
         ]
     ];
     $text = "نام کامل شما : " . $Object['message']['text'] . " است؟";
