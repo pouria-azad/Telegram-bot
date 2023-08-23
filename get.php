@@ -44,7 +44,7 @@ $Callback_date = $Object['callback_query']['message']['date'] ?? null;
 if (isset($Callback_date))
     $Callback_date = jdate('Y-m-d H:i:s', $Datestamp, "", "", "en");
 
-sendMessage("1178581717", "1");
+// sendMessage("1178581717", "1");
 //user-status
 try {
     $sql = "SELECT `chat_id`,`status` FROM `status` WHERE `chat_id`= ? LIMIT 1";
@@ -77,6 +77,7 @@ if (($Message_entities && $Object['message']['text'] == '/start') || (in_array($
         ['عضویت در گروه یادآور'], ['مدیریت لیست اعضا'], ['درباره']
     ];
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
+    deleteMessage($Message_id , $Message_message_id-2);
 } //
 elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا' && $is_admin[0]['status']) {
     changeStatus($array, $conn,  $Date, "-1", $Message_id);
