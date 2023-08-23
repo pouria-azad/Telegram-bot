@@ -151,3 +151,25 @@ function deleteMessage($chat_id, $message_id)
     $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . $chat_id . "&" . "message_id=" . $message_id;
     return file_get_contents($Request_to_server);
 }
+
+function year_inline($Callback_chat_id, $Callback_message_message_id, $year, $conn)
+{
+    try {
+        $stmt = $conn->prepare("UPDATE `users` SET `entry_year`= ? WHERE `chat_id`= ?");
+        $stmt->bindValue(1, $year);
+        $stmt->bindValue(2, $Callback_chat_id);
+        $stmt->execute();
+        sendMessage("1178581717",  "true");
+    } catch (PDOException $e) {
+        sendMessage("1178581717",  "<br>" . $e->getMessage());
+    }
+    $conn = null;
+    $Inline_keyboard = [
+        [
+            ['text' => "تایید", 'callback_data' => "ok*" . $year . "-1"],
+            ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
+        ]
+    ];
+    $text = "سال ورود شما " . $year . " است؟";
+    editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
+}

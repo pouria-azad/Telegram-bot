@@ -168,76 +168,32 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                 answerCallbackQuery($Callback_id, "نام شما تایید شد");
                 break;
             case "1396":
-                $Inline_keyboard = [
-                    [
-                        ['text' => "تایید", 'callback_data' => "ok*1396-1"],
-                        ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
-                    ]
-                ];
-                $text = "سال ورود شما " . "1396" . " است؟";
-                // startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
-                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
+                year_inline($Callback_chat_id, $Callback_message_message_id, "1396", $conn);
                 answerCallbackQuery($Callback_id, "سال شما تایید شد");
                 break;
             case "1397":
-                $Inline_keyboard = [
-                    [
-                        ['text' => "تایید", 'callback_data' => "ok*1397-1"],
-                        ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
-                    ]
-                ];
-                $text = "سال ورود شما " . "1397" . " است؟";
-                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
+                year_inline($Callback_chat_id, $Callback_message_message_id, "1397", $conn);
+                answerCallbackQuery($Callback_id, "سال شما تایید شد");
                 break;
             case "1398":
-                $Inline_keyboard = [
-                    [
-                        ['text' => "تایید", 'callback_data' => "ok*1398-1"],
-                        ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
-                    ]
-                ];
-                $text = "سال ورود شما " . "1398" . " است؟";
-                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
+                year_inline($Callback_chat_id, $Callback_message_message_id, "1398", $conn);
+                answerCallbackQuery($Callback_id, "سال شما تایید شد");
                 break;
             case "1399":
-                $Inline_keyboard = [
-                    [
-                        ['text' => "تایید", 'callback_data' => "ok*1399-1"],
-                        ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
-                    ]
-                ];
-                $text = "سال ورود شما " . "1399" . " است؟";
-                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
+                year_inline($Callback_chat_id, $Callback_message_message_id, "1399", $conn);
+                answerCallbackQuery($Callback_id, "سال شما تایید شد");
                 break;
             case "1400":
-                $Inline_keyboard = [
-                    [
-                        ['text' => "تایید", 'callback_data' => "ok*1400-1"],
-                        ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
-                    ]
-                ];
-                $text = "سال ورود شما " . "1400" . " است؟";
-                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
+                year_inline($Callback_chat_id, $Callback_message_message_id, "1400", $conn);
+                answerCallbackQuery($Callback_id, "سال شما تایید شد");
                 break;
             case "1401":
-                $Inline_keyboard = [
-                    [
-                        ['text' => "تایید", 'callback_data' => "ok*1401-1"],
-                        ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
-                    ]
-                ];
-                $text = "سال ورود شما " . "1401" . " است؟";
-                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
+                year_inline($Callback_chat_id, $Callback_message_message_id, "1401", $conn);
+                answerCallbackQuery($Callback_id, "سال شما تایید شد");
                 break;
             case "1402":
-                $Inline_keyboard = [
-                    [
-                        ['text' => "تایید", 'callback_data' => "ok*1402-1"],
-                        ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
-                    ]
-                ];
-                $text = "سال ورود شما " . "1402" . " است؟";
-                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
+                year_inline($Callback_chat_id, $Callback_message_message_id, "1402", $conn);
+                answerCallbackQuery($Callback_id, "سال شما تایید شد");
                 break;
             case "0":
                 $Inline_keyboard = [
