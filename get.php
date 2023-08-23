@@ -111,7 +111,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
     $Keyboard = [['بازگشت']];
     startWellcome($Message_id, "لطفا نام کامل خود را وارد نمایید: ", $Keyboard, $Message_message_id);
 } elseif ($array[0]['status'] == "1") {
-
+    
     //if exist update name in database
     try {
         $stmt = $conn->prepare("UPDATE `users` SET `fullname_fa`= ? WHERE `chat_id`= ?");
@@ -144,9 +144,12 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
     }
 
     $Callback_data = explode('-', $Callback_data);
-
+// &
     if ($Callback_data[1] == "1") {
         switch ($Callback_data[0]) {
+            case "reset":
+                updateStatus($conn,  $Date, "1", $Callback_chat_id);
+                break;
             case "okname":
                 sendMessage($Callback_chat_id, "ddd");
                 updateStatus($conn,  $Date, "2", $Callback_chat_id);
@@ -240,7 +243,6 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                 ]
             ];
             $text = "لطفا وضعیت دانشجویی خود را مشخص نمایید: ";
-            // startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
             editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
         } elseif (in_array($Callback_data[0], ['save*0', 'save*1', 'save*2', 'save*3'])) {
             answerCallbackQuery($Callback_id, "اطلاعات شما ذخیره شد");
