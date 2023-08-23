@@ -185,7 +185,6 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                     ],
                 ];
                 $text = "لطفا سال ورود خود را به رشته کامپیوتر وارد کنید";
-                // startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
                 $re = editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
                 logi($conn, "inline update", $re, $re, $Date);
                 answerCallbackQuery($Callback_id, "نام شما تایید شد");
