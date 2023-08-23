@@ -166,11 +166,11 @@ function year_inline($Callback_chat_id, $Callback_message_message_id, $year, $co
     $conn = null;
     $Inline_keyboard = [
         [
-            ['text' => "تایید", 'callback_data' => "ok*" . $year . "-1"],
-            ['text' => "مرحله قبل", 'callback_data' => "reset-1"],
+            ['text' => "\xE2\x9C\x85", 'callback_data' => "ok*" . $year . "-1"],
+            ['text' => "\xF0\x9F\x94\x99", 'callback_data' => "reset-1"],
         ],
         [
-            ['text' => "ورود مجدد", 'callback_data' => "okname-1"]
+            ['text' => "\xE2\x86\xA9", 'callback_data' => "okname-1"]
         ]
 
     ];
@@ -192,11 +192,11 @@ function type_inline($Callback_chat_id, $Callback_message_message_id, $type = "0
     $conn = null;
     $Inline_keyboard = [
         [
-            ['text' => "تایید", 'callback_data' => "save*" . $type . "-1"],
-            ['text' => "مرحله قبل", 'callback_data' => "okname-1"]
+            ['text' => "\xE2\x9C\x85", 'callback_data' => "save*" . $type . "-1"],
+            ['text' => "\xF0\x9F\x94\x99", 'callback_data' => "okname-1"]
         ],
         [
-            ['text' => "ورود مجدد", 'callback_data' => "back-1"]
+            ['text' => "\xE2\x86\xA9", 'callback_data' => "back-1"]
         ]
 
     ];
