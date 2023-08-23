@@ -24,7 +24,7 @@ function startWellcomeremove($Message_id)
     $arr_keyboard = array("ReplyKeyboardRemove" => true);
     $reply_markup = json_encode($arr_keyboard);
     $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . $Message_id . "&" . "text=" . " /" . "&" . "reply_markup=" . $reply_markup;
-    file_get_contents($Request_to_server);
+    return ($Request_to_server);
 }
 
 function startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id)
