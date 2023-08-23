@@ -70,8 +70,7 @@ try {
 }
 // logi($conn, "is admin test", $is_admin, "", $Date);
 //کلید استارت یا بازگشت
-if (($Message_entities && $Object['message']['text'] == '/start') || ($array[0]['status'] == "-1" && $Object['message']['text'] == "بازگشت به منوی اصلی")) {
-    //$array = getStatus($conn, $Message_id);
+if ($array[0]['status'] == "0" ||($Message_entities && $Object['message']['text'] == '/start') || ($array[0]['status'] == "-1" && $Object['message']['text'] == "بازگشت به منوی اصلی")) {
     changeStatus($array, $conn,  $Date, "0", $Message_id);
     //////
     $Keyboard = [
@@ -80,7 +79,6 @@ if (($Message_entities && $Object['message']['text'] == '/start') || ($array[0][
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
 } //
 elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا' && $is_admin[0]['status']) {
-    //$array = getStatus($conn, $Message_id);
     changeStatus($array, $conn,  $Date, "-1", $Message_id);
     //////
     $Inline_keyboard = [
@@ -108,7 +106,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
     //$array = getStatus($conn, $Message_id);
     changeStatus($array, $conn,  $Date, "1", $Message_id);
 
-    $Keyboard = [['بازگشت']];
+    $Keyboard = [["بازگشت به منوی اصلی"]];
     startWellcome($Message_id, "لطفا نام کامل خود را وارد نمایید: ", $Keyboard, $Message_message_id);
 } elseif ($array[0]['status'] == "1") {
 
@@ -147,10 +145,18 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
     // &
     if ($Callback_data[1] == "1") {
         switch ($Callback_data[0]) {
+            case "cancel":
+                updateStatus($conn,  $Date, "0", $Callback_chat_id);
+                $Keyboard = [
+                    ['عضویت در گروه یادآور'], ['مدیریت لیست اعضا'], ['درباره']
+                ];
+                startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
+                break;
             case "reset":
-                updateStatus($conn,  $Date, "1", $Callback_chat_id);
-                $Keyboard = [['بازگشت']];
+                updateStatus($conn,  $Date, "-1", $Callback_chat_id);
+                $Keyboard = [["بازگشت به منوی اصلی"]];
                 startWellcome($Callback_chat_id, "لطفا نام کامل خود را وارد نمایید: ", $Keyboard, $Callback_message_message_id);
+                deleteMessage($Callback_chat_id, $Callback_message_message_id);
                 break;
             case "okname":
                 sendMessage($Callback_chat_id, "ddd");
