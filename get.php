@@ -70,7 +70,7 @@ try {
 }
 // logi($conn, "is admin test", $is_admin, "", $Date);
 //کلید استارت یا بازگشت
-if (($Message_entities && $Object['message']['text'] == '/start') || (in_array($array[0]['status'], ["-1", "1" , "2"]) && ($Object['message']['text'] == "بازگشت به منوی اصلی"))) {
+if (($Message_entities && $Object['message']['text'] == '/start') || (in_array($array[0]['status'], ["-1", "1", "2"]) && ($Object['message']['text'] == "بازگشت به منوی اصلی"))) {
     changeStatus($array, $conn,  $Date, "0", $Message_id);
     //////
     $Keyboard = [
@@ -166,6 +166,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
             case "okname":
                 sendMessage($Callback_chat_id, "ddd");
                 updateStatus($conn,  $Date, "2", $Callback_chat_id);
+                startWellcomeremove($Callback_chat_id);
                 $Inline_keyboard = [
                     [
                         ['text' => "1396", 'callback_data' => "1396-1"],
