@@ -168,13 +168,21 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                 updateStatus($conn,  $Date, "2", $Callback_chat_id);
                 $Inline_keyboard = [
                     [
-                        ['text' => "1396", 'callback_data' => "1396-1"],
-                        ['text' => "1397", 'callback_data' => "1397-1"],
-                        ['text' => "1398", 'callback_data' => "1398-1"],
-                        ['text' => "1399", 'callback_data' => "1399-1"],
-                        ['text' => "1400", 'callback_data' => "1400-1"],
-                        ['text' => "1401", 'callback_data' => "1401-1"],
-                        ['text' => "1402", 'callback_data' => "1402-1"],
+                        [
+                            ['text' => "1396", 'callback_data' => "1396-1"],
+                            ['text' => "1397", 'callback_data' => "1397-1"],
+                        ],
+                        [
+                            ['text' => "1398", 'callback_data' => "1398-1"],
+                            ['text' => "1399", 'callback_data' => "1399-1"]
+                        ],
+                        [
+                            ['text' => "1400", 'callback_data' => "1400-1"],
+                            ['text' => "1401", 'callback_data' => "1401-1"]
+                        ],
+                        [
+                            ['text' => "1402", 'callback_data' => "1402-1"]
+                        ],
                     ]
                 ];
                 $text = "لطفا سال ورود خود را به رشته کامپیوتر وارد کنید";
@@ -220,11 +228,17 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
         if ($Callback_data[0] == "back") {
             $Inline_keyboard = [
                 [
-                    ['text' => "دانکشده مهندسی", 'callback_data' => "0-1"],
-                    ['text' => "دانشجو پردیس", 'callback_data' => "1-1"],
-                    ['text' => "دانشجو مهمان", 'callback_data' => "2-1"],
-                    ['text' => "دانشجو فارغ التحصیل", 'callback_data' => "3-1"],
-                ]
+                    ['text' => "دانکشده مهندسی", 'callback_data' => "0-1"]
+                ],
+                [
+                    ['text' => "دانشجو پردیس", 'callback_data' => "1-1"]
+                ],
+                [
+                    ['text' => "دانشجو مهمان", 'callback_data' => "2-1"]
+                ],
+                [
+                    ['text' => "دانشجو فارغ التحصیل", 'callback_data' => "3-1"]
+                ],
             ];
             $text = "لطفا وضعیت دانشجویی خود را مشخص نمایید: ";
             editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
@@ -253,7 +267,6 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                 [
                     ['text' => "دانشجو فارغ التحصیل", 'callback_data' => "3-1"]
                 ],
-
             ];
             $text = "لطفا وضعیت دانشجویی مخاطب را مشخص نمایید: ";
             editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
