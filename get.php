@@ -111,7 +111,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
     $Keyboard = [['بازگشت']];
     startWellcome($Message_id, "لطفا نام کامل خود را وارد نمایید: ", $Keyboard, $Message_message_id);
 } elseif ($array[0]['status'] == "1") {
-    
+
     //if exist update name in database
     try {
         $stmt = $conn->prepare("UPDATE `users` SET `fullname_fa`= ? WHERE `chat_id`= ?");
@@ -144,11 +144,13 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
     }
 
     $Callback_data = explode('-', $Callback_data);
-// &
+    // &
     if ($Callback_data[1] == "1") {
         switch ($Callback_data[0]) {
             case "reset":
                 updateStatus($conn,  $Date, "1", $Callback_chat_id);
+                $Keyboard = [['بازگشت']];
+                startWellcome($Callback_chat_id, "لطفا نام کامل خود را وارد نمایید: ", $Keyboard, $Callback_message_message_id);
                 break;
             case "okname":
                 sendMessage($Callback_chat_id, "ddd");
