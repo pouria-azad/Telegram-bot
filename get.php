@@ -95,7 +95,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیری�
     $text = $Message_fname . " عزیز در این بخش شما میتوانید اعضای گروه رو مدیریت نمایید";
     startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
     $Keyboard = [["بازگشت به منوی اصلی"]];
-    startWellcome($Message_id, "\xF0\x9F\x8E\x88", $Keyboard, $Message_message_id);
+    startWellcome($Message_id, "\xF0\x9F\x8E\x89", $Keyboard, $Message_message_id);
     //
 } elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا' && !$is_admin[0]['status']) {
     sendMessage($Message_id, "شما به این بخش دسترسی ندارید!");
@@ -164,7 +164,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                 break;
             case "okname":
                 updateStatus($conn,  $Date, "2", $Callback_chat_id);
-                startWellcomeremove($Callback_chat_id);
+                startWellcomeremove($Callback_chat_id , "\xF0\x9F\x8E\x89");
                 $Inline_keyboard = [
                     [
                         ['text' => "1396", 'callback_data' => "1396-1"],
