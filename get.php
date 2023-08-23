@@ -70,7 +70,7 @@ try {
 }
 // logi($conn, "is admin test", $is_admin, "", $Date);
 //کلید استارت یا بازگشت
-if (($Message_entities && $Object['message']['text'] == '/start') || (in_array($array[0]['status'], ["-1", "1"]) && ($Object['message']['text'] == "بازگشت به منوی اصلی"))) {
+if (($Message_entities && $Object['message']['text'] == '/start') || (in_array($array[0]['status'], ["-1", "1" , "2"]) && ($Object['message']['text'] == "بازگشت به منوی اصلی"))) {
     changeStatus($array, $conn,  $Date, "0", $Message_id);
     //////
     $Keyboard = [
@@ -168,22 +168,20 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                 updateStatus($conn,  $Date, "2", $Callback_chat_id);
                 $Inline_keyboard = [
                     [
-                        [
-                            ['text' => "1396", 'callback_data' => "1396-1"],
-                            ['text' => "1397", 'callback_data' => "1397-1"],
-                        ],
-                        [
-                            ['text' => "1398", 'callback_data' => "1398-1"],
-                            ['text' => "1399", 'callback_data' => "1399-1"]
-                        ],
-                        [
-                            ['text' => "1400", 'callback_data' => "1400-1"],
-                            ['text' => "1401", 'callback_data' => "1401-1"]
-                        ],
-                        [
-                            ['text' => "1402", 'callback_data' => "1402-1"]
-                        ],
-                    ]
+                        ['text' => "1396", 'callback_data' => "1396-1"],
+                        ['text' => "1397", 'callback_data' => "1397-1"],
+                    ],
+                    [
+                        ['text' => "1398", 'callback_data' => "1398-1"],
+                        ['text' => "1399", 'callback_data' => "1399-1"]
+                    ],
+                    [
+                        ['text' => "1400", 'callback_data' => "1400-1"],
+                        ['text' => "1401", 'callback_data' => "1401-1"]
+                    ],
+                    [
+                        ['text' => "1402", 'callback_data' => "1402-1"]
+                    ],
                 ];
                 $text = "لطفا سال ورود خود را به رشته کامپیوتر وارد کنید";
                 // startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
