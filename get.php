@@ -187,7 +187,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                     ]
                 ];
                 $text = "سال ورود شما " . "1397" . " است؟";
-                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
                 break;
             case "1398":
                 $Inline_keyboard = [
@@ -197,7 +197,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                     ]
                 ];
                 $text = "سال ورود شما " . "1398" . " است؟";
-                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
                 break;
             case "1399":
                 $Inline_keyboard = [
@@ -207,7 +207,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                     ]
                 ];
                 $text = "سال ورود شما " . "1399" . " است؟";
-                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
                 break;
             case "1400":
                 $Inline_keyboard = [
@@ -217,7 +217,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                     ]
                 ];
                 $text = "سال ورود شما " . "1400" . " است؟";
-                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
                 break;
             case "1401":
                 $Inline_keyboard = [
@@ -227,7 +227,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                     ]
                 ];
                 $text = "سال ورود شما " . "1401" . " است؟";
-                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
                 break;
             case "1402":
                 $Inline_keyboard = [
@@ -237,7 +237,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                     ]
                 ];
                 $text = "سال ورود شما " . "1402" . " است؟";
-                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
                 break;
             case "0":
                 $Inline_keyboard = [
@@ -257,7 +257,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                     ]
                 ];
                 $text = "وضعیت شما " . "دانشجو پردیس" . " است؟";
-                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
                 break;
             case "2":
                 $Inline_keyboard = [
@@ -267,7 +267,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                     ]
                 ];
                 $text = "وضعیت شما " . "دانشجو مهمان" . " است؟";
-                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
                 break;
             case "3":
                 $Inline_keyboard = [
@@ -277,7 +277,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                     ]
                 ];
                 $text = "وضعیت شما " . "دانشجو فارغ التحصیل" . " است؟";
-                startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+                editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
                 break;
         }
         if ($Callback_data[0] == "back") {
@@ -290,7 +290,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
                 ]
             ];
             $text = "لطفا وضعیت دانشجویی خود را مشخص نمایید: ";
-            startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+            editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
         }
         if (in_array($Callback_data[0], ['ok*1402', 'ok*1401', 'ok*1400', 'ok*1399', 'ok*1398', 'ok*1397', 'ok*1396'])) {
             $Callback_data[0] = explode('*', $Callback_data[0]);
