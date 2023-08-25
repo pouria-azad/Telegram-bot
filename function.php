@@ -173,7 +173,7 @@ function year_inline($Callback_chat_id, $Callback_message_message_id, $year, $co
         echo $sql . "<br>" . $e->getMessage();
     }
     try {
-        $stmt = $conn->prepare("UPDATE `users` SET `entry_year`= ? WHERE `chat_id`= ?");
+        $stmt = $conn->prepare("UPDATE `temp_user` SET `entry_year`= ? WHERE `chat_id`= ?");
         $stmt->bindValue(1, $year);
         $stmt->bindValue(2, $chat_id_for[0]['chat_id_for']);
         $stmt->execute();
@@ -207,7 +207,7 @@ function type_inline($Callback_chat_id, $Callback_message_message_id, $type = "0
         echo $sql . "<br>" . $e->getMessage();
     }
     try {
-        $stmt = $conn->prepare("UPDATE `users` SET `type`= ? WHERE `chat_id`= ?");
+        $stmt = $conn->prepare("UPDATE `temp_user` SET `type`= ? WHERE `chat_id`= ?");
         $stmt->bindValue(1, $type);
         $stmt->bindValue(2, $chat_id_for[0]['chat_id_for']);
         $stmt->execute();
