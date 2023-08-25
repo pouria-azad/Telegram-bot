@@ -97,7 +97,10 @@ if (($Message_entities && $Object['message']['text'] == '/start') || (in_array($
     deleteMessage($Message_id, ($Message_message_id - 2));
     deleteMessage($Message_id, ($Message_message_id - 1));
 } //
-elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا' && $is_admin[0]['status']) {
+elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'درباره') {
+    $text = "سازنده: " . "<a href='tg://user?id=1178581717'><b>" . "Pouria Azad" . "</b></a>";
+    sendMessage($Message_id, $text);
+} elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا' && $is_admin[0]['status']) {
     changeStatus($array, $conn,  $Date, "-1", $Message_id);
     //////
     $Inline_keyboard = [
@@ -451,11 +454,14 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
                     type("2", $t2, $Callback_chat_id);
                 if ($t3)
                     type("3", $t3, $Callback_chat_id);
-
-                year("1397", $y97, $Callback_chat_id);
-                year("1398", $y98, $Callback_chat_id);
-                year("1399", $y99, $Callback_chat_id);
-                year("1400", $y00, $Callback_chat_id);
+                if ($y97)
+                    year("1397", $y97, $Callback_chat_id);
+                if ($y98)
+                    year("1398", $y98, $Callback_chat_id);
+                if ($y99)
+                    year("1399", $y99, $Callback_chat_id);
+                if ($y00)
+                    year("1400", $y00, $Callback_chat_id);
 
                 break;
             case "recivead":
