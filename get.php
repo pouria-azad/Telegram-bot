@@ -94,6 +94,7 @@ if (($Message_entities && $Object['message']['text'] == '/start') || (in_array($
     } catch (PDOException $e) {
         echo $sql . "<br>" . $e->getMessage();
     }
+    deleteMessage($Message_id, ($Message_message_id - 2));
     deleteMessage($Message_id, ($Message_message_id - 1));
 } //
 elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا' && $is_admin[0]['status']) {
@@ -123,6 +124,9 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیری�
 elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزودن/آپدیت عضو") {
     sendMessage($Message_id, "لطفا یک پیام از مخاطب مورد نظر ارسال نمایید");
     changeStatus($array, $conn,  $Date, "5", $Message_id);
+    $Keyboard = [["بازگشت به منوی اصلی"]];
+    $emoji = ["\xE2\x9B\xB5", "\xE2\x99\xA5", "\xE2\x98\x95", "\xF0\x9F\x8C\x83", "\xF0\x9F\x8C\x8C", "\xF0\x9F\x8D\x9F", "\xF0\x9F\x8D\xAD", "\xF0\x9F\x8D\xB9", "\xF0\x9F\x8E\x89", "\xF0\x9F\x8E\x88"];
+    startWellcome($Message_id, $emoji[array_rand($emoji)], $Keyboard, $Message_message_id);
 } elseif ($array[0]['status'] == "5" && !$Object['message']['forward_from']) {
     sendMessage($Message_id, "مخاطب خود پروفایلش را بسته است لطفا مجددا فوروارد نمایید");
 } elseif ($array[0]['status'] == "5" && $Object['message']['forward_from']) {
@@ -398,7 +402,6 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
                     if ($status['ok'] && $status['result']['user']['username']) {
                         try {
                             $stmt = $conn->prepare("UPDATE `users` SET `fullname` = ? ,`username`= ? WHERE `chat_id`= ?");
-
                             if (isset($status['result']['user']['last_name'])) {
                                 $stmt->bindValue(1, $status['result']['user']['first_name'] . " " . $status['result']['user']['last_name']);
                             } else {
