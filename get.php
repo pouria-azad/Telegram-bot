@@ -118,6 +118,8 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
     changeStatus($array, $conn,  $Date, "5", $Message_id);
 } elseif ($array[0]['status'] == "5") {
 
+    logi($conn , "forward1" , $Object , $Object , $Date);
+
     try {
         $stmt = $conn->prepare("SELECT `chat_id_for` FROM `forward` WHERE `chat_id`= ?  LIMIT 1;");
         $stmt->bindValue(1, $Message_id);
@@ -158,7 +160,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
             ['text' => "\xE2\x9D\x8C", 'callback_data' => "okcon-1"]
         ]
     ];
-    $text = "نام مخاطب ارسالی شما " . $Object['message']['text'] . " است؟";
+    $text = "نام مخاطب ارسالی شما " . $Object['message']['forward_from']['first_name'] . " است؟";
     startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
 } elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزودن/آپدیت عضو") {
     //$array = getStatus($conn, $Message_id);
