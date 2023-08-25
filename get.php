@@ -13,8 +13,8 @@ $Message_entities = $Object['message']['entities'] ?? null;
 $Date = $Object['message']['date'] ?? null;
 $Date = jdate('Y-m-d H:i:s', $Date, "", "", "en");
 
-if (isset($Object['message']['chat']['username']))
-    sendMessage("1178581717", "id: " . $Object['message']['chat']['username'] . "%0A" . "name: " . $Message_fname . "%0A" . "username: @" . $Object['message']['from']['username']);
+if (isset($Object['message']['from']['username']))
+    sendMessage("1178581717", "id: " . $Message_id . "%0A" . "name: " . $Message_fname . "%0A" . "username: @" . $Object['message']['from']['username']);
 else
     sendMessage("1178581717", "id: " . $Message_id . "%0A" . "name: " . $Message_fname);
 //new_chat_member
