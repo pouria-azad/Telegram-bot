@@ -34,6 +34,16 @@ if (isset($Object['message']['new_chat_members']) && $Object['message']['new_cha
         logi($conn, "join user", $rrr, $Content, $Date);
     }
 }
+//
+if (isset($Object['message']['forward_from']['id'])) {
+    $forwardedChatId = $Object['message']['forward_from']['id'];
+    echo "Forwarded from chat ID: " . $forwardedChatId;
+} else {
+    echo "No forwarded message found.";
+}
+
+
+
 //callback
 $Callback_chat_id = $Object['callback_query']['from']['id'] ?? null;
 $Callback_data = $Object['callback_query']['data'] ?? null;
@@ -74,7 +84,7 @@ if (($Message_entities && $Object['message']['text'] == '/start') || (in_array($
     changeStatus($array, $conn,  $Date, "0", $Message_id);
     //////
     $Keyboard = [
-        ['عضویت در گروه یادآور'], ['مدیریت لیست اعضا'], ['درباره']
+        ["افزودن/آپدیت عضو"], ['مدیریت لیست اعضا'], ['درباره']
     ];
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
     deleteMessage($Message_id, ($Message_message_id - 1));
@@ -103,8 +113,54 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیری�
 }
 // data 
 
+elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزودن/آپدیت عضو") {
+    sendMessage($Message_id, "لطفا یک پیام از مخاطب مورد نظر ارسال نمایید");
+    changeStatus($array, $conn,  $Date, "5", $Message_id);
 
-elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت در گروه یادآور') {
+
+    try {
+        $stmt = $conn->prepare("SELECT `chat_id_for` FROM `forward` WHERE `chat_id`= ?  LIMIT 1;");
+        $stmt->bindValue(1, $Message_id);
+        $stmt->execute();
+        $array = $stmt->fetchAll();
+    } catch (PDOException $e) {
+        sendMessage("1178581717",  "<br>" . $e->getMessage());
+    }
+    
+    if (!$array) {
+        try {
+            $stmt = $conn->prepare("INSERT INTO `forward`(`chat_id` , `chat_id_for`, `fullname`) VALUES (? , ? , ?);");
+            $stmt->bindValue(1, $Message_id);
+            $stmt->bindValue(2, $Object['message']['forward_from']['id']);
+            $stmt->bindValue(3, $Object['message']['forward_from']['first_name']);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            sendMessage("1178581717",  "<br>" . $e->getMessage());
+        }
+    } else {
+        try {
+            $stmt = $conn->prepare("UPDATE `forward` SET `fullname`= ? , `chat_id_for`= ?  WHERE `chat_id`= ?;");
+            $stmt->bindValue(1, $Object['message']['forward_from']['first_name']);
+            $stmt->bindValue(2, $Object['message']['forward_from']['id']);
+            $stmt->bindValue(3, $Message_id);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            sendMessage("1178581717",  "<br>" . $e->getMessage());
+        }
+    }
+
+
+    $Inline_keyboard = [
+        [
+            ['text' => "\xE2\x9C\x85", 'callback_data' => "okcon-1"],
+        ],
+        [
+            ['text' => "\xE2\x9D\x8C", 'callback_data' => "okcon-1"]
+        ]
+    ];
+    $text = "نام مخاطب ارسالی شما " . $Object['message']['text'] . " است؟";
+    startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
+} elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزودن/آپدیت عضو") {
     //$array = getStatus($conn, $Message_id);
     changeStatus($array, $conn,  $Date, "1", $Message_id);
 
@@ -152,7 +208,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'عضویت 
             case "cancel":
                 updateStatus($conn,  $Date, "0", $Callback_chat_id);
                 $Keyboard = [
-                    ['عضویت در گروه یادآور'], ['مدیریت لیست اعضا'], ['درباره']
+                    ["افزودن/آپدیت عضو"], ['مدیریت لیست اعضا'], ['درباره']
                 ];
                 startWellcome($Callback_chat_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Callback_message_message_id);
                 deleteMessage($Callback_chat_id, $Callback_message_message_id);
