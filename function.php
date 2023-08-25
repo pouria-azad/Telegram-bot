@@ -6,7 +6,7 @@ function sendMessage($Message_id, $text)
 {
     $Method = 'sendMessage';
     $Request_to_server = API_REQUEST . $Method . "?" . "chat_id=" . $Message_id . "&" . "text=" . $text . "&" . "parse_mode=HTML";
-    return ($Request_to_server);
+    file_get_contents($Request_to_server);
 }
 
 function startWellcome($Message_id, $text, $keyboard, $Message_message_id)
@@ -58,7 +58,7 @@ function year($year, $y, $id)
     $y99 = array_slice($y, 1);
     foreach ($y99 as $number => $user)
         $text = $text . "%0A" . ($number + 2) . ". " . "<a href='tg://user?id=" . $user[2] . "'>" . $user[0] . "</a>" . " @" . $user[1];
-    return sendMessage($id, $text);
+    sendMessage($id, $text);
 }
 
 function type($number, $y, $id)
@@ -74,7 +74,7 @@ function type($number, $y, $id)
     $y99 = array_slice($y, 1);
     foreach ($y99 as $number => $user)
         $text = $text . "%0A" . ($number + 2) . ". " . "<a href='tg://user?id=" . $user[2] . "'>" . $user[0] . "</a>" . " @" . $user[1];
-    return sendMessage($id, $text);
+    sendMessage($id, $text);
 }
 
 function changeStatus($array, $conn,  $Date, $status, $Message_id)
