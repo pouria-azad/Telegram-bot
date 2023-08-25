@@ -125,14 +125,14 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'دربار�
     startWellcome($Message_id, $emoji[array_rand($emoji)], $Keyboard, $Message_message_id);
     //
 } elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا' && !$is_admin[0]['status']) {
-    sendMessage($Message_id, "شما به این بخش دسترسی ندارید!");
+    sendMessage($Message_id, "دسترسی به این بخش فقط برای ادمین های گروه مجاز میباشد!");
 
 } elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزودن/آپدیت عضو" && !$is_admin[0]['status']) {
     sendMessage($Message_id, "دسترسی به این بخش فقط برای ادمین های گروه مجاز میباشد!");
 }
 
 elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزودن/آپدیت عضو"  && $is_admin[0]['status']) {
-    sendMessage($Message_id, "دسترسی به این بخش فقط برای ادمین های گروه مجاز میباشد!");
+    sendMessage($Message_id, "لطفا یک پیام از مخاطب مورد نظر ارسال نمایید");
     changeStatus($array, $conn,  $Date, "5", $Message_id);
     $Keyboard = [["بازگشت به منوی اصلی"]];
     $emoji = ["\xE2\x9B\xB5", "\xE2\x99\xA5", "\xE2\x98\x95", "\xF0\x9F\x8C\x83", "\xF0\x9F\x8C\x8C", "\xF0\x9F\x8D\x9F", "\xF0\x9F\x8D\xAD", "\xF0\x9F\x8D\xB9", "\xF0\x9F\x8E\x89", "\xF0\x9F\x8E\x88"];
