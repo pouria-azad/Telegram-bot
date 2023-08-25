@@ -156,7 +156,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
 
     $Inline_keyboard = [
         [
-            ['text' => "\xE2\x9C\x85", 'callback_data' => "okcon-1"],
+            ['text' => "\xE2\x9C\x85", 'callback_data' => "reset-1"],
         ],
         [
             ['text' => "\xE2\x9D\x8C", 'callback_data' => "cancel-1"]
@@ -214,14 +214,8 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
             case "reset":
                 updateStatus($conn,  $Date, "-1", $Callback_chat_id);
                 $Keyboard = [["بازگشت به منوی اصلی"]];
-                logi($conn , "content for" , $Content , $Content , $Date);
                 startWellcome($Callback_chat_id, "لطفا نام کامل خود را وارد نمایید: ", $Keyboard, $Callback_message_message_id);
                 deleteMessage($Callback_chat_id, $Callback_message_message_id);
-                break;
-            case "okcon":
-                updateStatus($conn,  $Date, "1", $Callback_chat_id);
-                $Keyboard = [["بازگشت به منوی اصلی"]];
-                startWellcome($Message_id, "لطفا نام کامل خود را وارد نمایید: ", $Keyboard, $Message_message_id);
                 break;
             case "okname":
                 updateStatus($conn,  $Date, "2", $Callback_chat_id);
