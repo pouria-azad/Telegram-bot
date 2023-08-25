@@ -217,7 +217,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
                 startWellcome($Callback_chat_id, "لطفا نام کامل خود را وارد نمایید: ", $Keyboard, $Callback_message_message_id);
                 deleteMessage($Callback_chat_id, $Callback_message_message_id);
                 break;
-            case "oncon":
+            case "okcon":
                 updateStatus($conn,  $Date, "1", $Callback_chat_id);
                 $Keyboard = [["بازگشت به منوی اصلی"]];
                 startWellcome($Message_id, "لطفا نام کامل خود را وارد نمایید: ", $Keyboard, $Message_message_id);
