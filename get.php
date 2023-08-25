@@ -87,6 +87,13 @@ if (($Message_entities && $Object['message']['text'] == '/start') || (in_array($
         ["افزودن/آپدیت عضو"], ['مدیریت لیست اعضا'], ['درباره']
     ];
     startWellcome($Message_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Message_message_id);
+    try {
+        $pdo = $conn->prepare("DELETE FROM `temp_user` WHERE `id` = ?");
+        $pdo->bindValue(1, $Message_id);
+        $pdo->execute();
+    } catch (PDOException $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
     deleteMessage($Message_id, ($Message_message_id - 1));
 } //
 elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا' && $is_admin[0]['status']) {
@@ -215,6 +222,13 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
                     ["افزودن/آپدیت عضو"], ['مدیریت لیست اعضا'], ['درباره']
                 ];
                 startWellcome($Callback_chat_id, "با سلام به ربات یادآور خوش آمدید.  لطفا یکی از گزینه های زیر را انتخاب نمایید:", $Keyboard, $Callback_message_message_id);
+                try {
+                    $pdo = $conn->prepare("DELETE FROM `temp_user` WHERE `id` = ?");
+                    $pdo->bindValue(1, $Callback_chat_id);
+                    $pdo->execute();
+                } catch (PDOException $e) {
+                    echo $sql . "<br>" . $e->getMessage();
+                }
                 deleteMessage($Callback_chat_id, $Callback_message_message_id);
                 break;
             case "reset":
