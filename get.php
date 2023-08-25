@@ -101,7 +101,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'دربار�
     sendMessage("1178581717", "Dfgdf");
     $text = "<b>". "سازنده: " . "<a href='tg://user?id=1178581717'>" . "پوریا آزاد" . "</a></b>" . " @pouria_azad";
     $text2 = $text ."%0A" ."<b>"."سورس پروژه "  . "<a href='https://github.com/pouria-azad/Telegram-bot'>" . "Telegram bot" . "</a></b>";
-    sendMessage($Message_id, $text);
+    sendMessage($Message_id, $text2);
 } elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا' && $is_admin[0]['status']) {
     changeStatus($array, $conn,  $Date, "-1", $Message_id);
     //////
