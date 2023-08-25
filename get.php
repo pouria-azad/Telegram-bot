@@ -483,7 +483,8 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'دربار�
                     $username = $admins["user"]["username"] ?? "";
                     $cutsom_title = $admins["custom_title"] ?? "";
                     if (!$admins["user"]["is_bot"]) {
-                        $base1 =  $base1 . "%0A" . ($key + 1) . ". " . $admins["user"]["first_name"] . " @" . $username . " %0A"
+                        $key = $key + 1;
+                        $base1 =  $base1 . "%0A" . ($key) . ". " . $admins["user"]["first_name"] . " @" . $username . " %0A"
                             . "عنوان ادمین در گروه: " . $cutsom_title . "%0A";
                     }
                 }
