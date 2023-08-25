@@ -121,6 +121,14 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
 } elseif ($array[0]['status'] == "5" && $Object['message']['forward_from']) {
 
     logi($conn, "forward1", $Content, $Content, $Date);
+    try {
+        $pdo = $conn->prepare("INSERT INTO `users`(`chat_id`) VALUES (?)");
+        $pdo->bindValue(1, $Object['message']['forward_from']['id']);
+        $pdo->execute();
+        $rrr = "New record created successfully";
+    } catch (PDOException $e) {
+        $rrr = $e->getMessage();
+    }
 
     try {
         $stmt = $conn->prepare("SELECT `chat_id_for` FROM `forward` WHERE `chat_id`= ?  LIMIT 1;");
@@ -166,11 +174,21 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
     startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
 } elseif ($array[0]['status'] == "1") {
 
+    try {
+        $sql = "SELECT `chat_id_for` FROM `status` WHERE `chat_id`= ? LIMIT 1";
+        $pdo = $conn->prepare($sql);
+        $pdo->bindValue(1, $Message_id);
+        $pdo->execute();
+        $result = $pdo->setFetchMode(PDO::FETCH_ASSOC);
+        $chat_id_for = $pdo->fetchAll();
+    } catch (PDOException $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
     //if exist update name in database
     try {
         $stmt = $conn->prepare("UPDATE `users` SET `fullname_fa`= ? WHERE `chat_id`= ?");
         $stmt->bindValue(1, $Object['message']['text']);
-        $stmt->bindValue(2, $Message_id);
+        $stmt->bindValue(2, $chat_id_for[0]['chat_id_for']);
         $stmt->execute();
     } catch (PDOException $e) {
         sendMessage("1178581717",  "<br>" . $e->getMessage());
@@ -184,7 +202,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
             ['text' => "\xE2\x9D\x8C", 'callback_data' => "cancel-1"]
         ]
     ];
-    $text = "نام کامل شما : " . $Object['message']['text'] . " است؟";
+    $text = "نام کامل مخاطب ارسالی : " . $Object['message']['text'] . " است؟";
     startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
 } elseif ($Callback_chat_id && $Callback_data && $is_admin[0]['status']) {
     $array = [];
@@ -214,7 +232,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
             case "reset":
                 updateStatus($conn,  $Date, "-1", $Callback_chat_id);
                 $Keyboard = [["بازگشت به منوی اصلی"]];
-                startWellcome($Callback_chat_id, "لطفا نام کامل خود را وارد نمایید: ", $Keyboard, $Callback_message_message_id);
+                startWellcome($Callback_chat_id, "لطفا نام کامل مخاطب خود را وارد نمایید: ", $Keyboard, $Callback_message_message_id);
                 deleteMessage($Callback_chat_id, $Callback_message_message_id);
                 break;
             case "okname":
@@ -237,10 +255,10 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
                         ['text' => "1402", 'callback_data' => "1402-1"]
                     ],
                 ];
-                $text = "لطفا سال ورود خود را به رشته کامپیوتر وارد کنید";
+                $text = "لطفا سال ورود مخاطب خود را به رشته کامپیوتر وارد کنید";
                 $re = editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
                 logi($conn, "inline update", $re, $re, $Date);
-                answerCallbackQuery($Callback_id, "نام شما تایید شد");
+                answerCallbackQuery($Callback_id, "نام مخاطب شما تایید شد");
                 break;
             case "1396":
                 year_inline($Callback_chat_id, $Callback_message_message_id, "1396", $conn);
@@ -291,16 +309,26 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
                     ['text' => "دانشجو فارغ التحصیل", 'callback_data' => "3-1"]
                 ],
             ];
-            $text = "لطفا وضعیت دانشجویی خود را مشخص نمایید: ";
+            $text = "لطفا وضعیت دانشجویی مخاطب خود را مشخص نمایید: ";
             editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
         }
         if (in_array($Callback_data[0], ['ok*1402', 'ok*1401', 'ok*1400', 'ok*1399', 'ok*1398', 'ok*1397', 'ok*1396'])) {
-            answerCallbackQuery($Callback_id, "سال ورود ذخیره شد");
+            answerCallbackQuery($Callback_id, "سال ورود مخاطب ذخیره شد");
             $Callback_data[0] = explode('*', $Callback_data[0]);
+            try {
+                $sql = "SELECT `chat_id_for` FROM `status` WHERE `chat_id`= ? LIMIT 1";
+                $pdo = $conn->prepare($sql);
+                $pdo->bindValue(1, $Message_id);
+                $pdo->execute();
+                $result = $pdo->setFetchMode(PDO::FETCH_ASSOC);
+                $chat_id_for = $pdo->fetchAll();
+            } catch (PDOException $e) {
+                echo $sql . "<br>" . $e->getMessage();
+            }
             try {
                 $stmt = $conn->prepare("UPDATE `users` SET `entry_year`= ? WHERE `chat_id`= ?");
                 $stmt->bindValue(1, $Callback_data[0][1]);
-                $stmt->bindValue(2, $Message_id);
+                $stmt->bindValue(2, $chat_id_for[0]['chat_id_for']);
                 $stmt->execute();
             } catch (PDOException $e) {
                 sendMessage("1178581717",  "<br>" . $e->getMessage());
@@ -325,13 +353,31 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
             answerCallbackQuery($Callback_id, "اطلاعات مخاطب ذخیره شد");
             $Callback_data[0] = explode('*', $Callback_data[0]);
             try {
+                $sql = "SELECT `chat_id_for` FROM `forward` WHERE `chat_id`= ? LIMIT 1";
+                $pdo = $conn->prepare($sql);
+                $pdo->bindValue(1, $Message_id);
+                $pdo->execute();
+                $result = $pdo->setFetchMode(PDO::FETCH_ASSOC);
+                $chat_id_for = $pdo->fetchAll();
+            } catch (PDOException $e) {
+                echo $sql . "<br>" . $e->getMessage();
+            }
+            try {
                 $stmt = $conn->prepare("UPDATE `users` SET `type`= ? WHERE `chat_id`= ?");
                 $stmt->bindValue(1, $Callback_data[0][1]);
-                $stmt->bindValue(2, $Message_id);
+                $stmt->bindValue(2, $chat_id_for[0]['chat_id_for']);
                 $stmt->execute();
-                sendMessage("1178581717",  "کاربر با موفقیت افزوده شد");
             } catch (PDOException $e) {
                 sendMessage("1178581717",  "<br>" . $e->getMessage());
+            }
+            // 
+            try {
+                $pdo = $conn->prepare("DELETE FROM `forward` WHERE `chat_id` = ?");
+                $pdo->bindValue(1, $Message_id);
+                $pdo->execute();
+                sendMessage("1178581717",  "کاربر با موفقیت افزوده شد");
+            } catch (PDOException $e) {
+                echo $sql . "<br>" . $e->getMessage();
             }
             deleteMessage($Callback_chat_id, $Callback_message_message_id);
         } elseif (in_array($Callback_data[0], ['0', '1', '2', '3'])) {

@@ -182,7 +182,7 @@ function year_inline($Callback_chat_id, $Callback_message_message_id, $year, $co
         ]
 
     ];
-    $text = "سال ورود شما " . $year . " است؟";
+    $text = "سال ورود مخاطب شما " . $year . " است؟";
     editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
 }
 
@@ -213,6 +213,6 @@ function type_inline($Callback_chat_id, $Callback_message_message_id, $type = "0
         '2' => "دانشجو مهمان",
         '3' => "دانشجو فارغ التحصیل"
     ];
-    $text = "وضعیت شما " . $t[$type] . " است؟";
+    $text = "وضعیت مخاطب شما " . $t[$type] . " است؟";
     editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
 }
