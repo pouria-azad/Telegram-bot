@@ -156,7 +156,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
 
     $Inline_keyboard = [
         [
-            ['text' => "\xE2\x9C\x85", 'callback_data' => "okname-1"],
+            ['text' => "\xE2\x9C\x85", 'callback_data' => "okcon-1"],
         ],
         [
             ['text' => "\xE2\x9D\x8C", 'callback_data' => "cancel-1"]
@@ -164,12 +164,6 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
     ];
     $text = "نام مخاطب ارسالی شما " . $Object['message']['forward_from']['first_name'] . " است؟";
     startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
-} elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزودن/آپدیت عضو") {
-    //$array = getStatus($conn, $Message_id);
-    changeStatus($array, $conn,  $Date, "1", $Message_id);
-
-    $Keyboard = [["بازگشت به منوی اصلی"]];
-    startWellcome($Message_id, "لطفا نام کامل خود را وارد نمایید: ", $Keyboard, $Message_message_id);
 } elseif ($array[0]['status'] == "1") {
 
     //if exist update name in database
@@ -222,6 +216,11 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
                 $Keyboard = [["بازگشت به منوی اصلی"]];
                 startWellcome($Callback_chat_id, "لطفا نام کامل خود را وارد نمایید: ", $Keyboard, $Callback_message_message_id);
                 deleteMessage($Callback_chat_id, $Callback_message_message_id);
+                break;
+            case "oncon":
+                updateStatus($conn,  $Date, "1", $Callback_chat_id);
+                $Keyboard = [["بازگشت به منوی اصلی"]];
+                startWellcome($Message_id, "لطفا نام کامل خود را وارد نمایید: ", $Keyboard, $Message_message_id);
                 break;
             case "okname":
                 updateStatus($conn,  $Date, "2", $Callback_chat_id);
