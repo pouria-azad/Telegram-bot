@@ -122,7 +122,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
 
     logi($conn, "forward1", $Content, $Content, $Date);
     try {
-        $pdo = $conn->prepare("INSERT INTO `users`(`chat_id`) VALUES (?)");
+        $pdo = $conn->prepare("INSERT INTO `temp_user`(`chat_id`) VALUES (?)");
         $pdo->bindValue(1, $Object['message']['forward_from']['id']);
         $pdo->execute();
         $rrr = "New record created successfully";
@@ -169,7 +169,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
             ['text' => "\xE2\x9D\x8C", 'callback_data' => "cancel-1"]
         ]
     ];
-    $text = "نام مخاطب ارسالی شما " . $Object['message']['forward_from']['first_name'] . " است؟";
+    $text = "نام مخاطب ارسالی شما " . $Object['message']['forward_from']['first_name'] . " است؟" . "" . "در صورتی که پیام مخاطب اشتباهی وارد کرده اید لطفا مجددا یک پیام از مخاطب را ارسال نمایید";
     startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
 } elseif ($array[0]['status'] == "1") {
 
@@ -185,7 +185,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
     }
     //if exist update name in database
     try {
-        $stmt = $conn->prepare("UPDATE `users` SET `fullname_fa`= ? WHERE `chat_id`= ?");
+        $stmt = $conn->prepare("UPDATE `temp_user` SET `fullname_fa`= ? WHERE `chat_id`= ?");
         $stmt->bindValue(1, $Object['message']['text']);
         $stmt->bindValue(2, $chat_id_for[0]['chat_id_for']);
         $stmt->execute();
@@ -201,7 +201,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
             ['text' => "\xE2\x9D\x8C", 'callback_data' => "cancel-1"]
         ]
     ];
-    $text = "نام کامل مخاطب ارسالی : " . $Object['message']['text'] . " است؟";
+    $text = "نام کامل مخاطب ارسالی : " . $Object['message']['text'] . " است؟" . "" . "در صورتی که نام خود را اشتباه وارد کرده اید لفا مجددا نام کامل خود را ارسال نمایید";
     startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
 } elseif ($Callback_chat_id && $Callback_data && $is_admin[0]['status']) {
     $array = [];
