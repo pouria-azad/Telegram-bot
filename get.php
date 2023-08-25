@@ -116,9 +116,11 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیری�
 elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزودن/آپدیت عضو") {
     sendMessage($Message_id, "لطفا یک پیام از مخاطب مورد نظر ارسال نمایید");
     changeStatus($array, $conn,  $Date, "5", $Message_id);
-} elseif ($array[0]['status'] == "5") {
+} elseif ($array[0]['status'] == "5" && !$Object['message']['forward_from']) {
+    sendMessage($Message_id, "مخاطب خود پروفایلش را بسته است لطفا مجددا فوروارد نمایید");
+} elseif ($array[0]['status'] == "5" && $Object['message']['forward_from']) {
 
-    logi($conn , "forward1" , $Content , $Content , $Date);
+    logi($conn, "forward1", $Content, $Content, $Date);
 
     try {
         $stmt = $conn->prepare("SELECT `chat_id_for` FROM `forward` WHERE `chat_id`= ?  LIMIT 1;");
