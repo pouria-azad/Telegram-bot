@@ -116,7 +116,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیری�
 elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزودن/آپدیت عضو") {
     sendMessage($Message_id, "لطفا یک پیام از مخاطب مورد نظر ارسال نمایید");
     changeStatus($array, $conn,  $Date, "5", $Message_id);
-
+} elseif ($array[0]['status'] == "5") {
 
     try {
         $stmt = $conn->prepare("SELECT `chat_id_for` FROM `forward` WHERE `chat_id`= ?  LIMIT 1;");
@@ -126,7 +126,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
     } catch (PDOException $e) {
         sendMessage("1178581717",  "<br>" . $e->getMessage());
     }
-    
+
     if (!$array) {
         try {
             $stmt = $conn->prepare("INSERT INTO `forward`(`chat_id` , `chat_id_for`, `fullname`) VALUES (? , ? , ?);");
