@@ -214,6 +214,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
             case "reset":
                 updateStatus($conn,  $Date, "-1", $Callback_chat_id);
                 $Keyboard = [["بازگشت به منوی اصلی"]];
+                logi($conn , "content for" , $Content , $Content , $Date);
                 startWellcome($Callback_chat_id, "لطفا نام کامل خود را وارد نمایید: ", $Keyboard, $Callback_message_message_id);
                 deleteMessage($Callback_chat_id, $Callback_message_message_id);
                 break;
