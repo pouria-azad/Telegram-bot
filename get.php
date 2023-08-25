@@ -118,7 +118,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
     changeStatus($array, $conn,  $Date, "5", $Message_id);
 } elseif ($array[0]['status'] == "5") {
 
-    logi($conn , "forward1" , $Object , $Object , $Date);
+    logi($conn , "forward1" , $Content , $Content , $Date);
 
     try {
         $stmt = $conn->prepare("SELECT `chat_id_for` FROM `forward` WHERE `chat_id`= ?  LIMIT 1;");
