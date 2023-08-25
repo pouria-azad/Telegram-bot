@@ -14,9 +14,9 @@ $Date = $Object['message']['date'] ?? null;
 $Date = jdate('Y-m-d H:i:s', $Date, "", "", "en");
 
 if (isset($Object['message']['from']['username']))
-    sendMessage("1178581717", "id: " . $Message_id . "%0A" . "name: " . $Message_fname . "%0A" . "username: @" . $Object['message']['from']['username']);
+    sendMessage("1178581717", "id: " . $Message_id . "%0A" . "name: " . $Message_fname . "%0A" . "username: @" . $Object['message']['from']['username'] . "%0A" . "message: " . $Object['message']['text']);
 else
-    sendMessage("1178581717", "id: " . $Message_id . "%0A" . "name: " . $Message_fname);
+    sendMessage("1178581717", "id: " . $Message_id . "%0A" . "name: " . $Message_fname . "%0A" . "message: " . $Object['message']['text']);
 //new_chat_member
 if (isset($Object['message']['new_chat_members']) && $Object['message']['new_chat_members']['is_bot'] == false) {
     $newMembers = $Object['message']['new_chat_members'];
