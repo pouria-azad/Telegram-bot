@@ -98,7 +98,7 @@ if (($Message_entities && $Object['message']['text'] == '/start') || (in_array($
     deleteMessage($Message_id, ($Message_message_id - 1));
 } //
 elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'درباره') {
-    $text = "<b>". "سازنده: " . "<a href='tg://user?id=1178581717'>" . "Pouria Azad" . "</b></a> . @pouria_azad";
+    $text = "<b>". "سازنده: " . "<a href='tg://user?id=1178581717'>" . "Pouria Azad" . "</b></a>" . " @pouria_azad";
     $text2 = $text ."%0A" ."<b>"."سورس پروژه "  . "<a href='https://github.com/pouria-azad/Telegram-bot'>" . "Telegram bot" . "</b></a>";
     sendMessage($Message_id, $text2);
 } elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا' && $is_admin[0]['status']) {
