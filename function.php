@@ -164,18 +164,9 @@ function deleteMessage($chat_id, $message_id)
 function year_inline($Callback_chat_id, $Callback_message_message_id, $year, $conn)
 {
     try {
-        $sql = "SELECT `chat_id_for` FROM `forward` WHERE `chat_id`= ? LIMIT 1";
-        $pdo = $conn->prepare($sql);
-        $pdo->bindValue(1, $Callback_chat_id);
-        $pdo->execute();
-        $chat_id_for = $pdo->fetchAll();
-    } catch (PDOException $e) {
-        echo $sql . "<br>" . $e->getMessage();
-    }
-    try {
-        $stmt = $conn->prepare("UPDATE `temp_user` SET `entry_year`= ? WHERE `chat_id`= ?");
+        $stmt = $conn->prepare("UPDATE `temp_user` SET `entry_year`= ? WHERE `id`= ?");
         $stmt->bindValue(1, $year);
-        $stmt->bindValue(2, $chat_id_for[0]['chat_id_for']);
+        $stmt->bindValue(2, $Callback_chat_id);
         $stmt->execute();
     } catch (PDOException $e) {
         sendMessage("1178581717",  "<br>" . $e->getMessage());
@@ -198,18 +189,9 @@ function year_inline($Callback_chat_id, $Callback_message_message_id, $year, $co
 function type_inline($Callback_chat_id, $Callback_message_message_id, $type = "0", $conn)
 {
     try {
-        $sql = "SELECT `chat_id_for` FROM `forward` WHERE `chat_id`= ? LIMIT 1";
-        $pdo = $conn->prepare($sql);
-        $pdo->bindValue(1, $Callback_chat_id);
-        $pdo->execute();
-        $chat_id_for = $pdo->fetchAll();
-    } catch (PDOException $e) {
-        echo $sql . "<br>" . $e->getMessage();
-    }
-    try {
-        $stmt = $conn->prepare("UPDATE `temp_user` SET `type`= ? WHERE `chat_id`= ?");
+        $stmt = $conn->prepare("UPDATE `temp_user` SET `type`= ? WHERE `id`= ?");
         $stmt->bindValue(1, $type);
-        $stmt->bindValue(2, $chat_id_for[0]['chat_id_for']);
+        $stmt->bindValue(2, $Callback_chat_id);
         $stmt->execute();
     } catch (PDOException $e) {
         sendMessage("1178581717",  "<br>" . $e->getMessage());

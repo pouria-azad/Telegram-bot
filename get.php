@@ -122,8 +122,9 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
 
     logi($conn, "forward1", $Content, $Content, $Date);
     try {
-        $pdo = $conn->prepare("INSERT INTO `temp_user`(`chat_id`) VALUES (?)");
-        $pdo->bindValue(1, $Object['message']['forward_from']['id']);
+        $pdo = $conn->prepare("INSERT INTO `temp_user`(`id` , `chat_id`) VALUES (?)");
+        $pdo->bindValue(1, $Message_id);
+        $pdo->bindValue(2, $Object['message']['forward_from']['id']);
         $pdo->execute();
         $rrr = "New record created successfully";
     } catch (PDOException $e) {
@@ -131,7 +132,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
     }
 
     try {
-        $stmt = $conn->prepare("SELECT `chat_id_for` FROM `forward` WHERE `chat_id`= ?  LIMIT 1;");
+        $stmt = $conn->prepare("SELECT `chat_id` FROM `temp_user` WHERE `id`= ?  LIMIT 1;");
         $stmt->bindValue(1, $Message_id);
         $stmt->execute();
         $array = $stmt->fetchAll();
@@ -141,20 +142,18 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
 
     if (!$array) {
         try {
-            $stmt = $conn->prepare("INSERT INTO `forward`(`chat_id` , `chat_id_for`, `fullname`) VALUES (? , ? , ?);");
+            $stmt = $conn->prepare("INSERT INTO `temp_user`(`id` , `chat_id`) VALUES (? , ?);");
             $stmt->bindValue(1, $Message_id);
             $stmt->bindValue(2, $Object['message']['forward_from']['id']);
-            $stmt->bindValue(3, $Object['message']['forward_from']['first_name']);
             $stmt->execute();
         } catch (PDOException $e) {
             sendMessage("1178581717",  "<br>" . $e->getMessage());
         }
     } else {
         try {
-            $stmt = $conn->prepare("UPDATE `forward` SET `fullname`= ? , `chat_id_for`= ?  WHERE `chat_id`= ?;");
-            $stmt->bindValue(1, $Object['message']['forward_from']['first_name']);
-            $stmt->bindValue(2, $Object['message']['forward_from']['id']);
-            $stmt->bindValue(3, $Message_id);
+            $stmt = $conn->prepare("UPDATE `temp_user` SET `chat_id`= ?  WHERE `id`= ?;");
+            $stmt->bindValue(1, $Object['message']['forward_from']['id']);
+            $stmt->bindValue(2, $Message_id);
             $stmt->execute();
         } catch (PDOException $e) {
             sendMessage("1178581717",  "<br>" . $e->getMessage());
@@ -173,21 +172,11 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
     startWellcomeinline($Message_id, $text, $Inline_keyboard, $Message_message_id);
 } elseif ($array[0]['status'] == "1") {
 
-    try {
-        $sql = "SELECT `chat_id_for` FROM `forward` WHERE `chat_id`= ? LIMIT 1";
-        $pdo = $conn->prepare($sql);
-        $pdo->bindValue(1, $Message_id);
-        $pdo->execute();
-        $result = $pdo->setFetchMode(PDO::FETCH_ASSOC);
-        $chat_id_for = $pdo->fetchAll();
-    } catch (PDOException $e) {
-        echo $sql . "<br>" . $e->getMessage();
-    }
     //if exist update name in database
     try {
-        $stmt = $conn->prepare("UPDATE `temp_user` SET `fullname_fa`= ? WHERE `chat_id`= ?");
+        $stmt = $conn->prepare("UPDATE `temp_user` SET `fullname_fa`= ? WHERE `id`= ?");
         $stmt->bindValue(1, $Object['message']['text']);
-        $stmt->bindValue(2, $chat_id_for[0]['chat_id_for']);
+        $stmt->bindValue(2, $Message_id);
         $stmt->execute();
     } catch (PDOException $e) {
         sendMessage("1178581717",  "<br>" . $e->getMessage());
@@ -315,19 +304,9 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
             answerCallbackQuery($Callback_id, "سال ورود مخاطب ذخیره شد");
             $Callback_data[0] = explode('*', $Callback_data[0]);
             try {
-                $sql = "SELECT `chat_id_for` FROM `forward` WHERE `chat_id`= ? LIMIT 1";
-                $pdo = $conn->prepare($sql);
-                $pdo->bindValue(1, $Callback_chat_id);
-                $pdo->execute();
-                $result = $pdo->setFetchMode(PDO::FETCH_ASSOC);
-                $chat_id_for = $pdo->fetchAll();
-            } catch (PDOException $e) {
-                echo $sql . "<br>" . $e->getMessage();
-            }
-            try {
-                $stmt = $conn->prepare("UPDATE `users` SET `entry_year`= ? WHERE `chat_id`= ?");
+                $stmt = $conn->prepare("UPDATE `users` SET `entry_year`= ? WHERE `id`= ?");
                 $stmt->bindValue(1, $Callback_data[0][1]);
-                $stmt->bindValue(2, $chat_id_for[0]['chat_id_for']);
+                $stmt->bindValue(2, $Callback_chat_id);
                 $stmt->execute();
             } catch (PDOException $e) {
                 sendMessage("1178581717",  "<br>" . $e->getMessage());
@@ -352,26 +331,16 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
             answerCallbackQuery($Callback_id, "اطلاعات مخاطب ذخیره شد");
             $Callback_data[0] = explode('*', $Callback_data[0]);
             try {
-                $sql = "SELECT `chat_id_for` FROM `forward` WHERE `chat_id`= ? LIMIT 1";
-                $pdo = $conn->prepare($sql);
-                $pdo->bindValue(1, $Callback_chat_id);
-                $pdo->execute();
-                $result = $pdo->setFetchMode(PDO::FETCH_ASSOC);
-                $chat_id_for = $pdo->fetchAll();
-            } catch (PDOException $e) {
-                echo $sql . "<br>" . $e->getMessage();
-            }
-            try {
                 $stmt = $conn->prepare("UPDATE `users` SET `type`= ? WHERE `chat_id`= ?");
                 $stmt->bindValue(1, $Callback_data[0][1]);
-                $stmt->bindValue(2, $chat_id_for[0]['chat_id_for']);
+                $stmt->bindValue(2, $Callback_chat_id);
                 $stmt->execute();
             } catch (PDOException $e) {
                 sendMessage("1178581717",  "<br>" . $e->getMessage());
             }
             // 
             try {
-                $pdo = $conn->prepare("DELETE FROM `forward` WHERE `chat_id` = ?");
+                $pdo = $conn->prepare("DELETE FROM `temp_user` WHERE `id` = ?");
                 $pdo->bindValue(1, $Callback_chat_id);
                 $pdo->execute();
                 sendMessage("1178581717",  "کاربر با موفقیت افزوده/آپدیت شد");
