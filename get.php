@@ -431,19 +431,19 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
                 $y00 = [];
                 foreach ($array as $users) {
                     if ($users['type'] == "1")
-                        $t1[] = [$users['fullname_fa'], $users['username']];
+                        $t1[] = [$users['fullname_fa'], $users['username'], $users['chat_id']];
                     elseif ($users['type'] == "2")
-                        $t2[] = [$users['fullname_fa'], $users['username']];
+                        $t2[] = [$users['fullname_fa'], $users['username'], $users['chat_id']];
                     elseif ($users['type'] == "3")
-                        $t3[] = [$users['fullname_fa'], $users['username']];
+                        $t3[] = [$users['fullname_fa'], $users['username'], $users['chat_id']];
                     elseif ($users['entry_year'] == "1397" && $users['type'] == "0") {
-                        $y97[] = [$users['fullname_fa'], $users['username']];
+                        $y97[] = [$users['fullname_fa'], $users['username'], $users['chat_id']];
                     } elseif ($users['entry_year'] == "1398" && $users['type'] == "0") {
-                        $y98[] = [$users['fullname_fa'], $users['username']];
+                        $y98[] = [$users['fullname_fa'], $users['username'], $users['chat_id']];
                     } elseif ($users['entry_year'] == "1399" && $users['type'] == "0") {
-                        $y99[] = [$users['fullname_fa'], $users['username']];
+                        $y99[] = [$users['fullname_fa'], $users['username'], $users['chat_id']];
                     } elseif ($users['entry_year'] == "1400" && $users['type'] == "0") {
-                        $y00[] = [$users['fullname_fa'], $users['username']];
+                        $y00[] = [$users['fullname_fa'], $users['username'], $users['chat_id']];
                     }
                 }
 
