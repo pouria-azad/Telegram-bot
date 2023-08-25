@@ -58,7 +58,7 @@ function year($year, $y, $id)
     $y99 = array_slice($y, 1);
     foreach ($y99 as $number => $user)
         $text = $text . "%0A" . ($number + 2) . ". " . "<a href='tg://user?id=" . $user[2] . "'>" . $user[0] . "</a>" . " @" . $user[1];
-    sendMessage($id, $text);
+    return sendMessage($id, $text);
 }
 
 function type($number, $y, $id)
@@ -74,7 +74,7 @@ function type($number, $y, $id)
     $y99 = array_slice($y, 1);
     foreach ($y99 as $number => $user)
         $text = $text . "%0A" . ($number + 2) . ". " . "<a href='tg://user?id=" . $user[2] . "'>" . $user[0] . " @" . $user[1];
-    sendMessage($id, $text);
+    return sendMessage($id, $text);
 }
 
 function changeStatus($array, $conn,  $Date, $status, $Message_id)

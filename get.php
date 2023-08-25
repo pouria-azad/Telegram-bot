@@ -468,7 +468,8 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'دربار�
                 if ($y98)
                     year("1398", $y98, $Callback_chat_id);
                 if ($y99)
-                    year("1399", $y99, $Callback_chat_id);
+                    $kir = year("1399", $y99, $Callback_chat_id);
+                    logi($conn , "fuck" ,  $kir ,  $kir , $Date);
                 if ($y00)
                     year("1400", $y00, $Callback_chat_id);
 
