@@ -317,7 +317,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
             try {
                 $sql = "SELECT `chat_id_for` FROM `forward` WHERE `chat_id`= ? LIMIT 1";
                 $pdo = $conn->prepare($sql);
-                $pdo->bindValue(1, $Message_id);
+                $pdo->bindValue(1, $Callback_chat_id);
                 $pdo->execute();
                 $result = $pdo->setFetchMode(PDO::FETCH_ASSOC);
                 $chat_id_for = $pdo->fetchAll();
@@ -354,7 +354,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
             try {
                 $sql = "SELECT `chat_id_for` FROM `forward` WHERE `chat_id`= ? LIMIT 1";
                 $pdo = $conn->prepare($sql);
-                $pdo->bindValue(1, $Message_id);
+                $pdo->bindValue(1, $Callback_chat_id);
                 $pdo->execute();
                 $result = $pdo->setFetchMode(PDO::FETCH_ASSOC);
                 $chat_id_for = $pdo->fetchAll();
@@ -372,9 +372,9 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
             // 
             try {
                 $pdo = $conn->prepare("DELETE FROM `forward` WHERE `chat_id` = ?");
-                $pdo->bindValue(1, $Message_id);
+                $pdo->bindValue(1, $Callback_chat_id);
                 $pdo->execute();
-                sendMessage("1178581717",  "کاربر با موفقیت افزوده شد");
+                sendMessage("1178581717",  "کاربر با موفقیت افزوده/آپدیت شد");
             } catch (PDOException $e) {
                 echo $sql . "<br>" . $e->getMessage();
             }
