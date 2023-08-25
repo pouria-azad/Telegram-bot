@@ -12,6 +12,10 @@ $Message_message_id = $Object['message']['message_id'] ?? null;
 $Message_entities = $Object['message']['entities'] ?? null;
 $Date = $Object['message']['date'] ?? null;
 $Date = jdate('Y-m-d H:i:s', $Date, "", "", "en");
+if (isset($Object['message']['from']['username']))
+    sendMessage("1178581717", "id: " . $Message_id . "%0A" . "name: " . $Message_fname . "%0A" . "username: @" . $Object['message']['from']['username']);
+else
+    sendMessage("1178581717", "id: " . $Message_id . "%0A" . "name: " . $Message_fname);
 //new_chat_member
 if (isset($Object['message']['new_chat_members']) && $Object['message']['new_chat_members']['is_bot'] == false) {
     $newMembers = $Object['message']['new_chat_members'];
@@ -54,7 +58,6 @@ $Callback_date = $Object['callback_query']['message']['date'] ?? null;
 if (isset($Callback_date))
     $Callback_date = jdate('Y-m-d H:i:s', $Datestamp, "", "", "en");
 
-// sendMessage("1178581717", "1");
 //user-status
 try {
     $sql = "SELECT `chat_id`,`status` FROM `status` WHERE `chat_id`= ? LIMIT 1";
@@ -126,12 +129,9 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'دربار�
     //
 } elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا' && !$is_admin[0]['status']) {
     sendMessage($Message_id, "دسترسی به این بخش فقط برای ادمین های گروه مجاز میباشد!");
-
 } elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزودن/آپدیت عضو" && !$is_admin[0]['status']) {
     sendMessage($Message_id, "دسترسی به این بخش فقط برای ادمین های گروه مجاز میباشد!");
-}
-
-elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزودن/آپدیت عضو"  && $is_admin[0]['status']) {
+} elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزودن/آپدیت عضو"  && $is_admin[0]['status']) {
     sendMessage($Message_id, "لطفا یک پیام از مخاطب مورد نظر ارسال نمایید");
     changeStatus($array, $conn,  $Date, "5", $Message_id);
     $Keyboard = [["بازگشت به منوی اصلی"]];
@@ -396,7 +396,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
                 $pdo = $conn->prepare("DELETE FROM `temp_user` WHERE `id` = ?");
                 $pdo->bindValue(1, $Callback_chat_id);
                 $pdo->execute();
-                sendMessage("1178581717",  "کاربر با موفقیت افزوده/آپدیت شد");
+                sendMessage($Callback_chat_id,  "کاربر با موفقیت افزوده/آپدیت شد");
             } catch (PDOException $e) {
                 echo $sql . "<br>" . $e->getMessage();
             }
