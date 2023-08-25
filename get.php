@@ -448,7 +448,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
                 if ($t1)
                     type("1", $t1, $Callback_chat_id);
                 if ($t2)
-                    type("2", $t1, $Callback_chat_id);
+                    type("2", $t2, $Callback_chat_id);
                 if ($t3)
                     type("3", $t3, $Callback_chat_id);
 
