@@ -161,7 +161,6 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
         }
     }
 
-
     $Inline_keyboard = [
         [
             ['text' => "\xE2\x9C\x85", 'callback_data' => "reset-1"],
@@ -175,7 +174,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
 } elseif ($array[0]['status'] == "1") {
 
     try {
-        $sql = "SELECT `chat_id_for` FROM `status` WHERE `chat_id`= ? LIMIT 1";
+        $sql = "SELECT `chat_id_for` FROM `forward` WHERE `chat_id`= ? LIMIT 1";
         $pdo = $conn->prepare($sql);
         $pdo->bindValue(1, $Message_id);
         $pdo->execute();
@@ -230,7 +229,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
                 deleteMessage($Callback_chat_id, $Callback_message_message_id);
                 break;
             case "reset":
-                updateStatus($conn,  $Date, "-1", $Callback_chat_id);
+                updateStatus($conn,  $Date, "1", $Callback_chat_id);
                 $Keyboard = [["بازگشت به منوی اصلی"]];
                 startWellcome($Callback_chat_id, "لطفا نام کامل مخاطب خود را وارد نمایید: ", $Keyboard, $Callback_message_message_id);
                 deleteMessage($Callback_chat_id, $Callback_message_message_id);
@@ -316,7 +315,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
             answerCallbackQuery($Callback_id, "سال ورود مخاطب ذخیره شد");
             $Callback_data[0] = explode('*', $Callback_data[0]);
             try {
-                $sql = "SELECT `chat_id_for` FROM `status` WHERE `chat_id`= ? LIMIT 1";
+                $sql = "SELECT `chat_id_for` FROM `forward` WHERE `chat_id`= ? LIMIT 1";
                 $pdo = $conn->prepare($sql);
                 $pdo->bindValue(1, $Message_id);
                 $pdo->execute();
