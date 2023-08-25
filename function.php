@@ -68,7 +68,7 @@ function type($number, $y, $id)
         '2' => "دانشجوهای مهمان",
         '3' => "دانشجوهای فارغ التحصیل"
     ];
-    $base = "\xE2\xAD\x95 \xF0\x9F\x94\xB4 \xE2\xAD\x95 " . "<b><u>" . $t['number'] . "</u></b>" . " \xE2\xAD\x95 \xF0\x9F\x94\xB4 \xE2\xAD\x95" . "%0A%0A";
+    $base = "\xE2\xAD\x95 \xF0\x9F\x94\xB4 \xE2\xAD\x95 " . "<b><u>" . $t[$number] . "</u></b>" . " \xE2\xAD\x95 \xF0\x9F\x94\xB4 \xE2\xAD\x95" . "%0A%0A";
     $text = "";
     $text = $text . $base . "1" . " " . $y[0][0] . " @" . $y[0][1];
     $y99 = array_slice($y, 1);

@@ -445,9 +445,12 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
                 }
 
                 answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت ارسال شد!");
-                type("1", $t1, $Callback_chat_id);
-                type("2", $t1, $Callback_chat_id);
-                type("3", $t3, $Callback_chat_id);
+                if ($t1)
+                    type("1", $t1, $Callback_chat_id);
+                if ($t2)
+                    type("2", $t1, $Callback_chat_id);
+                if ($t3)
+                    type("3", $t3, $Callback_chat_id);
 
                 year("1397", $y97, $Callback_chat_id);
                 year("1398", $y98, $Callback_chat_id);
