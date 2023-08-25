@@ -54,7 +54,7 @@ function year($year, $y, $id)
 {
     $base = "\xE2\xAD\x95 \xF0\x9F\x94\xB4 \xE2\xAD\x95 " . "<b><u>ورودی های سال: " . $year . "</u></b>" . " \xE2\xAD\x95 \xF0\x9F\x94\xB4 \xE2\xAD\x95" . "%0A%0A";
     $text = "";
-    $text = $text . $base . "1" . ". " . "<a href='tg://user?id=" . $y[0][2] . "'>" . $y[0][0] . " @" . $y[0][1];
+    $text = $text . $base . "1" . ". " . "<a href='tg://user?id=" . $y[0][2] . "'>" . $y[0][0] . "</a>" . " @" . $y[0][1];
     $y99 = array_slice($y, 1);
     foreach ($y99 as $number => $user)
         $text = $text . "%0A" . ($number + 2) . ". " . "<a href='tg://user?id=" . $user[2] . "'>" . $user[0] . "</a>" . " @" . $user[1];
@@ -70,10 +70,10 @@ function type($number, $y, $id)
     ];
     $base = "\xE2\xAD\x95 \xF0\x9F\x94\xB4 \xE2\xAD\x95 " . "<b><u>" . $t[$number] . "</u></b>" . " \xE2\xAD\x95 \xF0\x9F\x94\xB4 \xE2\xAD\x95" . "%0A%0A";
     $text = "";
-    $text = $text . $base . "1" . ". " . "<a href='tg://user?id=" . $y[0][2] . "'>" . $y[0][0] . " @" . $y[0][1];
+    $text = $text . $base . "1" . ". " . "<a href='tg://user?id=" . $y[0][2] . "'>" . $y[0][0] . "</a>" . " @" . $y[0][1];
     $y99 = array_slice($y, 1);
     foreach ($y99 as $number => $user)
-        $text = $text . "%0A" . ($number + 2) . ". " . "<a href='tg://user?id=" . $user[2] . "'>" . $user[0] . " @" . $user[1];
+        $text = $text . "%0A" . ($number + 2) . ". " . "<a href='tg://user?id=" . $user[2] . "'>" . $user[0] . "</a>" . " @" . $user[1];
     return sendMessage($id, $text);
 }
 
