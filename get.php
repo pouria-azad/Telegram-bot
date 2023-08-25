@@ -129,7 +129,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'دربار�
 }
 // data 
 
-elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزودن/آپدیت عضو") {
+elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزودن/آپدیت عضو"  && $is_admin[0]['status']) {
     sendMessage($Message_id, "لطفا یک پیام از مخاطب مورد نظر ارسال نمایید");
     changeStatus($array, $conn,  $Date, "5", $Message_id);
     $Keyboard = [["بازگشت به منوی اصلی"]];
