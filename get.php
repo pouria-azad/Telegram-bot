@@ -156,10 +156,10 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
 
     $Inline_keyboard = [
         [
-            ['text' => "\xE2\x9C\x85", 'callback_data' => "okcon-1"],
+            ['text' => "\xE2\x9C\x85", 'callback_data' => "okname-1"],
         ],
         [
-            ['text' => "\xE2\x9D\x8C", 'callback_data' => "okcon-1"]
+            ['text' => "\xE2\x9D\x8C", 'callback_data' => "cancel-1"]
         ]
     ];
     $text = "نام مخاطب ارسالی شما " . $Object['message']['forward_from']['first_name'] . " است؟";
