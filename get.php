@@ -80,7 +80,7 @@ try {
 }
 // logi($conn, "is admin test", $is_admin, "", $Date);
 //کلید استارت یا بازگشت
-if (($Message_entities && $Object['message']['text'] == '/start') || (in_array($array[0]['status'], ["-1", "1", "2"]) && ($Object['message']['text'] == "بازگشت به منوی اصلی"))) {
+if (($Message_entities && $Object['message']['text'] == '/start') || (in_array($array[0]['status'], ["-1", "1", "2" , "5"]) && ($Object['message']['text'] == "بازگشت به منوی اصلی"))) {
     changeStatus($array, $conn,  $Date, "0", $Message_id);
     //////
     $Keyboard = [
