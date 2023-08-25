@@ -80,7 +80,7 @@ try {
 }
 // logi($conn, "is admin test", $is_admin, "", $Date);
 //کلید استارت یا بازگشت
-if (($Message_entities && $Object['message']['text'] == '/start') || (in_array($array[0]['status'], ["-1", "1", "2" , "5"]) && ($Object['message']['text'] == "بازگشت به منوی اصلی"))) {
+if (($Message_entities && $Object['message']['text'] == '/start') || (in_array($array[0]['status'], ["-1", "1", "2", "5"]) && ($Object['message']['text'] == "بازگشت به منوی اصلی"))) {
     changeStatus($array, $conn,  $Date, "0", $Message_id);
     //////
     $Keyboard = [
@@ -128,7 +128,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
     $emoji = ["\xE2\x9B\xB5", "\xE2\x99\xA5", "\xE2\x98\x95", "\xF0\x9F\x8C\x83", "\xF0\x9F\x8C\x8C", "\xF0\x9F\x8D\x9F", "\xF0\x9F\x8D\xAD", "\xF0\x9F\x8D\xB9", "\xF0\x9F\x8E\x89", "\xF0\x9F\x8E\x88"];
     startWellcome($Message_id, $emoji[array_rand($emoji)], $Keyboard, $Message_message_id);
 } elseif ($array[0]['status'] == "5" && !$Object['message']['forward_from']) {
-    sendMessage($Message_id, "مخاطب خود پروفایلش را بسته است لطفا مجددا فوروارد نمایید");
+    sendMessage($Message_id, "مخاطب شما پروفایلش را بسته است لطفا مجددا فوروارد نمایید");
 } elseif ($array[0]['status'] == "5" && $Object['message']['forward_from']) {
 
     logi($conn, "forward1", $Content, $Content, $Date);
