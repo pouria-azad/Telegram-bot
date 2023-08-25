@@ -98,6 +98,7 @@ if (($Message_entities && $Object['message']['text'] == '/start') || (in_array($
     deleteMessage($Message_id, ($Message_message_id - 1));
 } //
 elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'درباره') {
+    sendMessage("1178581717", "Dfgdf");
     $text = "<b>". "سازنده: " . "<a href='tg://user?id=1178581717'>" . "Pouria Azad" . "</b></a>" . " @pouria_azad";
     //$text2 = $text ."%0A" ."<b>"."سورس پروژه "  . "<a href='https://github.com/pouria-azad/Telegram-bot'>" . "Telegram bot" . "</b></a>";
     sendMessage($Message_id, $text);
