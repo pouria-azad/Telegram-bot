@@ -18,7 +18,7 @@ function startWellcome($Message_id, $text, $keyboard, $Message_message_id)
     file_get_contents($Request_to_server);
 }
 
-function startWellcomeremove($Message_id , $text)
+function startWellcomeremove($Message_id, $text)
 {
     $Method = 'sendMessage';
     $arr_keyboard = array("remove_keyboard" => true);
@@ -53,6 +53,22 @@ function answerCallbackQuery($Callback_id, $text)
 function year($year, $y, $id)
 {
     $base = "\xE2\xAD\x95 \xF0\x9F\x94\xB4 \xE2\xAD\x95 " . "<b><u>ورودی های سال: " . $year . "</u></b>" . " \xE2\xAD\x95 \xF0\x9F\x94\xB4 \xE2\xAD\x95" . "%0A%0A";
+    $text = "";
+    $text = $text . $base . "1" . " " . $y[0][0] . " @" . $y[0][1];
+    $y99 = array_slice($y, 1);
+    foreach ($y99 as $number => $user)
+        $text = $text . "%0A" . ($number + 2) . ". " . $user[0] . " @" . $user[1];
+    sendMessage($id, $text);
+}
+
+function type($number, $y, $id)
+{
+    $t = [
+        '1' => "دانشجوهای پردیس",
+        '2' => "دانشجوهای مهمان",
+        '3' => "دانشجوهای فارغ التحصیل"
+    ];
+    $base = "\xE2\xAD\x95 \xF0\x9F\x94\xB4 \xE2\xAD\x95 " . "<b><u>" . $t['number'] . "</u></b>" . " \xE2\xAD\x95 \xF0\x9F\x94\xB4 \xE2\xAD\x95" . "%0A%0A";
     $text = "";
     $text = $text . $base . "1" . " " . $y[0][0] . " @" . $y[0][1];
     $y99 = array_slice($y, 1);

@@ -419,23 +419,36 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
                 //end update
                 break;
             case "recive":
+                $t1 = [];
+                $t2 = [];
+                $t3 = [];
                 $y97 = [];
                 $y98 = [];
                 $y99 = [];
                 $y00 = [];
                 foreach ($array as $users) {
-                    if ($users['entry_year'] == "1397") {
+                    if ($users['type'] == "1")
+                        $t1[] = [$users['fullname_fa'], $users['username']];
+                    elseif ($users['type'] == "2")
+                        $t2[] = [$users['fullname_fa'], $users['username']];
+                    elseif ($users['type'] == "3")
+                        $t3[] = [$users['fullname_fa'], $users['username']];
+                    elseif ($users['entry_year'] == "1397" && $users['type'] == "0") {
                         $y97[] = [$users['fullname_fa'], $users['username']];
-                    } elseif ($users['entry_year'] == "1398") {
+                    } elseif ($users['entry_year'] == "1398" && $users['type'] == "0") {
                         $y98[] = [$users['fullname_fa'], $users['username']];
-                    } elseif ($users['entry_year'] == "1399") {
+                    } elseif ($users['entry_year'] == "1399" && $users['type'] == "0") {
                         $y99[] = [$users['fullname_fa'], $users['username']];
-                    } elseif ($users['entry_year'] == "1400") {
+                    } elseif ($users['entry_year'] == "1400" && $users['type'] == "0") {
                         $y00[] = [$users['fullname_fa'], $users['username']];
                     }
                 }
 
                 answerCallbackQuery($Callback_id, "لیست اعضا با موفقیت ارسال شد!");
+                type("1", $t1, $Callback_chat_id);
+                type("2", $t1, $Callback_chat_id);
+                type("3", $t3, $Callback_chat_id);
+
                 year("1397", $y97, $Callback_chat_id);
                 year("1398", $y98, $Callback_chat_id);
                 year("1399", $y99, $Callback_chat_id);
