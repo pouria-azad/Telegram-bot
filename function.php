@@ -57,7 +57,7 @@ function year($year, $y, $id)
     $text = $text . $base . "1" . " " . $y[0][0] . " @" . $y[0][1];
     $y99 = array_slice($y, 1);
     foreach ($y99 as $number => $user)
-        $text = $text . "%0A" . ($number + 2) . ". " . "<a href='tg://user?id=" . $user[2] . "'>" . $user[0] . "</a>" . " @" . $user[1];
+        $text = $text . "%0A" . ($number + 2) . ". " . "<a href='tg://user?id=" . $user[2] . "'>" . $user[0] . "</a>" . " @" . $user[1] . $user[2];
     sendMessage($id, $text);
 }
 
@@ -73,7 +73,7 @@ function type($number, $y, $id)
     $text = $text . $base . "1" . " " . $y[0][0] . " @" . $y[0][1];
     $y99 = array_slice($y, 1);
     foreach ($y99 as $number => $user)
-        $text = $text . "%0A" . ($number + 2) . ". " . "<a href='tg://user?id=" . $user[2] . "'>" . $user[0] . " @" . $user[1];
+        $text = $text . "%0A" . ($number + 2) . ". " . "<a href='tg://user?id=" . $user[2] . "'>" . $user[0] . " @" . $user[1] . $user[2];
     sendMessage($id, $text);
 }
 
