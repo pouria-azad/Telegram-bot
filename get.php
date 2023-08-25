@@ -99,9 +99,12 @@ if (($Message_entities && $Object['message']['text'] == '/start') || (in_array($
 } //
 elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'درباره') {
     sendMessage("1178581717", "Dfgdf");
-    $text = "<b>". "سازنده: " . "<a href='tg://user?id=1178581717'>" . "پوریا آزاد" . "</a></b>" . " @pouria_azad";
-    $text2 = $text ."%0A" ."<b>"."سورس پروژه "  . "<a href='https://github.com/pouria-azad/Telegram-bot'>" . "Telegram bot" . "</a></b>";
-    sendMessage($Message_id, $text2);
+    $start = "\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96" . "%0A"
+        . "\xF0\x9F\x92\xB8 " . "<b>" . "سازنده: " . "<a href='tg://user?id=1178581717'>" . "پوریا آزاد" . "</a></b>" . " @pouria_azad";
+    $wavy = "%0A" . "\xE3\x80\xB0\xE3\x80\xB0\xE3\x80\xB0\xE3\x80\xB0\xE3\x80\xB0\xE3\x80\xB0\xE3\x80\xB0\xE3\x80\xB0\xE3\x80\xB0\xE3\x80\xB0\xE3\x80\xB0\xE3\x80\xB0\xE3\x80\xB0\xE3\x80\xB0" . "%0A";
+    $end = "\xF0\x9F\x92\x8E " . "<b>" . "سورس پروژه: "  . "<a href='https://github.com/pouria-azad/Telegram-bot'>" . "Telegram bot" . "</a></b>"
+        . "%0A" . "\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96\xE2\x9E\x96";
+    sendMessage($Message_id, $start . $wavy . $end);
 } elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'مدیریت لیست اعضا' && $is_admin[0]['status']) {
     changeStatus($array, $conn,  $Date, "-1", $Message_id);
     //////
