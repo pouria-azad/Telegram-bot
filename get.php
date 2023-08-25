@@ -397,9 +397,15 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == "افزود�
                     $status = getChatMember(-1001454096414, $users['chat_id']);
                     if ($status['ok'] && $status['result']['user']['username']) {
                         try {
-                            $stmt = $conn->prepare("UPDATE `users` SET `username`= ? WHERE `chat_id`= ?");
-                            $stmt->bindValue(1, $status['result']['user']['username']);
-                            $stmt->bindValue(2, $users['chat_id']);
+                            $stmt = $conn->prepare("UPDATE `users` SET `fullname` = ? ,`username`= ? WHERE `chat_id`= ?");
+
+                            if (isset($status['result']['user']['last_name'])) {
+                                $stmt->bindValue(1, $status['result']['user']['first_name'] . " " . $status['result']['user']['last_name']);
+                            } else {
+                                $stmt->bindValue(1, $status['result']['user']['first_name']);
+                            }
+                            $stmt->bindValue(2, $status['result']['user']['username']);
+                            $stmt->bindValue(3, $users['chat_id']);
                             $stmt->execute();
                         } catch (PDOException $e) {
                             sendMessage("1178581717",  "<br>" . $e->getMessage());
