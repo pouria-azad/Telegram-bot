@@ -140,7 +140,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'دربار�
     $emoji = ["\xE2\x9B\xB5", "\xE2\x99\xA5", "\xE2\x98\x95", "\xF0\x9F\x8C\x83", "\xF0\x9F\x8C\x8C", "\xF0\x9F\x8D\x9F", "\xF0\x9F\x8D\xAD", "\xF0\x9F\x8D\xB9", "\xF0\x9F\x8E\x89", "\xF0\x9F\x8E\x88"];
     startWellcome($Message_id, $emoji[array_rand($emoji)], $Keyboard, $Message_message_id);
 } elseif ($array[0]['status'] == "5" && !$Object['message']['forward_from']) {
-    sendMessage($Message_id, "مخاطب شما پروفایلش را بسته است لطفا مجددا فوروارد نمایید");
+    sendMessage($Message_id, "مخاطب شما فورواردش را بسته است لطفا پس از بازکردن فورواردش  مجددا یک پیام از او  فوروارد نمایید");
 } elseif ($array[0]['status'] == "5" && $Object['message']['forward_from']) {
 
     logi($conn, "forward1", $Content, $Content, $Date);
