@@ -473,7 +473,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'دربار�
                 if ($t3)
                     type("3", $t3, $Callback_chat_id);
                 if ($y96)
-                    year("1396", $y97, $Callback_chat_id);
+                    year("1396", $y96, $Callback_chat_id);
                 if ($y97)
                     year("1397", $y97, $Callback_chat_id);
                 if ($y98)
@@ -483,9 +483,9 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'دربار�
                 if ($y00)
                     year("1400", $y00, $Callback_chat_id);
                 if ($y01)
-                    year("1401", $y00, $Callback_chat_id);
+                    year("1401", $y01, $Callback_chat_id);
                 if ($y02)
-                    year("1402", $y00, $Callback_chat_id);
+                    year("1402", $y02, $Callback_chat_id);
 
                 break;
             case "recivead":
