@@ -311,6 +311,9 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'دربار�
             case "3":
                 type_inline($Callback_chat_id, $Callback_message_message_id, "3", $conn);
                 break;
+            case "4":
+                type_inline($Callback_chat_id, $Callback_message_message_id, "4", $conn);
+                break;
         }
         if ($Callback_data[0] == "back") {
             $Inline_keyboard = [
@@ -325,6 +328,9 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'دربار�
                 ],
                 [
                     ['text' => "دانشجو فارغ التحصیل", 'callback_data' => "3-1"]
+                ],
+                [
+                    ['text' => "دانشجو ارشد", 'callback_data' => "4-1"]
                 ],
             ];
             $text = "لطفا وضعیت دانشجویی مخاطب خود را مشخص نمایید: ";
@@ -353,6 +359,9 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'دربار�
                 ],
                 [
                     ['text' => "دانشجو فارغ التحصیل", 'callback_data' => "3-1"]
+                ],
+                [
+                    ['text' => "دانشجو ارشد", 'callback_data' => "4-1"]
                 ],
             ];
             $text = "لطفا وضعیت دانشجویی مخاطب را مشخص نمایید: ";
@@ -434,6 +443,7 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'دربار�
                 $t1 = [];
                 $t2 = [];
                 $t3 = [];
+                $t4 = [];
                 $y96 = [];
                 $y97 = [];
                 $y98 = [];
@@ -448,6 +458,8 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'دربار�
                         $t2[] = [$users['fullname_fa'], $users['username'], $users['chat_id']];
                     elseif ($users['type'] == "3")
                         $t3[] = [$users['fullname_fa'], $users['username'], $users['chat_id']];
+                    elseif ($users['type'] == "4")
+                        $t4[] = [$users['fullname_fa'], $users['username'], $users['chat_id']];
                     elseif ($users['entry_year'] == "1396" && $users['type'] == "0") {
                         $y96[] = [$users['fullname_fa'], $users['username'], $users['chat_id']];
                     } elseif ($users['entry_year'] == "1397" && $users['type'] == "0") {
@@ -472,6 +484,8 @@ elseif ($array[0]['status'] == "0" && $Object['message']['text'] == 'دربار�
                     type("2", $t2, $Callback_chat_id);
                 if ($t3)
                     type("3", $t3, $Callback_chat_id);
+                if ($t4)
+                    type("4", $t4, $Callback_chat_id);
                 if ($y96)
                     year("1396", $y96, $Callback_chat_id);
                 if ($y97)

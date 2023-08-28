@@ -66,7 +66,8 @@ function type($number, $y, $id)
     $t = [
         '1' => "دانشجوهای پردیس",
         '2' => "دانشجوهای مهمان",
-        '3' => "دانشجوهای فارغ التحصیل"
+        '3' => "دانشجوهای فارغ التحصیل",
+        '4' => "دانشجوهای ارشد",
     ];
     $base = "\xE2\xAD\x95 \xF0\x9F\x94\xB4 \xE2\xAD\x95 " . "<b><u>" . $t[$number] . "</u></b>" . " \xE2\xAD\x95 \xF0\x9F\x94\xB4 \xE2\xAD\x95" . "%0A%0A";
     $text = "";
@@ -227,7 +228,8 @@ function type_inline($Callback_chat_id, $Callback_message_message_id, $type = "0
         '0' => "دانکشده مهندسی",
         '1' => "دانشجو پردیس",
         '2' => "دانشجو مهمان",
-        '3' => "دانشجو فارغ التحصیل"
+        '3' => "دانشجو فارغ التحصیل",
+        '4' => "دانشجو ارشد"
     ];
     $text = "وضعیت مخاطب شما " . $t[$type] . " است؟";
     editMessageReplyMarkup($Callback_chat_id, $Callback_message_message_id, $Inline_keyboard, $text);
